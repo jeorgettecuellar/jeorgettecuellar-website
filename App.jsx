@@ -1,44 +1,37 @@
 import React, { useState } from "react";
 
-const photoHighlights = [
-  {
-    src: "/images/pick-a-purse-press.jpg",
-    alt: "News headline about more than $100,000 raised at Olive Crest's Pick-A-Purse luncheon.",
-    caption:
-      "Press coverage of Olive Crest's Pick-A-Purse Luncheon, where my story helped raise over $100,000.",
-    section: "speaking",
-  },
-  {
-    src: "/images/pick-a-purse-selfie.jpg",
-    alt: "Jeorgette smiling and taking a selfie with an event host in a sequin jacket.",
-    caption: "Celebrating community and generosity at Pick-A-Purse.",
-    section: "speaking",
-  },
-  {
-    src: "/images/iam-youth-group.jpg",
-    alt: "Large group of youth and mentors posing with certificates outside a building.",
-    caption: "Life skills and empowerment with youth participants.",
-    section: "teaching",
-  },
-  {
-    src: "/images/iam-volunteers.jpg",
-    alt: "Group of women wearing I AM t-shirts in front of a balloon backdrop.",
-    caption: "Community of mentors and volunteers showing up for young people.",
-    section: "teaching",
-  },
-  {
-    src: "/images/iam-duo.jpg",
-    alt: "Two young women in I AM shirts standing in front of a colorful balloon arch.",
-    caption: "Celebrating growth and identity with program participants.",
-    section: "teaching",
-  },
-  {
-    src: "/images/evening-speaking.jpg",
-    alt: "Jeorgette speaking into a microphone at an outdoor evening event.",
-    caption: "Sharing my story at an outdoor Olive Crest fundraiser.",
-    section: "speaking",
-  },
-];
+{/* PHOTO HIGHLIGHTS */}
+<section id="photos" className="py-16">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl font-bold mb-6">Photo Highlights</h2>
+    <p className="text-gray-700 mb-10">
+      A snapshot of some of the communities, programs, and international projects I’ve had the honor to work with.
+    </p>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      {/* Olive Crest Pick-A-Purse Luncheon */}
+      <div className="bg-white shadow rounded-lg p-4">
+        <img src="/images/photo1.jpg" alt="Olive Crest Pick-A-Purse Luncheon fundraiser group photo." className="rounded mb-3" />
+        <p className="text-gray-600">
+          Press coverage of Olive Crest’s Pick-A-Purse Luncheon, where our community helped raise over $100,000.
+        </p>
+      </div>
+
+      {/* Youth certificate celebration group */}
+      <div className="bg-white shadow rounded-lg p-4">
+        <img src="/images/photo2.jpg" alt="Large group of youth and mentors holding certificates." className="rounded mb-3" />
+        <p className="text-gray-600">
+          Celebrating youth leadership, mentorship, and empowerment with the I AM program community.
+        </p>
+      </div>
+
+      {/* Olive Crest outdoor gala dinner */}
+      <div className="bg-white shadow rounded-lg p-4">
+        <img src="/images/photo3.jpg" alt="Group photo at an Olive Crest outdoor dinner event." className="rounded mb-3" />
+        <p className="text-gray-600">
+          Honori
+
 
 function App() {
   const [lightboxItem, setLightboxItem] = useState(null);
@@ -49,7 +42,7 @@ function App() {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-
+          
   const navLinkClasses =
     "hover:underline cursor-pointer text-gray-700 text-xs";
 
