@@ -1,37 +1,5 @@
 import React, { useState } from "react";
 
-{/* PHOTO HIGHLIGHTS */}
-<section id="photos" className="py-16">
-  <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-3xl font-bold mb-6">Photo Highlights</h2>
-    <p className="text-gray-700 mb-10">
-      A snapshot of some of the communities, programs, and international projects I’ve had the honor to work with.
-    </p>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      {/* Olive Crest Pick-A-Purse Luncheon */}
-      <div className="bg-white shadow rounded-lg p-4">
-        <img src="/images/photo1.jpg" alt="Olive Crest Pick-A-Purse Luncheon fundraiser group photo." className="rounded mb-3" />
-        <p className="text-gray-600">
-          Press coverage of Olive Crest’s Pick-A-Purse Luncheon, where our community helped raise over $100,000.
-        </p>
-      </div>
-
-      {/* Youth certificate celebration group */}
-      <div className="bg-white shadow rounded-lg p-4">
-        <img src="/images/photo2.jpg" alt="Large group of youth and mentors holding certificates." className="rounded mb-3" />
-        <p className="text-gray-600">
-          Celebrating youth leadership, mentorship, and empowerment with the I AM program community.
-        </p>
-      </div>
-
-      {/* Olive Crest outdoor gala dinner */}
-      <div className="bg-white shadow rounded-lg p-4">
-        <img src="/images/photo3.jpg" alt="Group photo at an Olive Crest outdoor dinner event." className="rounded mb-3" />
-        <p className="text-gray-600">
-          Honori
-
 
 function App() {
   const [lightboxItem, setLightboxItem] = useState(null);
@@ -390,6 +358,79 @@ function App() {
           </div>
 
           {/* Simple photo highlight grid */}
+          const photoHighlights = [
+  {
+    src: "/photo1.jpg",
+    alt: "Press coverage of Olive Crest Pick-A-Purse Luncheon",
+    caption: "Press coverage of Olive Crest’s Pick-A-Purse Luncheon, where over $100,000 was raised.",
+  },
+  {
+    src: "/photo2.jpg",
+    alt: "Large group of youth and mentors holding certificates",
+    caption: "Celebrating youth leadership and empowerment with the I AM program community.",
+  },
+  {
+    src: "/photo3.jpg",
+    alt: "Olive Crest outdoor dinner event",
+    caption: "Honoring community partnership and continued support for displaced youth.",
+  },
+  {
+    src: "/photo4.jpg",
+    alt: "Community luncheon group photo",
+    caption: "Community members gathering at the Olive Crest summer luncheon.",
+  },
+  {
+    src: "/photo5.jpg",
+    alt: "Podcast interview recording",
+    caption: "Sharing my story and lived experience during a filmed podcast interview.",
+  },
+  {
+    src: "/photo6.jpg",
+    alt: "I AM program celebration photo",
+    caption: "Celebrating mentorship, growth, and community support with the I AM program.",
+  },
+  {
+    src: "/photo7.jpg",
+    alt: "Orange County event photo",
+    caption: "Gathering with community members at an Olive Crest donor appreciation event.",
+  },
+  {
+    src: "/photo8.jpg",
+    alt: "State Capitol advocacy trip",
+    caption: "Advocacy trip to the California State Capitol with Underground Scholars.",
+  },
+  {
+    src: "/photo9.jpg",
+    alt: "European correctional facility delegation trip",
+    caption: "International education delegation visit in Denmark, collaborating on justice reform.",
+  },
+  {
+    src: "/photo10.jpg",
+    alt: "Group visiting correctional facility in Denmark",
+    caption: "Observing rehabilitation-centered correctional models in Europe.",
+  },
+  {
+    src: "/photo11.jpg",
+    alt: "International education cohort gathering",
+    caption: "Collaborating with educators and leaders during an international education workshop.",
+  },
+  {
+    src: "/photo12.jpg",
+    alt: "Delegation team at community center abroad",
+    caption: "Meeting with community organizations abroad to explore education partnerships.",
+  },
+  {
+    src: "/photo13.jpg",
+    alt: "Group photo from international collaboration",
+    caption: "Strengthening global partnerships in community education and justice reform.",
+  },
+  {
+    src: "/photo14.jpg",
+    alt: "Outdoor community celebration",
+    caption: "Celebrating shared accomplishments with the international education team.",
+  },
+];
+
           <div className="mt-10">
             <h3 className="text-xl font-semibold">Photo Highlights</h3>
             <p className="mt-2 text-gray-700 text-xs md:text-sm">
