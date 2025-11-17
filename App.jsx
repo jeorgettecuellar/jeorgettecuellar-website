@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-
-
 function App() {
   const [lightboxItem, setLightboxItem] = useState(null);
 
@@ -359,76 +356,20 @@ function App() {
 
           {/* Simple photo highlight grid */}
           const photoHighlights = [
-  {
-    src: "/photo1.jpg",
-    alt: "Press coverage of Olive Crest Pick-A-Purse Luncheon",
-    caption: "Press coverage of Olive Crest’s Pick-A-Purse Luncheon, where over $100,000 was raised.",
-  },
-  {
-    src: "/photo2.jpg",
-    alt: "Large group of youth and mentors holding certificates",
-    caption: "Celebrating youth leadership and empowerment with the I AM program community.",
-  },
-  {
-    src: "/photo3.jpg",
-    alt: "Olive Crest outdoor dinner event",
-    caption: "Honoring community partnership and continued support for displaced youth.",
-  },
-  {
-    src: "/photo4.jpg",
-    alt: "Community luncheon group photo",
-    caption: "Community members gathering at the Olive Crest summer luncheon.",
-  },
-  {
-    src: "/photo5.jpg",
-    alt: "Podcast interview recording",
-    caption: "Sharing my story and lived experience during a filmed podcast interview.",
-  },
-  {
-    src: "/photo6.jpg",
-    alt: "I AM program celebration photo",
-    caption: "Celebrating mentorship, growth, and community support with the I AM program.",
-  },
-  {
-    src: "/photo7.jpg",
-    alt: "Orange County event photo",
-    caption: "Gathering with community members at an Olive Crest donor appreciation event.",
-  },
-  {
-    src: "/photo8.jpg",
-    alt: "State Capitol advocacy trip",
-    caption: "Advocacy trip to the California State Capitol with Underground Scholars.",
-  },
-  {
-    src: "/photo9.jpg",
-    alt: "European correctional facility delegation trip",
-    caption: "International education delegation visit in Denmark, collaborating on justice reform.",
-  },
-  {
-    src: "/photo10.jpg",
-    alt: "Group visiting correctional facility in Denmark",
-    caption: "Observing rehabilitation-centered correctional models in Europe.",
-  },
-  {
-    src: "/photo11.jpg",
-    alt: "International education cohort gathering",
-    caption: "Collaborating with educators and leaders during an international education workshop.",
-  },
-  {
-    src: "/photo12.jpg",
-    alt: "Delegation team at community center abroad",
-    caption: "Meeting with community organizations abroad to explore education partnerships.",
-  },
-  {
-    src: "/photo13.jpg",
-    alt: "Group photo from international collaboration",
-    caption: "Strengthening global partnerships in community education and justice reform.",
-  },
-  {
-    src: "/photo14.jpg",
-    alt: "Outdoor community celebration",
-    caption: "Celebrating shared accomplishments with the international education team.",
-  },
+  { src: "/photo1.jpg",  alt: "Press coverage of Olive Crest Pick-A-Purse Luncheon", caption: "Press coverage of Olive Crest’s Pick-A-Purse Luncheon, where over $100,000 was raised.", },
+  { src: "/photo2.jpg", alt: "Large group of youth and mentors presenting certificates", caption: "Celebrating youth leadership and empowerment with the I AM program community.", },
+  { src: "/photo3.jpg", alt: "Olive Crest outdoor dinner event", caption: "Honoring community partnership and continued support for displaced youth.", },
+  { src: "/photo4.jpg", alt: "Community luncheon group photo", caption: "Community members gathering at the Olive Crest summer luncheon.", },
+  { src: "/photo5.jpg", alt: "Podcast interview recording", caption: "Sharing my story and lived experience during a filmed podcast interview.",},
+  { src: "/photo6.jpg", alt: "I AM program celebration photo", caption: "Celebrating mentorship, growth, and community support with the I AM program.",},
+  { src: "/photo7.jpg", alt: "Orange County event photo",  caption: "Gathering with community members at an Olive Crest donor appreciation event.", },
+  { src: "/photo8.jpg", alt: "State Capitol advocacy trip", caption: "Advocacy trip to the California State Capitol with Underground Scholars.",},
+  { src: "/photo9.jpg", alt: "European correctional facility delegation trip" caption: "International education delegation visit in Denmark, collaborating on justice reform.",},
+  { src: "/photo10.jpg", alt: "Group visiting correctional facility in Denmark", caption: "Observing rehabilitation-centered correctional models in Europe.", },
+  { src: "/photo11.jpg",alt: "International education cohort gathering",caption: "Collaborating with educators and leaders during an international education workshop.", },
+  { src: "/photo12.jpg",alt: "Delegation team at community center abroad",caption: "Meeting with community organizations abroad to explore education partnerships.",},
+  { src: "/photo13.jpg",alt: "Group photo from international collaboration",caption: "Strengthening global partnerships in community education and justice reform.", },
+  { src: "/photo14.jpg", alt: "Outdoor community celebration",caption: "Celebrating shared accomplishments with the international education team.",},
 ];
 
           <div className="mt-10">
