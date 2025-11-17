@@ -1,18 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-
-const SECTION_IDS = [
-  "about",
-  "offerings",
-  "education",
-  "portfolio",
-  "speaking",
-  "teaching",
-  "advocacy",
-  "international",
-  "media",
-  "contact",
-];
+import React, { useState } from "react";
 
 const photoHighlights = [
   {
@@ -52,75 +38,10 @@ const photoHighlights = [
     caption: "Sharing my story at an outdoor Olive Crest fundraiser.",
     section: "speaking",
   },
-  {
-    src: "/images/olive-crest-table.jpg",
-    alt: "Group photo around a dinner table at a formal event.",
-    caption: "Gathering with supporters and community partners.",
-    section: "advocacy",
-  },
-  {
-    src: "/images/fundraiser-crowd.jpg",
-    alt: "Wide shot of an outdoor fundraiser under string lights.",
-    caption: "A full room of supporters investing in youth and families.",
-    section: "speaking",
-  },
-  {
-    src: "/images/nfl-visit-1.jpg",
-    alt: "Jeorgette standing in front of the NFL shield logo.",
-    caption: "Collaborating with the NFL on opportunities for foster youth.",
-    section: "advocacy",
-  },
-  {
-    src: "/images/nfl-visit-2.jpg",
-    alt: "Full-body photo of Jeorgette in front of the NFL building.",
-    caption: "Bringing lived experience into professional spaces.",
-    section: "advocacy",
-  },
-  {
-    src: "/images/olive-crest-panel-group.jpg",
-    alt: "Group of panelists, including Jeorgette, standing in front of an Olive Crest step-and-repeat.",
-    caption: "Sharing pathways from foster care to higher education.",
-    section: "speaking",
-  },
-  {
-    src: "/images/olive-crest-panel-stage.jpg",
-    alt: "Panel of speakers on stage with an audience listening.",
-    caption: "Speaking on stage about resilience, policy, and youth support.",
-    section: "speaking",
-  },
 ];
 
-export default function JeorgetteWebsite() {
-  const [activeSection, setActiveSection] = useState("about");
+function App() {
   const [lightboxItem, setLightboxItem] = useState(null);
-
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: "0px 0px -60% 0px",
-      threshold: 0,
-    };
-
-    const callback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute("id");
-          if (id && SECTION_IDS.includes(id)) {
-            setActiveSection(id);
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-
-    SECTION_IDS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -129,19 +50,13 @@ export default function JeorgetteWebsite() {
     }
   };
 
-  const navLinkClasses = (id) =>
-    `hover:underline cursor-pointer ${
-      activeSection === id ? "font-semibold text-indigo-700" : "text-gray-700"
-    }`;
+  const navLinkClasses =
+    "hover:underline cursor-pointer text-gray-700 text-xs";
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-      <motion.header
-        className="bg-white/80 backdrop-blur shadow-sm sticky top-0 z-40"
-        initial={{ y: -40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4 }}
-      >
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur shadow-sm sticky top-0 z-40">
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="rounded-full w-10 h-10 bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white font-semibold text-sm">
@@ -149,84 +64,75 @@ export default function JeorgetteWebsite() {
             </div>
             <div>
               <p className="text-sm font-semibold">
-                Jeorgette Cuellar <span className="text-xs font-normal ml-1">(she/her)</span>
+                Jeorgette Cuellar{" "}
+                <span className="text-xs font-normal ml-1">(she/her)</span>
               </p>
               <p className="text-xs text-gray-600">
                 Sociologist • Educator • Advocate for displaced youth
               </p>
             </div>
           </div>
-          <nav className="hidden md:flex gap-5 text-xs">
+          <nav className="hidden md:flex gap-5">
             <span
               onClick={() => scrollToSection("about")}
-              className={navLinkClasses("about")}
+              className={navLinkClasses}
             >
               About
             </span>
             <span
               onClick={() => scrollToSection("offerings")}
-              className={navLinkClasses("offerings")}
+              className={navLinkClasses}
             >
               Offerings
             </span>
             <span
               onClick={() => scrollToSection("education")}
-              className={navLinkClasses("education")}
+              className={navLinkClasses}
             >
               Education
             </span>
             <span
               onClick={() => scrollToSection("portfolio")}
-              className={navLinkClasses("portfolio")}
+              className={navLinkClasses}
             >
               Portfolio
             </span>
             <span
               onClick={() => scrollToSection("media")}
-              className={navLinkClasses("media")}
+              className={navLinkClasses}
             >
               Media
             </span>
             <span
               onClick={() => scrollToSection("contact")}
-              className={navLinkClasses("contact")}
+              className={navLinkClasses}
             >
               Contact
             </span>
           </nav>
         </div>
-      </motion.header>
+      </header>
 
       <main className="max-w-5xl mx-auto px-6 py-10 space-y-12">
-        <section id="about" className="grid md:grid-cols-2 gap-8 items-center">
+        {/* Hero / About */}
+        <section
+          id="about"
+          className="grid md:grid-cols-2 gap-8 items-center"
+        >
           <div>
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl md:text-4xl font-extrabold leading-tight"
-            >
+            <h1 className="text-3xl md:text-4xl font-extrabold leading-tight">
               Build the life you want — from where you are now.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-4 text-gray-700 text-base md:text-lg"
-            >
-              I teach the tools, habits, and community practices that help people transform a
-              life they don’t want into a life they do. My work centers displaced youth,
-              including those experiencing homelessness and transitions into or out of foster
-              care, as well as people and families impacted by incarceration across Los Angeles
-              County and beyond.
-            </motion.p>
+            </h1>
+            <p className="mt-4 text-gray-700 text-base md:text-lg">
+              I teach the tools, habits, and community practices that help
+              people transform a life they don’t want into a life they do. My
+              work centers displaced youth, including those experiencing
+              homelessness and transitions into or out of foster care, as well
+              as people and families impacted by incarceration across Los
+              Angeles County and beyond.
+            </p>
 
-            <motion.div
-              className="mt-6 flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+            <div className="mt-6 flex flex-wrap gap-4">
               <button
                 onClick={() => scrollToSection("contact")}
                 className="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-3 rounded-lg text-sm font-medium shadow hover:opacity-95"
@@ -239,17 +145,21 @@ export default function JeorgetteWebsite() {
               >
                 See offerings
               </button>
-            </motion.div>
+            </div>
 
             <div className="mt-5 text-xs text-gray-700 space-y-1">
               <p>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:c.jorgette@yahoo.com" className="underline">
+                <a
+                  href="mailto:c.jorgette@yahoo.com"
+                  className="underline"
+                >
                   c.jorgette@yahoo.com
                 </a>
               </p>
               <p>
-                <strong>Location:</strong> Los Angeles, California, United States
+                <strong>Location:</strong> Los Angeles, California, United
+                States
               </p>
             </div>
 
@@ -264,25 +174,20 @@ export default function JeorgetteWebsite() {
             </div>
           </div>
 
-          <motion.aside
-            className="bg-white rounded-2xl p-6 shadow-md border border-gray-100"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
+          <aside className="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
             <h3 className="text-lg font-semibold">Snapshot</h3>
             <ul className="mt-4 space-y-3 text-gray-700 text-sm">
               <li>
-                Advocate for displaced youth, especially those experiencing homelessness and
-                foster care transitions.
+                Advocate for displaced youth, especially those experiencing
+                homelessness and foster care transitions.
               </li>
               <li>
-                Aspiring educator dedicated to rehabilitation resources for incarcerated people
-                across LA County and internationally.
+                Educator dedicated to rehabilitation resources for
+                incarcerated people across LA County and internationally.
               </li>
               <li>
-                Passionate about community-driven academic advancement, emotional growth, and
-                systems-level change.
+                Passionate about community-driven academic advancement,
+                emotional growth, and systems-level change.
               </li>
             </ul>
 
@@ -307,24 +212,17 @@ export default function JeorgetteWebsite() {
                 ))}
               </div>
             </div>
-          </motion.aside>
+          </aside>
         </section>
 
         {/* Offerings */}
         <section id="offerings" className="pt-4">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45 }}
-          >
-            <h2 className="text-2xl font-semibold">What I offer</h2>
-            <p className="mt-2 text-gray-700 text-sm md:text-base">
-              Practical, research-informed programming and one-on-one coaching that help
-              people build tangible structures for life change: academically, emotionally,
-              and in community.
-            </p>
-          </motion.div>
+          <h2 className="text-2xl font-semibold">What I offer</h2>
+          <p className="mt-2 text-gray-700 text-sm md:text-base">
+            Practical, research-informed programming and one-on-one coaching
+            that help people build tangible structures for life change:
+            academically, emotionally, and in community.
+          </p>
 
           <div className="mt-6 grid md:grid-cols-3 gap-6">
             {[
@@ -344,21 +242,283 @@ export default function JeorgetteWebsite() {
                   "Collaborations with schools, nonprofits, and county programs to expand access and support.",
               },
             ].map((card) => (
-              <motion.article
+              <article
                 key={card.title}
                 className="bg-white p-6 rounded-xl shadow-sm border border-gray-100"
-                whileHover={{ y: -4, boxShadow: "0 18px 45px rgba(15,23,42,0.08)" }}
-                transition={{ type: "spring", stiffness: 260, damping: 18 }}
               >
-                <h3 className="font-semibold text-sm md:text-base">{card.title}</h3>
-                <p className="mt-2 text-xs md:text-sm text-gray-600">{card.body}</p>
-              </motion.article>
+                <h3 className="font-semibold text-sm md:text-base">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-xs md:text-sm text-gray-600">
+                  {card.body}
+                </p>
+              </article>
             ))}
           </div>
         </section>
 
-        {/* The rest of sections omitted in this snippet for brevity */}
+        {/* Education */}
+        <section id="education" className="pt-4">
+          <h2 className="text-2xl font-semibold">Education</h2>
+          <div className="mt-4 grid md:grid-cols-2 gap-6">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-md bg-indigo-100 flex items-center justify-center font-semibold text-sm">
+                  U
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm md:text-base">
+                    UCLA — B.A. Sociology
+                  </h3>
+                  <p className="text-xs text-gray-600 mt-1">
+                    2023 - 2025 • Senior
+                  </p>
+                  <p className="text-xs text-gray-600 mt-2">
+                    UCLA Leadership Academy 2025 Cohort • Underground
+                    Scholars Policy Fellowship
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-md bg-amber-100 flex items-center justify-center font-semibold text-sm">
+                  B
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm md:text-base">
+                    Barstow Community College — A.A. in English
+                  </h3>
+                  <p className="text-xs text-gray-600 mt-1">
+                    2020 - 2022 • Summa Cum Laude
+                  </p>
+                  <p className="text-xs text-gray-600 mt-2">
+                    All California Academic Awardee • All USA Academic
+                    Nominee • Commencement Speaker 2023
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Portfolio hub */}
+        <section id="portfolio" className="pt-4">
+          <h2 className="text-2xl font-semibold">Portfolio</h2>
+          <p className="mt-2 text-gray-700 text-sm md:text-base">
+            Explore my work across speaking, teaching, advocacy, and
+            international engagement.
+          </p>
+
+          <div className="mt-6 grid md:grid-cols-2 gap-6">
+            {[
+              {
+                id: "speaking",
+                title: "Speaking & Media",
+                body:
+                  "Keynotes, interviews, podcast features, and press appearances.",
+              },
+              {
+                id: "teaching",
+                title: "Teaching & Curriculum",
+                body:
+                  "Domestic and international education, curriculum development, and youth instruction.",
+              },
+              {
+                id: "advocacy",
+                title: "Advocacy & Policy Work",
+                body:
+                  "Community leadership, legislative work, and nonprofit advocacy.",
+              },
+              {
+                id: "international",
+                title: "International Work",
+                body:
+                  "Global education initiatives and correctional facility collaboration across Europe.",
+              },
+            ].map((card) => (
+              <button
+                key={card.id}
+                onClick={() => scrollToSection(card.id)}
+                className="text-left bg-white p-6 rounded-xl shadow-sm border border-gray-100 w-full hover:shadow-md"
+              >
+                <h3 className="text-sm md:text-base font-semibold">
+                  {card.title}
+                </h3>
+                <p className="text-xs md:text-sm text-gray-600 mt-2">
+                  {card.body}
+                </p>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Media section with videos */}
+        <section id="media" className="pt-4">
+          <h2 className="text-2xl font-semibold">Media & Videos</h2>
+          <p className="mt-2 text-gray-700 text-sm md:text-base">
+            Watch and explore select talks, testimonials, and moments from my
+            advocacy and teaching work.
+          </p>
+
+          <div className="mt-6 grid md:grid-cols-2 gap-6">
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <h3 className="font-semibold text-sm md:text-base">
+                Testimonial Film
+              </h3>
+              <div className="mt-3 aspect-video">
+                <iframe
+                  className="w-full h-full rounded-lg"
+                  src="https://www.youtube.com/embed/nDHfURsqDWs"
+                  title="Testimonial film"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <h3 className="font-semibold text-sm md:text-base">
+                College Commencement Speech
+              </h3>
+              <div className="mt-3 aspect-video">
+                <iframe
+                  className="w-full h-full rounded-lg"
+                  src="https://www.youtube.com/embed/TFAbGh3ZhkY"
+                  title="Commencement speech"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          {/* Simple photo highlight grid */}
+          <div className="mt-10">
+            <h3 className="text-xl font-semibold">Photo Highlights</h3>
+            <p className="mt-2 text-gray-700 text-xs md:text-sm">
+              A snapshot of some of the rooms, communities, and organizations I
+              have had the honor to work with.
+            </p>
+
+            <div className="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {photoHighlights.map((item, index) => (
+                <figure
+                  key={index}
+                  className="bg-white rounded-xl shadow-sm overflow-hidden flex flex-col cursor-pointer hover:-translate-y-1 hover:shadow-md transition"
+                  onClick={() => setLightboxItem(item)}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="w-full h-40 object-cover"
+                  />
+                  <figcaption className="p-3 text-xs text-gray-700">
+                    {item.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section
+          id="contact"
+          className="mt-4 bg-gradient-to-r from-white to-gray-50 p-6 rounded-2xl border border-gray-100"
+        >
+          <h2 className="text-2xl font-semibold">Get in touch</h2>
+          <p className="mt-2 text-gray-700 text-sm md:text-base">
+            Interested in workshops, coaching, speaking engagements, or
+            partnerships? Share a bit about what you&apos;re looking for, and
+            I&apos;ll be in touch.
+          </p>
+
+          <div className="mt-6 grid md:grid-cols-2 gap-6">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <h3 className="font-semibold text-sm md:text-base">Contact</h3>
+              <p className="mt-3 text-xs md:text-sm text-gray-600">
+                Email:{" "}
+                <a
+                  className="underline"
+                  href="mailto:c.jorgette@yahoo.com"
+                >
+                  c.jorgette@yahoo.com
+                </a>
+              </p>
+              <p className="mt-2 text-xs md:text-sm text-gray-600">
+                Location: Los Angeles, California, United States
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <h3 className="font-semibold text-sm md:text-base">
+                Quick inquiry
+              </h3>
+              <form className="mt-3 grid gap-3">
+                <input
+                  className="border rounded-md px-3 py-2 text-xs md:text-sm"
+                  placeholder="Your name"
+                />
+                <input
+                  className="border rounded-md px-3 py-2 text-xs md:text-sm"
+                  placeholder="Email"
+                />
+                <textarea
+                  className="border rounded-md px-3 py-2 text-xs md:text-sm"
+                  rows={4}
+                  placeholder="How can I help?"
+                />
+                <button className="mt-2 inline-block px-4 py-2 bg-indigo-600 text-white rounded-md text-xs md:text-sm">
+                  Send message
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        {/* Lightbox overlay */}
+        {lightboxItem && (
+          <div
+            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
+            onClick={() => setLightboxItem(null)}
+          >
+            <div
+              className="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-black">
+                <img
+                  src={lightboxItem.src}
+                  alt={lightboxItem.alt}
+                  className="w-full max-h-[70vh] object-contain mx-auto"
+                />
+              </div>
+              <div className="p-4 flex items-start justify-between gap-4">
+                <p className="text-sm text-gray-800">
+                  {lightboxItem.caption}
+                </p>
+                <button
+                  type="button"
+                  className="text-xs px-2 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50"
+                  onClick={() => setLightboxItem(null)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <footer className="mt-8 text-center text-xs md:text-sm text-gray-500 border-t border-gray-100 pt-4">
+          © {new Date().getFullYear()} Jeorgette Cuellar — Built with care
+        </footer>
       </main>
     </div>
   );
 }
+
+export default App;
