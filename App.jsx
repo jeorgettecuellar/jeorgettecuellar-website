@@ -683,8 +683,12 @@ function App() {
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className="w-full className="w-full h-40 sm:h-44 md:h-48 lg:h-56 min-h-[160px] object-cover rounded lg"
- object-cover transform transition-transform duration-300 group-hover:scale-105"
+                    <img
+  src={item.src}
+  alt={item.alt}
+  className="w-full h-40 sm:h-44 md:h-48 lg:h-56 min-h-[160px] object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-105"
+/>
+
                   />
                 </div>
                 <figcaption className="p-3 text-[11px] md:text-[12px] text-[#4C5A52] leading-snug">
