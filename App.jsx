@@ -4,31 +4,87 @@ import { motion } from "framer-motion";
 const SECTION_IDS = [
   "about",
   "offerings",
-  "education",
-  "portfolio",
   "speaking",
+  "portfolio",
   "teaching",
   "advocacy",
   "international",
+  "education",
   "gallery",
   "contact",
 ];
 
 const photoHighlights = [
-  { src: "/photo1.jpg", alt: "Photo 1", caption: "Speaking with community partners and supporters." },
-  { src: "/photo2.jpg", alt: "Photo 2", caption: "Celebrating youth leadership and accomplishment." },
-  { src: "/photo3.jpg", alt: "Photo 3", caption: "Gathering with students and mentors after a workshop." },
-  { src: "/photo4.jpg", alt: "Photo 4", caption: "Community event focused on uplifting families." },
-  { src: "/photo5.jpg", alt: "Photo 5", caption: "Sharing lived experience in a recorded conversation." },
-  { src: "/photo6.jpg", alt: "Photo 6", caption: "Marking milestones with the young people I serve." },
-  { src: "/photo7.jpg", alt: "Photo 7", caption: "Connection and celebration at a donor event." },
-  { src: "/photo8.jpg", alt: "Photo 8", caption: "Building relationships that expand opportunity." },
-  { src: "/photo9.jpg", alt: "Photo 9", caption: "International collaboration around justice and education." },
-  { src: "/photo10.jpg", alt: "Photo 10", caption: "Learning from systems abroad focused on rehabilitation." },
-  { src: "/photo11.jpg", alt: "Photo 11", caption: "Global classroom moments with educators and students." },
-  { src: "/photo12.jpg", alt: "Photo 12", caption: "Partnering with community organizations overseas." },
-  { src: "/photo13.jpg", alt: "Photo 13", caption: "Strengthening international networks for change." },
-  { src: "/photo14.jpg", alt: "Photo 14", caption: "Honoring shared work toward transformation." },
+  {
+    src: "/photo1.jpg",
+    alt: "Community gathering at a fundraising or program event.",
+    caption: "Sharing my story in community spaces that invest in youth and families.",
+  },
+  {
+    src: "/photo2.jpg",
+    alt: "Smiling group photo with youth and mentors.",
+    caption: "Celebrating youth leadership, milestones, and the work they’ve done.",
+  },
+  {
+    src: "/photo3.jpg",
+    alt: "Group standing together at a community or school event.",
+    caption: "Building rooms where young people can be seen, heard, and supported.",
+  },
+  {
+    src: "/photo4.jpg",
+    alt: "Participants seated or gathered during a live event.",
+    caption: "Facilitating conversations about resilience, systems, and possibility.",
+  },
+  {
+    src: "/photo5.jpg",
+    alt: "Jeorgette speaking or being filmed while sharing her story.",
+    caption: "Using lived experience as a catalyst for healing and structural change.",
+  },
+  {
+    src: "/photo6.jpg",
+    alt: "Smiling with program participants or community partners.",
+    caption: "Marking milestones with young people as they build new routines.",
+  },
+  {
+    src: "/photo7.jpg",
+    alt: "Formal or semi-formal dinner with supporters at a table.",
+    caption: "Gathering with supporters and partners who make this work possible.",
+  },
+  {
+    src: "/photo8.jpg",
+    alt: "Community or campus-based event setting.",
+    caption: "Connecting across campuses, nonprofits, and county programs.",
+  },
+  {
+    src: "/photo9.jpg",
+    alt: "International or delegation-style photo abroad.",
+    caption: "Learning from global models of justice, education, and rehabilitation.",
+  },
+  {
+    src: "/photo10.jpg",
+    alt: "Group visiting a correctional or institutional facility.",
+    caption: "Seeing how other countries center rehabilitation and re-entry.",
+  },
+  {
+    src: "/photo11.jpg",
+    alt: "Group of educators or advocates standing together.",
+    caption: "Collaborating with leaders committed to systems-level change.",
+  },
+  {
+    src: "/photo12.jpg",
+    alt: "Community gathering in an international setting.",
+    caption: "Connecting community work locally to movements happening abroad.",
+  },
+  {
+    src: "/photo13.jpg",
+    alt: "Smiling delegation or cohort photo.",
+    caption: "Standing beside people who believe in transformation at scale.",
+  },
+  {
+    src: "/photo14.jpg",
+    alt: "Outdoor celebration or group gathering.",
+    caption: "Honoring the joy, repair, and relationships this work creates.",
+  },
 ];
 
 export default function JeorgetteWebsite() {
@@ -66,22 +122,27 @@ export default function JeorgetteWebsite() {
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const navLinkClasses = (id) =>
     `relative cursor-pointer text-[11px] tracking-wide uppercase ${
       activeSection === id
-        ? "text-indigo-700 font-semibold"
+        ? "text-[#C55637] font-semibold"
         : "text-slate-600 hover:text-slate-900"
     }`;
 
   return (
     <div
-      className="min-h-screen bg-slate-50 text-slate-900 antialiased"
-      style={{ fontFamily: '"Times New Roman", serif' }}
+      className="min-h-screen bg-[#FFF8F3] text-slate-900 antialiased"
+      style={{
+        fontFamily:
+          '"Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      }}
     >
-      {/* TOP BAR */}
+      {/* HEADER */}
       <motion.header
         className="sticky top-0 z-40 border-b border-slate-200 bg-white/85 backdrop-blur"
         initial={{ y: -30, opacity: 0 }}
@@ -90,24 +151,24 @@ export default function JeorgetteWebsite() {
       >
         <div className="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-indigo-600 to-rose-500 flex items-center justify-center text-white text-xs font-semibold">
+            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#F4B78C] to-[#C55637] flex items-center justify-center text-white text-xs font-semibold">
               JC
             </div>
             <div className="leading-tight">
-              <p className="text-xs font-semibold tracking-wide">
+              <p className="text-xs font-semibold tracking-wide text-[#2F2A26]">
                 Jeorgette Cuellar{" "}
                 <span className="text-[10px] font-normal text-slate-500">
                   (she/her)
                 </span>
               </p>
               <p className="text-[11px] text-slate-500">
-                Sociologist • Educator • Advocate for displaced youth
+                Sociologist · Educator · Advocate for displaced youth
               </p>
             </div>
           </div>
 
           <nav className="hidden md:flex items-center gap-5">
-            {["about", "offerings", "portfolio", "speaking", "gallery", "contact"].map(
+            {["about", "offerings", "speaking", "portfolio", "gallery", "contact"].map(
               (id) => (
                 <span
                   key={id}
@@ -122,7 +183,7 @@ export default function JeorgetteWebsite() {
             )}
             <button
               onClick={() => scrollToSection("contact")}
-              className="ml-4 inline-flex items-center gap-1 rounded-full bg-indigo-600 px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-indigo-700"
+              className="ml-4 inline-flex items-center gap-1 rounded-full bg-[#C55637] px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-[#A6452B]"
             >
               Book Jeorgette
             </button>
@@ -134,20 +195,20 @@ export default function JeorgetteWebsite() {
         {/* HERO / ABOUT */}
         <section
           id="about"
-          className="grid lg:grid-cols-[1.4fr_minmax(0,1fr)] gap-10 items-center"
+          className="grid lg:grid-cols-[1.35fr_minmax(0,1fr)] gap-10 items-center"
         >
           <div>
             <motion.p
-              className="text-[11px] uppercase tracking-[0.2em] text-indigo-700 font-semibold"
+              className="text-[11px] uppercase tracking-[0.22em] text-[#F4D27A] font-semibold"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
-              Speaker • Educator • Systems Transformer
+              Speaker · Educator · Systems Transformer
             </motion.p>
 
             <motion.h1
-              className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900"
+              className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-[#2F2A26]"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
@@ -156,15 +217,15 @@ export default function JeorgetteWebsite() {
             </motion.h1>
 
             <motion.p
-              className="mt-4 text-sm md:text-base text-slate-700 max-w-xl"
+              className="mt-4 text-sm md:text-base text-[#4C4743] max-w-xl"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
             >
-              I partner with schools, nonprofits, and justice-impacted communities
-              to build practical pathways toward education, stability, and healing.
-              My work centers young people navigating homelessness, foster care, and
-              incarceration—alongside the families and systems around them.
+              I work alongside schools, nonprofits, and justice-impacted communities
+              to build real pathways toward stability, education, and healing. My
+              work centers young people navigating homelessness, foster care, and
+              incarceration—along with the families and systems around them.
             </motion.p>
 
             <motion.div
@@ -175,24 +236,24 @@ export default function JeorgetteWebsite() {
             >
               <button
                 onClick={() => scrollToSection("contact")}
-                className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-xs md:text-sm font-semibold text-white shadow-sm hover:bg-indigo-700"
+                className="inline-flex items-center justify-center rounded-full bg-[#C55637] px-5 py-2.5 text-xs md:text-sm font-semibold text-white shadow-sm hover:bg-[#A6452B]"
               >
                 Book Jeorgette to speak
               </button>
               <button
                 onClick={() => scrollToSection("offerings")}
-                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-[11px] md:text-xs font-semibold tracking-wide text-slate-700 hover:bg-slate-50"
+                className="inline-flex items-center justify-center rounded-full border border-[#F4D9C6] bg-white/90 px-5 py-2.5 text-[11px] md:text-xs font-semibold tracking-wide text-[#4C4743] hover:bg-[#FFF1E6]"
               >
                 View programs & workshops
               </button>
             </motion.div>
 
-            <div className="mt-5 text-[11px] text-slate-600 space-y-1">
+            <div className="mt-5 text-[11px] text-[#4C4743] space-y-1">
               <p>
                 <strong className="font-semibold">Email:</strong>{" "}
                 <a
                   href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-slate-400 hover:decoration-indigo-600"
+                  className="underline decoration-[#F4B78C] underline-offset-2 hover:decoration-[#C55637]"
                 >
                   c.jorgette@yahoo.com
                 </a>
@@ -207,30 +268,36 @@ export default function JeorgetteWebsite() {
               <a
                 href="/resume.pdf"
                 download
-                className="inline-flex items-center rounded-full bg-emerald-600 px-4 py-2 text-[11px] md:text-xs font-semibold uppercase tracking-wide text-white shadow hover:bg-emerald-700"
+                className="inline-flex items-center rounded-full bg-[#4BAF7A] px-4 py-2 text-[11px] md:text-xs font-semibold uppercase tracking-wide text-white shadow hover:bg-[#3C8D62]"
               >
                 Download résumé (PDF)
               </a>
             </div>
           </div>
 
-          {/* Hero image / collage */}
+          {/* Hero side card */}
           <motion.div
             className="relative"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900/95">
+            <div
+              className="rounded-3xl overflow-hidden shadow-2xl border border-[#F4D9C6]"
+              style={{
+                background:
+                  "linear-gradient(135deg, #F7C7A3 0%, #F8E9A1 40%, #BFD8FF 100%)",
+              }}
+            >
               <img
                 src="/photo5.jpg"
                 alt="Jeorgette speaking and sharing her story."
-                className="w-full h-64 md:h-80 object-cover opacity-90"
+                className="w-full h-64 md:h-80 object-cover mix-blend-multiply"
               />
             </div>
             <div className="absolute -bottom-6 -left-4 bg-white shadow-xl rounded-2xl px-4 py-3 border border-slate-100 max-w-xs">
-              <p className="text-[11px] font-semibold text-slate-900">
-                “Jeorgette’s story moved the room and gave our youth real,
+              <p className="text-[11px] font-semibold text-[#2F2A26]">
+                “Jeorgette&apos;s story moved the room and gave our youth real,
                 tangible hope.”
               </p>
               <p className="mt-1 text-[10px] text-slate-500">
@@ -241,16 +308,19 @@ export default function JeorgetteWebsite() {
         </section>
 
         {/* OFFERINGS */}
-        <section id="offerings" className="space-y-6">
+        <section
+          id="offerings"
+          className="space-y-6 rounded-3xl border border-[#F4D9C6] bg-white/90 p-5 md:p-7"
+        >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-                Programs & offerings
+              <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+                Programs & partnerships
               </h2>
-              <p className="mt-2 text-sm text-slate-700 max-w-xl">
-                I work with schools, nonprofits, campuses, and community partners to
-                design programming that is honest about harm and serious about
-                possibility.
+              <p className="mt-2 text-sm text-[#4C4743] max-w-xl">
+                I collaborate with campuses, nonprofits, and community programs to
+                design spaces where system-impacted youth and families can practice
+                new structures for stability and growth.
               </p>
             </div>
           </div>
@@ -260,27 +330,27 @@ export default function JeorgetteWebsite() {
               {
                 title: "Keynotes & Storytelling",
                 body:
-                  "Talks that weave lived experience, research, and practical hope for audiences of students, staff, and community.",
+                  "Talks that blend lived experience, research, and practical hope for audiences of students, staff, and community partners.",
               },
               {
                 title: "Workshops & Curriculum",
                 body:
-                  "Multi-session or one-time workshops on resilience, re-entry, navigating systems, and building structure for change.",
+                  "Multi-session or one-time workshops focused on resilience, re-entry, systems navigation, and academic re-engagement.",
               },
               {
-                title: "Consulting & Partnerships",
+                title: "Consulting & Design",
                 body:
-                  "Thought partnership with organizations designing programming for system-impacted youth and families.",
+                  "Thought partnership with organizations developing programs for justice-involved, foster, or housing-insecure youth.",
               },
             ].map((card) => (
               <div
                 key={card.title}
-                className="group h-full rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                className="group h-full rounded-2xl border border-slate-100 bg-[#FFFDFC] p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
               >
-                <h3 className="text-sm font-semibold text-slate-900">
+                <h3 className="text-sm font-semibold text-[#2F2A26]">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                <p className="mt-2 text-xs text-[#4C4743] leading-relaxed">
                   {card.body}
                 </p>
               </div>
@@ -288,122 +358,25 @@ export default function JeorgetteWebsite() {
           </div>
         </section>
 
-        {/* EDUCATION */}
-        <section id="education" className="space-y-5">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-            Education
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-indigo-700 font-semibold">
-                UCLA
-              </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold">
-                B.A. Sociology
-              </h3>
-              <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 • Senior</p>
-              <p className="mt-2 text-xs text-slate-600">
-                Leadership Academy 2025 Cohort • Underground Scholars Policy
-                Fellowship.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-emerald-700 font-semibold">
-                Barstow Community College
-              </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold">
-                A.A. English
-              </h3>
-              <p className="text-[11px] text-slate-500 mt-1">
-                2020 – 2022 • Summa Cum Laude
-              </p>
-              <p className="mt-2 text-xs text-slate-600">
-                All California Academic Awardee • All USA Academic Nominee • 2023
-                Commencement Speaker.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* PORTFOLIO HUB */}
-        <section id="portfolio" className="space-y-5">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-                Areas of work
-              </h2>
-              <p className="mt-2 text-sm text-slate-700 max-w-xl">
-                My work spans speaking, curriculum, advocacy, and international
-                collaboration around justice and education.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-            {[
-              {
-                id: "speaking",
-                title: "Speaking & Media",
-                body:
-                  "Keynotes, panels, interviews, and storytelling that connect lived experience with policy and practice.",
-              },
-              {
-                id: "teaching",
-                title: "Teaching & Curriculum",
-                body:
-                  "Designing and delivering courses and workshops for youth and adults in carceral and community settings.",
-              },
-              {
-                id: "advocacy",
-                title: "Advocacy & Policy",
-                body:
-                  "Collaborating with organizations and agencies on systems change centered on youth and families.",
-              },
-              {
-                id: "international",
-                title: "International Work",
-                body:
-                  "Participating in global delegations to learn from justice and education models abroad.",
-              },
-            ].map((card) => (
-              <button
-                key={card.id}
-                onClick={() => scrollToSection(card.id)}
-                className="text-left rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
-              >
-                <h3 className="text-sm md:text-base font-semibold text-slate-900">
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-xs text-slate-600">{card.body}</p>
-                <span className="mt-3 inline-flex text-[11px] font-semibold text-indigo-700">
-                  View this focus area →
-                </span>
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* SPEAKING – with YouTube only here */}
+        {/* SPEAKING (videos) */}
         <section id="speaking" className="space-y-5">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
             Speaking & media
           </h2>
-          <p className="text-sm text-slate-700 max-w-2xl">
-            From intimate rooms to large events, I speak about the realities of
-            displacement, incarceration, and resilience—and the structures that
-            make change possible.
+          <p className="text-sm text-[#4C4743] max-w-2xl">
+            From intimate rooms to large audiences, I speak about displacement,
+            incarceration, and possibility—and the structures that help people move
+            from surviving to building a life they want.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-              <h3 className="font-semibold text-sm md:text-base">
+            <div className="bg-white border border-[#F4D9C6] rounded-2xl p-4 shadow-sm">
+              <h3 className="font-semibold text-sm md:text-base text-[#2F2A26]">
                 Featured testimonial film
               </h3>
-              <p className="mt-1 text-xs text-slate-600">
-                A short film capturing my story, my work, and the communities I
-                serve.
+              <p className="mt-1 text-xs text-[#4C4743]">
+                A short film sharing my story, my work, and the communities I am
+                accountable to.
               </p>
               <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden shadow">
                 <iframe
@@ -417,13 +390,13 @@ export default function JeorgetteWebsite() {
               </div>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-              <h3 className="font-semibold text-sm md:text-base">
+            <div className="bg-white border border-[#F4D9C6] rounded-2xl p-4 shadow-sm">
+              <h3 className="font-semibold text-sm md:text-base text-[#2F2A26]">
                 Commencement address
               </h3>
-              <p className="mt-1 text-xs text-slate-600">
-                Speaking to graduates about possibility, responsibility, and
-                building new futures.
+              <p className="mt-1 text-xs text-[#4C4743]">
+                Speaking to graduates about responsibility, repair, and claiming
+                joy—even when the odds were not built for you.
               </p>
               <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden shadow">
                 <iframe
@@ -439,48 +412,143 @@ export default function JeorgetteWebsite() {
           </div>
         </section>
 
+        {/* PORTFOLIO HUB */}
+        <section id="portfolio" className="space-y-5">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+                Areas of work
+              </h2>
+              <p className="mt-2 text-sm text-[#4C4743] max-w-2xl">
+                My practice spans teaching, advocacy, and international collaboration
+                around justice, education, and re-entry.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+            {[
+              {
+                id: "teaching",
+                title: "Teaching & curriculum",
+                body:
+                  "Course and workshop design in community colleges, youth programs, and carceral settings.",
+              },
+              {
+                id: "advocacy",
+                title: "Advocacy & policy",
+                body:
+                  "Systems-focused work with nonprofits and agencies working toward decarceration and youth justice.",
+              },
+              {
+                id: "international",
+                title: "International collaboration",
+                body:
+                  "Global delegations studying rehabilitation-centered justice and education models.",
+              },
+            ].map((card) => (
+              <button
+                key={card.id}
+                onClick={() => scrollToSection(card.id)}
+                className="text-left rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+              >
+                <h3 className="text-sm md:text-base font-semibold text-[#2F2A26]">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-xs text-[#4C4743] leading-relaxed">
+                  {card.body}
+                </p>
+                <span className="mt-3 inline-flex text-[11px] font-semibold text-[#C55637]">
+                  Learn more →
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
+
         {/* TEACHING */}
         <section id="teaching" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+          <h2 className="text-xl md:text-2xl font-bold text-[#2F2A26]">
             Teaching & curriculum
           </h2>
-          <p className="text-sm text-slate-700 max-w-2xl">
-            I facilitate learning spaces in community colleges, youth programs,
-            and correctional facilities that center dignity, agency, and academic
-            possibility.
+          <p className="text-sm text-[#4C4743] max-w-2xl">
+            I facilitate classrooms and workshops that center dignity, agency, and
+            academic possibility for youth and adults—including inside carceral
+            facilities. My approach blends lived experience, trauma-informed
+            practice, and research-backed structure.
           </p>
         </section>
 
         {/* ADVOCACY */}
         <section id="advocacy" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+          <h2 className="text-xl md:text-2xl font-bold text-[#2F2A26]">
             Advocacy & policy work
           </h2>
-          <p className="text-sm text-slate-700 max-w-2xl">
-            My advocacy includes work with nonprofits, state and county partners,
-            and national organizations focused on decarceration, youth justice,
-            and educational access.
+          <p className="text-sm text-[#4C4743] max-w-2xl">
+            My advocacy includes work with nonprofits, county and state partners,
+            and national organizations committed to transforming youth justice,
+            decarceration, and access to education and housing.
           </p>
         </section>
 
         {/* INTERNATIONAL */}
         <section id="international" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+          <h2 className="text-xl md:text-2xl font-bold text-[#2F2A26]">
             International work
           </h2>
-          <p className="text-sm text-slate-700 max-w-2xl">
+          <p className="text-sm text-[#4C4743] max-w-2xl">
             Through global delegations, I&apos;ve visited correctional and
-            educational systems abroad to learn what it means to prioritize
-            rehabilitation, relationship, and re-entry.
+            educational systems abroad to learn how countries prioritize
+            rehabilitation, relationship, and re-entry—and bring those lessons back
+            to local work.
           </p>
+        </section>
+
+        {/* EDUCATION */}
+        <section id="education" className="space-y-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+            Education
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#C55637] font-semibold">
+                UCLA
+              </p>
+              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#2F2A26]">
+                B.A. Sociology
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
+              <p className="mt-2 text-xs text-[#4C4743]">
+                Leadership Academy 2025 Cohort · Underground Scholars Policy
+                Fellowship.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#4BAF7A] font-semibold">
+                Barstow Community College
+              </p>
+              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#2F2A26]">
+                A.A. English
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1">
+                2020 – 2022 · Summa Cum Laude
+              </p>
+              <p className="mt-2 text-xs text-[#4C4743]">
+                All California Academic Awardee · All USA Academic Nominee · 2023
+                Commencement Speaker.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* GALLERY */}
         <section id="gallery" className="space-y-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
             Photo highlights
           </h2>
-          <p className="text-sm text-slate-700 max-w-2xl">
+          <p className="text-sm text-[#4C4743] max-w-2xl">
             A glimpse into some of the rooms, communities, and partners I have had
             the honor to work alongside.
           </p>
@@ -499,7 +567,7 @@ export default function JeorgetteWebsite() {
                     className="w-full h-40 object-cover transform transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <figcaption className="p-3 text-[11px] text-slate-700 leading-snug">
+                <figcaption className="p-3 text-[11px] text-[#4C4743] leading-snug">
                   {item.caption}
                 </figcaption>
               </figure>
@@ -510,24 +578,24 @@ export default function JeorgetteWebsite() {
         {/* CONTACT */}
         <section
           id="contact"
-          className="rounded-3xl border border-slate-200 bg-white shadow-sm p-6 md:p-8 space-y-5"
+          className="rounded-3xl border border-[#F4D9C6] bg-white shadow-sm p-6 md:p-8 space-y-5"
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
                 Let&apos;s work together
               </h2>
-              <p className="mt-2 text-sm text-slate-700 max-w-xl">
+              <p className="mt-2 text-sm text-[#4C4743] max-w-xl">
                 Share a bit about your event, classroom, or program. I&apos;ll
                 follow up with next steps and possibilities.
               </p>
             </div>
-            <div className="text-xs text-slate-600">
-              <p className="font-semibold text-slate-900">Direct contact</p>
+            <div className="text-xs text-[#4C4743]">
+              <p className="font-semibold text-[#2F2A26]">Direct contact</p>
               <p className="mt-1">
                 <a
                   href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-slate-400 hover:decoration-indigo-600"
+                  className="underline decoration-[#F4B78C] underline-offset-2 hover:decoration-[#C55637]"
                 >
                   c.jorgette@yahoo.com
                 </a>
@@ -537,19 +605,22 @@ export default function JeorgetteWebsite() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mt-3">
-            <div className="bg-slate-50 rounded-2xl border border-slate-200 p-5 text-xs text-slate-700 space-y-2">
-              <p className="font-semibold text-slate-900">
-                Ideal for organizations who:
+            <div className="bg-[#FFF1E6] rounded-2xl border border-[#F4D9C6] p-5 text-xs text-[#4C4743] space-y-2">
+              <p className="font-semibold text-[#2F2A26]">
+                I&apos;m a fit for organizations who:
               </p>
               <ul className="list-disc list-inside space-y-1">
                 <li>Serve youth in foster care, re-entry, or housing instability.</li>
                 <li>Support system-impacted students or families.</li>
-                <li>Are designing programming around justice, healing, or access.</li>
+                <li>
+                  Are building programming around justice, healing, or educational
+                  access.
+                </li>
               </ul>
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 p-5">
-              <h3 className="font-semibold text-sm text-slate-900">
+              <h3 className="font-semibold text-sm text-[#2F2A26]">
                 Quick inquiry form
               </h3>
               <form className="mt-3 grid gap-3 text-xs">
@@ -572,7 +643,7 @@ export default function JeorgetteWebsite() {
                 />
                 <button
                   type="button"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-indigo-600 px-4 py-2 text-[11px] font-semibold text-white hover:bg-indigo-700"
+                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#C55637] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#A6452B]"
                 >
                   Send message
                 </button>
@@ -599,9 +670,7 @@ export default function JeorgetteWebsite() {
                 />
               </div>
               <div className="p-4 flex items-start justify-between gap-4">
-                <p className="text-sm text-slate-800">
-                  {lightboxItem.caption}
-                </p>
+                <p className="text-sm text-slate-800">{lightboxItem.caption}</p>
                 <button
                   type="button"
                   className="text-[11px] px-3 py-1 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50"
@@ -616,8 +685,8 @@ export default function JeorgetteWebsite() {
 
         {/* FOOTER */}
         <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
-          © {new Date().getFullYear()} Jeorgette Cuellar · Site for speaking,
-          teaching, and community work.
+          © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and
+          community work.
         </footer>
       </main>
     </div>
