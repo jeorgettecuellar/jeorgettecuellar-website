@@ -87,10 +87,29 @@ const photoHighlights = [
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay },
+  }),
+};
+
+const sectionFade = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
+};
+
 function App() {
   const [activeSection, setActiveSection] = useState("about");
   const [lightboxItem, setLightboxItem] = useState(null);
 
+  // Scroll spy
   useEffect(() => {
     const options = {
       root: null,
@@ -127,9 +146,9 @@ function App() {
   };
 
   const navLinkClasses = (id) =>
-    `relative cursor-pointer text-[11px] tracking-wide uppercase ${
+    `relative cursor-pointer text-[11px] tracking-[0.18em] uppercase ${
       activeSection === id
-        ? "text-[#2F6F4E] font-semibold"
+        ? "text-[#1F4E37] font-semibold"
         : "text-slate-600 hover:text-slate-900"
     }`;
 
@@ -143,14 +162,14 @@ function App() {
     >
       {/* HEADER */}
       <motion.header
-        className="sticky top-0 z-40 border-b border-slate-200 bg-white/85 backdrop-blur"
+        className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur"
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
         <div className="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#4BAF7A] to-[#2F6F4E] flex items-center justify-center text-white text-xs font-semibold">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#4BAF7A] to-[#1F4E37] flex items-center justify-center text-white text-xs font-semibold">
               JC
             </div>
             <div className="leading-tight">
@@ -182,7 +201,7 @@ function App() {
             )}
             <button
               onClick={() => scrollToSection("contact")}
-              className="ml-4 inline-flex items-center gap-1 rounded-full bg-[#2F6F4E] px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-[#275841]"
+              className="ml-4 inline-flex items-center gap-1 rounded-full bg-[#1F4E37] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-[#173A29]"
             >
               Book Jeorgette
             </button>
@@ -190,133 +209,160 @@ function App() {
         </div>
       </motion.header>
 
-      <main className="max-w-6xl mx-auto px-5 py-10 space-y-16">
+      <main className="max-w-6xl mx-auto px-5 py-10 space-y-20 md:space-y-24">
         {/* HERO / ABOUT */}
-        <section
-          id="about"
-          className="grid lg:grid-cols-[1.35fr_minmax(0,1fr)] gap-10 items-center"
-        >
-          <div>
-            <motion.p
-              className="text-[11px] uppercase tracking-[0.22em] text-[#4BAF7A] font-semibold"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              Speaker · Educator · Systems Transformer
-            </motion.p>
-
-            <motion.h1
-              className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-[#1F2621]"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-            >
-              Helping displaced youth move from survival to possibility.
-            </motion.h1>
-
-            <motion.p
-              className="mt-4 text-sm md:text-base text-[#4C5A52] max-w-xl"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-            >
-              I work alongside schools, nonprofits, and justice-impacted communities
-              to build real pathways toward stability, education, and healing. My
-              work centers young people navigating homelessness, foster care, and
-              incarceration—along with the families and systems around them.
-            </motion.p>
-
-            <motion.div
-              className="mt-6 flex flex-wrap items-center gap-3"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.18 }}
-            >
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="inline-flex items-center justify-center rounded-full bg-[#2F6F4E] px-5 py-2.5 text-xs md:text-sm font-semibold text-white shadow-sm hover:bg-[#275841]"
-              >
-                Book Jeorgette to speak
-              </button>
-              <button
-                onClick={() => scrollToSection("offerings")}
-                className="inline-flex items-center justify-center rounded-full border border-[#CFE7D4] bg-white/90 px-5 py-2.5 text-[11px] md:text-xs font-semibold tracking-wide text-[#3D4943] hover:bg-[#E7F4EE]"
-              >
-                View programs & workshops
-              </button>
-            </motion.div>
-
-            <div className="mt-5 text-[11px] text-[#4C5A52] space-y-1">
-              <p>
-                <strong className="font-semibold">Email:</strong>{" "}
-                <a
-                  href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#2F6F4E]"
-                >
-                  c.jorgette@yahoo.com
-                </a>
-              </p>
-              <p>
-                <strong className="font-semibold">Based in:</strong> Los Angeles,
-                California
-              </p>
-            </div>
-
-            <div className="mt-4">
-              <a
-                href="/resume.pdf"
-                download
-                className="inline-flex items-center rounded-full bg-[#F4D27A] px-4 py-2 text-[11px] md:text-xs font-semibold uppercase tracking-wide text-[#4A3C21] shadow hover:bg-[#E7C661]"
-              >
-                Download résumé (PDF)
-              </a>
-            </div>
-          </div>
-
-          {/* Hero side card */}
+        <section id="about" className="pt-4">
           <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            className="rounded-3xl overflow-hidden border border-[#CFE7D4] bg-gradient-to-br from-[#E7F4EE] via-[#D7ECFF] to-[#F7C7A3] px-6 py-8 md:px-10 md:py-10"
+            variants={sectionFade}
+            initial="hidden"
+            animate="visible"
           >
-            <div
-              className="rounded-3xl overflow-hidden shadow-2xl border border-[#CFE7D4]"
-              style={{
-                background:
-                  "linear-gradient(135deg, #CFE7D4 0%, #D7ECFF 40%, #F7C7A3 100%)",
-              }}
-            >
-              <img
-                src="/photo5.jpg"
-                alt="Jeorgette speaking and sharing her story."
-                className="w-full h-64 md:h-80 object-cover mix-blend-multiply"
-              />
-            </div>
-            <div className="absolute -bottom-6 -left-4 bg-white shadow-xl rounded-2xl px-4 py-3 border border-slate-100 max-w-xs">
-              <p className="text-[11px] font-semibold text-[#1F2621]">
-                “Jeorgette&apos;s story moved the room and gave our youth real,
-                tangible hope.”
-              </p>
-              <p className="mt-1 text-[10px] text-slate-500">
-                – Program partner feedback
-              </p>
+            <div className="grid lg:grid-cols-[1.4fr_minmax(0,1fr)] gap-10 items-center">
+              {/* Left: Text */}
+              <div>
+                <motion.p
+                  className="text-[11px] uppercase tracking-[0.26em] text-[#1F4E37] font-semibold"
+                  variants={fadeUp}
+                  custom={0}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  Speaker · Educator · Systems Transformer
+                </motion.p>
+
+                <motion.h1
+                  className="mt-4 text-3xl md:text-4xl lg:text-5xl xl:text-[3.3rem] font-extrabold leading-tight text-[#122019]"
+                  variants={fadeUp}
+                  custom={0.08}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  Helping displaced youth move
+                  <span className="block text-[#1F4E37]">
+                    from survival to possibility.
+                  </span>
+                </motion.h1>
+
+                <motion.p
+                  className="mt-5 text-sm md:text-[15px] text-[#304139] max-w-xl leading-relaxed"
+                  variants={fadeUp}
+                  custom={0.16}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  I partner with schools, nonprofits, and justice-impacted communities
+                  to build real pathways toward stability, education, and healing. My
+                  work centers young people navigating homelessness, foster care, and
+                  incarceration—along with the families and systems around them.
+                </motion.p>
+
+                <motion.div
+                  className="mt-7 flex flex-wrap items-center gap-3"
+                  variants={fadeUp}
+                  custom={0.24}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="inline-flex items-center justify-center rounded-full bg-[#1F4E37] px-6 py-3 text-xs md:text-sm font-semibold text-white shadow-md hover:bg-[#173A29]"
+                  >
+                    Book Jeorgette to speak
+                  </button>
+                  <button
+                    onClick={() => scrollToSection("offerings")}
+                    className="inline-flex items-center justify-center rounded-full border border-white/70 bg-white/80 px-6 py-3 text-[11px] md:text-xs font-semibold tracking-wide text-[#304139] hover:bg-white"
+                  >
+                    View programs & workshops
+                  </button>
+                </motion.div>
+
+                <motion.div
+                  className="mt-5 text-[11px] text-[#304139] space-y-1"
+                  variants={fadeUp}
+                  custom={0.32}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <p>
+                    <strong className="font-semibold">Email:</strong>{" "}
+                    <a
+                      href="mailto:c.jorgette@yahoo.com"
+                      className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
+                    >
+                      c.jorgette@yahoo.com
+                    </a>
+                  </p>
+                  <p>
+                    <strong className="font-semibold">Based in:</strong> Los Angeles,
+                    California
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  className="mt-4"
+                  variants={fadeUp}
+                  custom={0.4}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="inline-flex items-center rounded-full bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
+                  >
+                    Download résumé (PDF)
+                  </a>
+                </motion.div>
+              </div>
+
+              {/* Right: Image + badge */}
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.14 }}
+              >
+                <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/60 bg-[#0F1713]">
+                  <img
+                    src="/photo5.jpg"
+                    alt="Jeorgette speaking and sharing her story."
+                    className="w-full h-64 md:h-80 lg:h-96 object-cover opacity-90"
+                  />
+                </div>
+                <div className="absolute -bottom-6 -left-4 bg-white shadow-xl rounded-2xl px-4 py-3 border border-slate-100 max-w-xs">
+                  <p className="text-[11px] font-semibold text-[#122019]">
+                    “Jeorgette&apos;s story moved the room and gave our youth real,
+                    tangible hope.”
+                  </p>
+                  <p className="mt-1 text-[10px] text-slate-500">
+                    – Program partner feedback
+                  </p>
+                </div>
+                <div className="absolute -top-4 right-2 bg-[#1F4E37] text-white text-[10px] px-3 py-2 rounded-full shadow-lg">
+                  Trusted by campuses & community programs
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </section>
 
         {/* OFFERINGS */}
-        <section
+        <motion.section
           id="offerings"
-          className="space-y-6 rounded-3xl border border-[#CFE7D4] bg-white/95 p-5 md:p-7"
+          className="space-y-6"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
         >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
                 Programs & partnerships
               </h2>
-              <p className="mt-2 text-sm text-[#4C5A52] max-w-xl">
+              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
                 I collaborate with campuses, nonprofits, and community programs to
                 design spaces where system-impacted youth and families can practice
                 new structures for stability and growth.
@@ -341,39 +387,56 @@ function App() {
                 body:
                   "Thought partnership with organizations developing programs for justice-involved, foster, or housing-insecure youth.",
               },
-            ].map((card) => (
-              <div
+            ].map((card, i) => (
+              <motion.div
                 key={card.title}
-                className="group h-full rounded-2xl border border-slate-100 bg-[#FDFEFE] p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                className="group h-full rounded-2xl border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.05 * i }}
               >
-                <h3 className="text-sm font-semibold text-[#1F2621]">
+                <h3 className="text-sm md:text-base font-semibold text-[#122019]">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-xs text-[#4C5A52] leading-relaxed">
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
                   {card.body}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* SPEAKING (videos) */}
-        <section id="speaking" className="space-y-5">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
+        <motion.section
+          id="speaking"
+          className="space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
             Speaking & media
           </h2>
-          <p className="text-sm text-[#4C5A52] max-w-2xl">
+          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
             From intimate rooms to large audiences, I speak about displacement,
             incarceration, and possibility—and the structures that help people move
             from surviving to building a life they want.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
-            <div className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm">
-              <h3 className="font-semibold text-sm md:text-base text-[#1F2621]">
+            <motion.div
+              className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45 }}
+            >
+              <h3 className="font-semibold text-sm md:text-base text-[#122019]">
                 Featured testimonial film
               </h3>
-              <p className="mt-1 text-xs text-[#4C5A52]">
+              <p className="mt-1 text-xs md:text-[13px] text-[#4C5A52]">
                 A short film sharing my story, my work, and the communities I am
                 accountable to.
               </p>
@@ -387,13 +450,19 @@ function App() {
                   allowFullScreen
                 ></iframe>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm">
-              <h3 className="font-semibold text-sm md:text-base text-[#1F2621]">
+            <motion.div
+              className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.08 }}
+            >
+              <h3 className="font-semibold text-sm md:text-base text-[#122019]">
                 Commencement address
               </h3>
-              <p className="mt-1 text-xs text-[#4C5A52]">
+              <p className="mt-1 text-xs md:text-[13px] text-[#4C5A52]">
                 Speaking to graduates about responsibility, repair, and claiming
                 joy—even when the odds were not built for you.
               </p>
@@ -407,18 +476,25 @@ function App() {
                   allowFullScreen
                 ></iframe>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* PORTFOLIO HUB */}
-        <section id="portfolio" className="space-y-5">
+        <motion.section
+          id="portfolio"
+          className="space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
                 Areas of work
               </h2>
-              <p className="mt-2 text-sm text-[#4C5A52] max-w-2xl">
+              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
                 My practice spans teaching, advocacy, and international collaboration
                 around justice, education, and re-entry.
               </p>
@@ -445,80 +521,112 @@ function App() {
                 body:
                   "Global delegations studying rehabilitation-centered justice and education models.",
               },
-            ].map((card) => (
-              <button
+            ].map((card, i) => (
+              <motion.button
                 key={card.id}
                 onClick={() => scrollToSection(card.id)}
-                className="text-left rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                className="text-left rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.05 * i }}
               >
-                <h3 className="text-sm md:text-base font-semibold text-[#1F2621]">
+                <h3 className="text-sm md:text-base font-semibold text-[#122019]">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-xs text-[#4C5A52] leading-relaxed">
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
                   {card.body}
                 </p>
-                <span className="mt-3 inline-flex text-[11px] font-semibold text-[#2F6F4E]">
+                <span className="mt-3 inline-flex text-[11px] font-semibold text-[#1F4E37]">
                   Learn more →
                 </span>
-              </button>
+              </motion.button>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* TEACHING */}
-        <section id="teaching" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-[#1F2621]">
+        <motion.section
+          id="teaching"
+          className="space-y-3"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <h2 className="text-xl md:text-2xl font-bold text-[#122019]">
             Teaching & curriculum
           </h2>
-          <p className="text-sm text-[#4C5A52] max-w-2xl">
+          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
             I facilitate classrooms and workshops that center dignity, agency, and
             academic possibility for youth and adults—including inside carceral
             facilities. My approach blends lived experience, trauma-informed
             practice, and research-backed structure.
           </p>
-        </section>
+        </motion.section>
 
         {/* ADVOCACY */}
-        <section id="advocacy" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-[#1F2621]">
+        <motion.section
+          id="advocacy"
+          className="space-y-3"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <h2 className="text-xl md:text-2xl font-bold text-[#122019]">
             Advocacy & policy work
           </h2>
-          <p className="text-sm text-[#4C5A52] max-w-2xl">
+          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
             My advocacy includes work with nonprofits, county and state partners,
             and national organizations committed to transforming youth justice,
             decarceration, and access to education and housing.
           </p>
-        </section>
+        </motion.section>
 
         {/* INTERNATIONAL */}
-        <section id="international" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-[#1F2621]">
+        <motion.section
+          id="international"
+          className="space-y-3"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <h2 className="text-xl md:text-2xl font-bold text-[#122019]">
             International work
           </h2>
-          <p className="text-sm text-[#4C5A52] max-w-2xl">
+          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
             Through global delegations, I&apos;ve visited correctional and
             educational systems abroad to learn how countries prioritize
             rehabilitation, relationship, and re-entry—and bring those lessons back
             to local work.
           </p>
-        </section>
+        </motion.section>
 
         {/* EDUCATION */}
-        <section id="education" className="space-y-5">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
+        <motion.section
+          id="education"
+          className="space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
             Education
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#2F6F4E] font-semibold">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                 UCLA
               </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#1F2621]">
+              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#122019]">
                 B.A. Sociology
               </h3>
               <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
-              <p className="mt-2 text-xs text-[#4C5A52]">
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52]">
                 Leadership Academy 2025 Cohort · Underground Scholars Policy
                 Fellowship.
               </p>
@@ -528,36 +636,47 @@ function App() {
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#4BAF7A] font-semibold">
                 Barstow Community College
               </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#1F2621]">
+              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#122019]">
                 A.A. English
               </h3>
               <p className="text-[11px] text-slate-500 mt-1">
                 2020 – 2022 · Summa Cum Laude
               </p>
-              <p className="mt-2 text-xs text-[#4C5A52]">
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52]">
                 All California Academic Awardee · All USA Academic Nominee · 2023
                 Commencement Speaker.
               </p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* GALLERY */}
-        <section id="gallery" className="space-y-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
+        <motion.section
+          id="gallery"
+          className="space-y-4"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
             Photo highlights
           </h2>
-          <p className="text-sm text-[#4C5A52] max-w-2xl">
+          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
             A glimpse into some of the rooms, communities, and partners I have had
             the honor to work alongside.
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
             {photoHighlights.map((item, index) => (
-              <figure
+              <motion.figure
                 key={index}
-                className="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition"
+                className="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition"
                 onClick={() => setLightboxItem(item)}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.03 * index }}
               >
                 <div className="overflow-hidden">
                   <img
@@ -566,35 +685,39 @@ function App() {
                     className="w-full h-40 object-cover transform transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <figcaption className="p-3 text-[11px] text-[#4C5A52] leading-snug">
+                <figcaption className="p-3 text-[11px] md:text-[12px] text-[#4C5A52] leading-snug">
                   {item.caption}
                 </figcaption>
-              </figure>
+              </motion.figure>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* CONTACT */}
-        <section
+        <motion.section
           id="contact"
           className="rounded-3xl border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
                 Let&apos;s work together
               </h2>
-              <p className="mt-2 text-sm text-[#4C5A52] max-w-xl">
+              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
                 Share a bit about your event, classroom, or program. I&apos;ll
                 follow up with next steps and possibilities.
               </p>
             </div>
             <div className="text-xs text-[#4C5A52]">
-              <p className="font-semibold text-[#1F2621]">Direct contact</p>
+              <p className="font-semibold text-[#122019]">Direct contact</p>
               <p className="mt-1">
                 <a
                   href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#2F6F4E]"
+                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
                 >
                   c.jorgette@yahoo.com
                 </a>
@@ -604,8 +727,8 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mt-3">
-            <div className="bg-[#E7F4EE] rounded-2xl border border-[#CFE7D4] p-5 text-xs text-[#4C5A52] space-y-2">
-              <p className="font-semibold text-[#1F2621]">
+            <div className="bg-[#E7F4EE] rounded-2xl border border-[#CFE7D4] p-5 text-xs md:text-[13px] text-[#4C5A52] space-y-2">
+              <p className="font-semibold text-[#122019]">
                 I&apos;m a fit for organizations who:
               </p>
               <ul className="list-disc list-inside space-y-1">
@@ -619,10 +742,10 @@ function App() {
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 p-5">
-              <h3 className="font-semibold text-sm text-[#1F2621]">
+              <h3 className="font-semibold text-sm text-[#122019]">
                 Quick inquiry form
               </h3>
-              <form className="mt-3 grid gap-3 text-xs">
+              <form className="mt-3 grid gap-3 text-xs md:text-[13px]">
                 <input
                   className="border border-slate-300 rounded-md px-3 py-2"
                   placeholder="Your name"
@@ -642,14 +765,14 @@ function App() {
                 />
                 <button
                   type="button"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#2F6F4E] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#275841]"
+                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
                 >
                   Send message
                 </button>
               </form>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* LIGHTBOX */}
         {lightboxItem && (
@@ -683,7 +806,7 @@ function App() {
         )}
 
         {/* FOOTER */}
-        <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
+        <footer className="mt-10 border-top border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
           © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and
           community work.
         </footer>
