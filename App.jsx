@@ -325,11 +325,12 @@ function App() {
                 transition={{ duration: 0.7, delay: 0.14 }}
               >
                 <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/60 bg-[#0F1713]">
-                  <img
-                    src="/photo5.jpg"
-                    alt="Jeorgette speaking and sharing her story."
-                    className="w-full h-64 md:h-80 lg:h-96 object-cover opacity-90"
-                  />
+<img
+  src="/hero.png"
+  alt="Jeorgette speaking on a panel with community members."
+  className="w-full h-64 md:h-80 lg:h-96 object-cover opacity-90"
+/>
+
                 </div>
                 <div className="absolute -bottom-6 -left-4 bg-white shadow-xl rounded-2xl px-4 py-3 border border-slate-100 max-w-xs">
                   <p className="text-[11px] font-semibold text-[#122019]">
