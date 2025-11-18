@@ -87,11 +87,10 @@ const photoHighlights = [
   },
 ];
 
-export default function JeorgetteWebsite() {
+function App() {
   const [activeSection, setActiveSection] = useState("about");
   const [lightboxItem, setLightboxItem] = useState(null);
 
-  // Scroll spy
   useEffect(() => {
     const options = {
       root: null,
@@ -130,13 +129,13 @@ export default function JeorgetteWebsite() {
   const navLinkClasses = (id) =>
     `relative cursor-pointer text-[11px] tracking-wide uppercase ${
       activeSection === id
-        ? "text-[#C55637] font-semibold"
+        ? "text-[#2F6F4E] font-semibold"
         : "text-slate-600 hover:text-slate-900"
     }`;
 
   return (
     <div
-      className="min-h-screen bg-[#FFF8F3] text-slate-900 antialiased"
+      className="min-h-screen bg-[#F5FBF8] text-slate-900 antialiased"
       style={{
         fontFamily:
           '"Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
@@ -151,11 +150,11 @@ export default function JeorgetteWebsite() {
       >
         <div className="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#F4B78C] to-[#C55637] flex items-center justify-center text-white text-xs font-semibold">
+            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#4BAF7A] to-[#2F6F4E] flex items-center justify-center text-white text-xs font-semibold">
               JC
             </div>
             <div className="leading-tight">
-              <p className="text-xs font-semibold tracking-wide text-[#2F2A26]">
+              <p className="text-xs font-semibold tracking-wide text-[#1F2621]">
                 Jeorgette Cuellar{" "}
                 <span className="text-[10px] font-normal text-slate-500">
                   (she/her)
@@ -183,7 +182,7 @@ export default function JeorgetteWebsite() {
             )}
             <button
               onClick={() => scrollToSection("contact")}
-              className="ml-4 inline-flex items-center gap-1 rounded-full bg-[#C55637] px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-[#A6452B]"
+              className="ml-4 inline-flex items-center gap-1 rounded-full bg-[#2F6F4E] px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-[#275841]"
             >
               Book Jeorgette
             </button>
@@ -199,7 +198,7 @@ export default function JeorgetteWebsite() {
         >
           <div>
             <motion.p
-              className="text-[11px] uppercase tracking-[0.22em] text-[#F4D27A] font-semibold"
+              className="text-[11px] uppercase tracking-[0.22em] text-[#4BAF7A] font-semibold"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
@@ -208,7 +207,7 @@ export default function JeorgetteWebsite() {
             </motion.p>
 
             <motion.h1
-              className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-[#2F2A26]"
+              className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-[#1F2621]"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
@@ -217,7 +216,7 @@ export default function JeorgetteWebsite() {
             </motion.h1>
 
             <motion.p
-              className="mt-4 text-sm md:text-base text-[#4C4743] max-w-xl"
+              className="mt-4 text-sm md:text-base text-[#4C5A52] max-w-xl"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
@@ -236,24 +235,24 @@ export default function JeorgetteWebsite() {
             >
               <button
                 onClick={() => scrollToSection("contact")}
-                className="inline-flex items-center justify-center rounded-full bg-[#C55637] px-5 py-2.5 text-xs md:text-sm font-semibold text-white shadow-sm hover:bg-[#A6452B]"
+                className="inline-flex items-center justify-center rounded-full bg-[#2F6F4E] px-5 py-2.5 text-xs md:text-sm font-semibold text-white shadow-sm hover:bg-[#275841]"
               >
                 Book Jeorgette to speak
               </button>
               <button
                 onClick={() => scrollToSection("offerings")}
-                className="inline-flex items-center justify-center rounded-full border border-[#F4D9C6] bg-white/90 px-5 py-2.5 text-[11px] md:text-xs font-semibold tracking-wide text-[#4C4743] hover:bg-[#FFF1E6]"
+                className="inline-flex items-center justify-center rounded-full border border-[#CFE7D4] bg-white/90 px-5 py-2.5 text-[11px] md:text-xs font-semibold tracking-wide text-[#3D4943] hover:bg-[#E7F4EE]"
               >
                 View programs & workshops
               </button>
             </motion.div>
 
-            <div className="mt-5 text-[11px] text-[#4C4743] space-y-1">
+            <div className="mt-5 text-[11px] text-[#4C5A52] space-y-1">
               <p>
                 <strong className="font-semibold">Email:</strong>{" "}
                 <a
                   href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#F4B78C] underline-offset-2 hover:decoration-[#C55637]"
+                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#2F6F4E]"
                 >
                   c.jorgette@yahoo.com
                 </a>
@@ -268,7 +267,7 @@ export default function JeorgetteWebsite() {
               <a
                 href="/resume.pdf"
                 download
-                className="inline-flex items-center rounded-full bg-[#4BAF7A] px-4 py-2 text-[11px] md:text-xs font-semibold uppercase tracking-wide text-white shadow hover:bg-[#3C8D62]"
+                className="inline-flex items-center rounded-full bg-[#F4D27A] px-4 py-2 text-[11px] md:text-xs font-semibold uppercase tracking-wide text-[#4A3C21] shadow hover:bg-[#E7C661]"
               >
                 Download résumé (PDF)
               </a>
@@ -283,10 +282,10 @@ export default function JeorgetteWebsite() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div
-              className="rounded-3xl overflow-hidden shadow-2xl border border-[#F4D9C6]"
+              className="rounded-3xl overflow-hidden shadow-2xl border border-[#CFE7D4]"
               style={{
                 background:
-                  "linear-gradient(135deg, #F7C7A3 0%, #F8E9A1 40%, #BFD8FF 100%)",
+                  "linear-gradient(135deg, #CFE7D4 0%, #D7ECFF 40%, #F7C7A3 100%)",
               }}
             >
               <img
@@ -296,7 +295,7 @@ export default function JeorgetteWebsite() {
               />
             </div>
             <div className="absolute -bottom-6 -left-4 bg-white shadow-xl rounded-2xl px-4 py-3 border border-slate-100 max-w-xs">
-              <p className="text-[11px] font-semibold text-[#2F2A26]">
+              <p className="text-[11px] font-semibold text-[#1F2621]">
                 “Jeorgette&apos;s story moved the room and gave our youth real,
                 tangible hope.”
               </p>
@@ -310,14 +309,14 @@ export default function JeorgetteWebsite() {
         {/* OFFERINGS */}
         <section
           id="offerings"
-          className="space-y-6 rounded-3xl border border-[#F4D9C6] bg-white/90 p-5 md:p-7"
+          className="space-y-6 rounded-3xl border border-[#CFE7D4] bg-white/95 p-5 md:p-7"
         >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
                 Programs & partnerships
               </h2>
-              <p className="mt-2 text-sm text-[#4C4743] max-w-xl">
+              <p className="mt-2 text-sm text-[#4C5A52] max-w-xl">
                 I collaborate with campuses, nonprofits, and community programs to
                 design spaces where system-impacted youth and families can practice
                 new structures for stability and growth.
@@ -330,7 +329,7 @@ export default function JeorgetteWebsite() {
               {
                 title: "Keynotes & Storytelling",
                 body:
-                  "Talks that blend lived experience, research, and practical hope for audiences of students, staff, and community partners.",
+                  "Talks that blend lived experience, research, and practical hope for students, staff, and community partners.",
               },
               {
                 title: "Workshops & Curriculum",
@@ -345,12 +344,12 @@ export default function JeorgetteWebsite() {
             ].map((card) => (
               <div
                 key={card.title}
-                className="group h-full rounded-2xl border border-slate-100 bg-[#FFFDFC] p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                className="group h-full rounded-2xl border border-slate-100 bg-[#FDFEFE] p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
               >
-                <h3 className="text-sm font-semibold text-[#2F2A26]">
+                <h3 className="text-sm font-semibold text-[#1F2621]">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-xs text-[#4C4743] leading-relaxed">
+                <p className="mt-2 text-xs text-[#4C5A52] leading-relaxed">
                   {card.body}
                 </p>
               </div>
@@ -360,21 +359,21 @@ export default function JeorgetteWebsite() {
 
         {/* SPEAKING (videos) */}
         <section id="speaking" className="space-y-5">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
             Speaking & media
           </h2>
-          <p className="text-sm text-[#4C4743] max-w-2xl">
+          <p className="text-sm text-[#4C5A52] max-w-2xl">
             From intimate rooms to large audiences, I speak about displacement,
             incarceration, and possibility—and the structures that help people move
             from surviving to building a life they want.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
-            <div className="bg-white border border-[#F4D9C6] rounded-2xl p-4 shadow-sm">
-              <h3 className="font-semibold text-sm md:text-base text-[#2F2A26]">
+            <div className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm">
+              <h3 className="font-semibold text-sm md:text-base text-[#1F2621]">
                 Featured testimonial film
               </h3>
-              <p className="mt-1 text-xs text-[#4C4743]">
+              <p className="mt-1 text-xs text-[#4C5A52]">
                 A short film sharing my story, my work, and the communities I am
                 accountable to.
               </p>
@@ -390,11 +389,11 @@ export default function JeorgetteWebsite() {
               </div>
             </div>
 
-            <div className="bg-white border border-[#F4D9C6] rounded-2xl p-4 shadow-sm">
-              <h3 className="font-semibold text-sm md:text-base text-[#2F2A26]">
+            <div className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm">
+              <h3 className="font-semibold text-sm md:text-base text-[#1F2621]">
                 Commencement address
               </h3>
-              <p className="mt-1 text-xs text-[#4C4743]">
+              <p className="mt-1 text-xs text-[#4C5A52]">
                 Speaking to graduates about responsibility, repair, and claiming
                 joy—even when the odds were not built for you.
               </p>
@@ -416,10 +415,10 @@ export default function JeorgetteWebsite() {
         <section id="portfolio" className="space-y-5">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
                 Areas of work
               </h2>
-              <p className="mt-2 text-sm text-[#4C4743] max-w-2xl">
+              <p className="mt-2 text-sm text-[#4C5A52] max-w-2xl">
                 My practice spans teaching, advocacy, and international collaboration
                 around justice, education, and re-entry.
               </p>
@@ -452,13 +451,13 @@ export default function JeorgetteWebsite() {
                 onClick={() => scrollToSection(card.id)}
                 className="text-left rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
               >
-                <h3 className="text-sm md:text-base font-semibold text-[#2F2A26]">
+                <h3 className="text-sm md:text-base font-semibold text-[#1F2621]">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-xs text-[#4C4743] leading-relaxed">
+                <p className="mt-2 text-xs text-[#4C5A52] leading-relaxed">
                   {card.body}
                 </p>
-                <span className="mt-3 inline-flex text-[11px] font-semibold text-[#C55637]">
+                <span className="mt-3 inline-flex text-[11px] font-semibold text-[#2F6F4E]">
                   Learn more →
                 </span>
               </button>
@@ -468,10 +467,10 @@ export default function JeorgetteWebsite() {
 
         {/* TEACHING */}
         <section id="teaching" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-[#2F2A26]">
+          <h2 className="text-xl md:text-2xl font-bold text-[#1F2621]">
             Teaching & curriculum
           </h2>
-          <p className="text-sm text-[#4C4743] max-w-2xl">
+          <p className="text-sm text-[#4C5A52] max-w-2xl">
             I facilitate classrooms and workshops that center dignity, agency, and
             academic possibility for youth and adults—including inside carceral
             facilities. My approach blends lived experience, trauma-informed
@@ -481,10 +480,10 @@ export default function JeorgetteWebsite() {
 
         {/* ADVOCACY */}
         <section id="advocacy" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-[#2F2A26]">
+          <h2 className="text-xl md:text-2xl font-bold text-[#1F2621]">
             Advocacy & policy work
           </h2>
-          <p className="text-sm text-[#4C4743] max-w-2xl">
+          <p className="text-sm text-[#4C5A52] max-w-2xl">
             My advocacy includes work with nonprofits, county and state partners,
             and national organizations committed to transforming youth justice,
             decarceration, and access to education and housing.
@@ -493,10 +492,10 @@ export default function JeorgetteWebsite() {
 
         {/* INTERNATIONAL */}
         <section id="international" className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold text-[#2F2A26]">
+          <h2 className="text-xl md:text-2xl font-bold text-[#1F2621]">
             International work
           </h2>
-          <p className="text-sm text-[#4C4743] max-w-2xl">
+          <p className="text-sm text-[#4C5A52] max-w-2xl">
             Through global delegations, I&apos;ve visited correctional and
             educational systems abroad to learn how countries prioritize
             rehabilitation, relationship, and re-entry—and bring those lessons back
@@ -506,20 +505,20 @@ export default function JeorgetteWebsite() {
 
         {/* EDUCATION */}
         <section id="education" className="space-y-5">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
             Education
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#C55637] font-semibold">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#2F6F4E] font-semibold">
                 UCLA
               </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#2F2A26]">
+              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#1F2621]">
                 B.A. Sociology
               </h3>
               <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
-              <p className="mt-2 text-xs text-[#4C4743]">
+              <p className="mt-2 text-xs text-[#4C5A52]">
                 Leadership Academy 2025 Cohort · Underground Scholars Policy
                 Fellowship.
               </p>
@@ -529,13 +528,13 @@ export default function JeorgetteWebsite() {
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#4BAF7A] font-semibold">
                 Barstow Community College
               </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#2F2A26]">
+              <h3 className="mt-1 text-sm md:text-base font-semibold text-[#1F2621]">
                 A.A. English
               </h3>
               <p className="text-[11px] text-slate-500 mt-1">
                 2020 – 2022 · Summa Cum Laude
               </p>
-              <p className="mt-2 text-xs text-[#4C4743]">
+              <p className="mt-2 text-xs text-[#4C5A52]">
                 All California Academic Awardee · All USA Academic Nominee · 2023
                 Commencement Speaker.
               </p>
@@ -545,10 +544,10 @@ export default function JeorgetteWebsite() {
 
         {/* GALLERY */}
         <section id="gallery" className="space-y-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
             Photo highlights
           </h2>
-          <p className="text-sm text-[#4C4743] max-w-2xl">
+          <p className="text-sm text-[#4C5A52] max-w-2xl">
             A glimpse into some of the rooms, communities, and partners I have had
             the honor to work alongside.
           </p>
@@ -567,7 +566,7 @@ export default function JeorgetteWebsite() {
                     className="w-full h-40 object-cover transform transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <figcaption className="p-3 text-[11px] text-[#4C4743] leading-snug">
+                <figcaption className="p-3 text-[11px] text-[#4C5A52] leading-snug">
                   {item.caption}
                 </figcaption>
               </figure>
@@ -578,24 +577,24 @@ export default function JeorgetteWebsite() {
         {/* CONTACT */}
         <section
           id="contact"
-          className="rounded-3xl border border-[#F4D9C6] bg-white shadow-sm p-6 md:p-8 space-y-5"
+          className="rounded-3xl border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#2F2A26]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1F2621]">
                 Let&apos;s work together
               </h2>
-              <p className="mt-2 text-sm text-[#4C4743] max-w-xl">
+              <p className="mt-2 text-sm text-[#4C5A52] max-w-xl">
                 Share a bit about your event, classroom, or program. I&apos;ll
                 follow up with next steps and possibilities.
               </p>
             </div>
-            <div className="text-xs text-[#4C4743]">
-              <p className="font-semibold text-[#2F2A26]">Direct contact</p>
+            <div className="text-xs text-[#4C5A52]">
+              <p className="font-semibold text-[#1F2621]">Direct contact</p>
               <p className="mt-1">
                 <a
                   href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#F4B78C] underline-offset-2 hover:decoration-[#C55637]"
+                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#2F6F4E]"
                 >
                   c.jorgette@yahoo.com
                 </a>
@@ -605,8 +604,8 @@ export default function JeorgetteWebsite() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mt-3">
-            <div className="bg-[#FFF1E6] rounded-2xl border border-[#F4D9C6] p-5 text-xs text-[#4C4743] space-y-2">
-              <p className="font-semibold text-[#2F2A26]">
+            <div className="bg-[#E7F4EE] rounded-2xl border border-[#CFE7D4] p-5 text-xs text-[#4C5A52] space-y-2">
+              <p className="font-semibold text-[#1F2621]">
                 I&apos;m a fit for organizations who:
               </p>
               <ul className="list-disc list-inside space-y-1">
@@ -620,7 +619,7 @@ export default function JeorgetteWebsite() {
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 p-5">
-              <h3 className="font-semibold text-sm text-[#2F2A26]">
+              <h3 className="font-semibold text-sm text-[#1F2621]">
                 Quick inquiry form
               </h3>
               <form className="mt-3 grid gap-3 text-xs">
@@ -643,7 +642,7 @@ export default function JeorgetteWebsite() {
                 />
                 <button
                   type="button"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#C55637] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#A6452B]"
+                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#2F6F4E] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#275841]"
                 >
                   Send message
                 </button>
@@ -692,3 +691,5 @@ export default function JeorgetteWebsite() {
     </div>
   );
 }
+
+export default App;
