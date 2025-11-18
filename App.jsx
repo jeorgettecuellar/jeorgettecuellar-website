@@ -1,4 +1,3 @@
-function App() {
   const [lightboxItem, setLightboxItem] = useState(null);
 
   const scrollToSection = (id) => {
