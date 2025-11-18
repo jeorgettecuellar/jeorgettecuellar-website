@@ -780,19 +780,20 @@ function App() {
         {lightboxItem && (
           <div
             className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
-            onClick={() => setLightboxItem(null)}
+            onClick={() => setLightboxItem(item)}
           >
             <div
               className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="bg-black">
-                <img
-                  src={lightboxItem.src}
-                  alt={lightboxItem.alt}
-                  className="w-full max-h-[70vh] object-contain mx-auto"
-                />
-              </div>
+             <div className="overflow-hidden">
+  <img
+    src={item.src}
+    alt={item.alt}
+    className="w-full h-40 sm:h-44 md:h-48 lg:h-56 min-h-[160px] object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-105"
+  />
+</div>
+
               <div className="p-4 flex items-start justify-between gap-4">
                 <p className="text-sm text-slate-800">{lightboxItem.caption}</p>
                 <button
