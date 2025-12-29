@@ -1,8 +1,3 @@
-diff --git a/App.jsx b/App.jsx
-index 875236beef5fa49c986b3db1d00866d3ba6f46e1..4fe121ad3d1a6d0623f70e46d0db0b402d43d2cc 100644
---- a/App.jsx
-+++ b/App.jsx
-@@ -1,135 +1,166 @@
  import React, { useState, useEffect } from "react";
  import { motion } from "framer-motion";
  
