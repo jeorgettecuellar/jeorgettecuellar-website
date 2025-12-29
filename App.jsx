@@ -170,10 +170,9 @@ export default function App() {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // ✅ TWO DIFFERENT YOUTUBE LINKS
-  // Keep your first one, replace the second with your other video ID.
-  const YT_TESTIMONIAL = "https://www.youtube.com/embed/TFAbGh3ZhkY";
-  const YT_COMMENCEMENT = "https://www.youtube.com/embed/dQw4w9WgXcQ"; // <-- replace this with your real second video
+  // ✅ Correct embeds (the ?si=... is removed; embed uses just the video ID)
+  const YT_TESTIMONIAL = "https://www.youtube.com/embed/nDHfURsqDWs";
+  const YT_COMMENCEMENT = "https://www.youtube.com/embed/TFAbGh3ZhkY";
 
   return (
     <div className="min-h-screen bg-[#F6F3EA] text-[#122019]">
@@ -537,7 +536,9 @@ export default function App() {
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">UCLA</p>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                UCLA
+              </p>
               <h3 className="mt-1 text-sm md:text-base font-semibold">B.A. Sociology</h3>
               <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52]">
@@ -573,7 +574,6 @@ export default function App() {
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {/* Grid thumbnails (NO CROP) */}
             {photoHighlights.map((item, index) => (
               <motion.figure
                 key={index}
@@ -584,13 +584,8 @@ export default function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.03 * index }}
               >
-                {/* Frame ensures full image visible */}
                 <div className="bg-slate-50 w-full h-48 flex items-center justify-center">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="max-w-full max-h-full object-contain"
-                  />
+                  <img src={item.src} alt={item.alt} className="max-w-full max-h-full object-contain" />
                 </div>
 
                 <figcaption className="p-3 text-[11px] md:text-[12px] text-[#4C5A52] leading-snug">
@@ -599,7 +594,6 @@ export default function App() {
               </motion.figure>
             ))}
 
-            {/* Featured carousel tile (NO CROP) */}
             <motion.figure
               className="relative col-span-full bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden"
               initial={{ opacity: 0, y: 24 }}
@@ -733,7 +727,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* LIGHTBOX (NO CROP) */}
+        {/* LIGHTBOX */}
         {lightboxItem && (
           <div
             className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
@@ -765,7 +759,6 @@ export default function App() {
           </div>
         )}
 
-        {/* FOOTER */}
         <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
           © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and community work.
         </footer>
