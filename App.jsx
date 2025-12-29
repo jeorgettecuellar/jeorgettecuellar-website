@@ -20,81 +20,95 @@ const photoHighlights = [
     alt: "Community gathering at a fundraising or program event.",
     caption:
       "Over $100,000 fundraised in a day for youth transitioning out of foster care at Olive Crest's Pick-A-Purse event—proof of what a shared testimony can spark.",
+    focus: "center 35%",
   },
   {
     src: "/photo2.jpg",
     alt: "Smiling group photo with youth and mentors.",
     caption:
       "Celebrating youth leadership, milestones, and the work they’ve done at the annual ‘I am’ empowerment workshop.",
+    focus: "center 35%",
   },
   {
     src: "/photo3.jpg",
     alt: "Group standing together at a community or school event.",
     caption: "Building rooms where young people can be seen, heard, and supported.",
+    focus: "center 35%",
   },
   {
     src: "/photo4.jpg",
     alt: "Participants seated or gathered during a live event.",
     caption:
       "Facilitating conversations about resilience, systems, and possibility as a keynote speaker in Riverside County at the annual Southern Nights fundraising event.",
+    focus: "center 30%",
   },
   {
     src: "/photo5.jpg",
     alt: "Jeorgette speaking or being filmed while sharing her story.",
     caption: "Using lived experience as a catalyst for healing and structural change.",
+    focus: "center 30%",
   },
   {
     src: "/photo6.jpg",
     alt: "Smiling with program participants or community partners.",
     caption:
       "Advocating for access to resources after youth incarceration as a panelist speaker with the Prison Education Project at the California Youth Justice Summit.",
+    focus: "center 35%",
   },
   {
     src: "/photo7.jpg",
     alt: "Formal or semi-formal dinner with supporters at a table.",
     caption:
       "Alongside Olive Crest’s CEO after another keynote in Palm Springs to fundraise for foster youth in every stage of state custody placement.",
+    focus: "center 35%",
   },
   {
     src: "/photo8.jpg",
     alt: "Community or campus-based event setting.",
     caption:
       "Radio interview on the leaps made in education and professional life after the hardships of placement in the foster care system.",
+    focus: "center 35%",
   },
   {
     src: "/photo9.jpg",
     alt: "International or delegation-style photo abroad.",
     caption:
       "Learning from global models of justice, education, and rehabilitation at the California state capital in partnership with UCLA and UC Berkeley.",
+    focus: "center 35%",
   },
   {
     src: "/photo10.jpg",
     alt: "Group visiting a correctional or institutional facility.",
     caption:
       "Advocating for bills that prioritize rehabilitative tools during incarceration and rapid access to education after release.",
+    focus: "center 35%",
   },
   {
     src: "/photo11.jpg",
     alt: "Group of educators or advocates standing together.",
     caption:
       "Collaborating with leaders at Café Exit in Denmark after a day of workshops focused on forgiveness, healing, and positive change.",
+    focus: "center 40%",
   },
   {
     src: "/photo12.jpg",
     alt: "Community gathering in an international setting.",
     caption:
       "Connecting community work in California to transformative movements taking place across Northern Europe.",
+    focus: "center 35%",
   },
   {
     src: "/photo13.jpg",
     alt: "Smiling delegation or cohort photo.",
     caption: "At Nyborg Prison in Denmark with others who believe in transformation at scale.",
+    focus: "center 40%",
   },
   {
     src: "/photo14.jpg",
     alt: "Outdoor celebration or group gathering.",
     caption:
       "Honoring the joy, repair, and relationships this work creates at a rehabilitative home in Copenhagen.",
+    focus: "center 40%",
   },
 ];
 
@@ -170,7 +184,7 @@ export default function App() {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // ✅ Correct embeds (the ?si=... is removed; embed uses just the video ID)
+  // ✅ Correct embeds
   const YT_TESTIMONIAL = "https://www.youtube.com/embed/nDHfURsqDWs";
   const YT_COMMENCEMENT = "https://www.youtube.com/embed/TFAbGh3ZhkY";
 
@@ -559,7 +573,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* GALLERY */}
+        {/* ✅ GALLERY (SLIDESHOW ONLY — NO CARDS) */}
         <motion.section
           id="gallery"
           className="space-y-4"
@@ -573,196 +587,30 @@ export default function App() {
             A glimpse into some of the rooms, communities, and partners I have had the honor to work alongside.
           </p>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {photoHighlights.map((item, index) => (
-              <motion.figure
-                key={index}
-                className="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition"
-                onClick={() => setLightboxItem(item)}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.03 * index }}
-              >
-                <div className="bg-slate-50 w-full h-48 flex items-center justify-center">
-                  <img src={item.src} alt={item.alt} className="max-w-full max-h-full object-contain" />
-                </div>
-
-                <figcaption className="p-3 text-[11px] md:text-[12px] text-[#4C5A52] leading-snug">
-                  {item.caption}
-                </figcaption>
-              </motion.figure>
-            ))}
-
-            <motion.figure
-              className="relative col-span-full bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45 }}
-            >
-              <div className="relative bg-slate-50">
-                <div
-                  className="w-full h-72 sm:h-80 md:h-96 flex items-center justify-center"
-                  onClick={() => setLightboxItem(currentPhoto)}
-                >
-                  <img
-                    src={currentPhoto.src}
-                    alt={currentPhoto.alt}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  className="absolute inset-y-0 left-0 w-1/2 flex items-center justify-start"
-                  onMouseEnter={() => setHoverDirection("prev")}
-                  onMouseLeave={() => setHoverDirection(null)}
-                  onClick={() => advancePhoto("prev")}
-                  aria-label="Show previous photo"
-                >
-                  <span className="ml-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 text-white text-xl font-semibold opacity-0 transition-opacity hover:opacity-100">
-                    ‹
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-end"
-                  onMouseEnter={() => setHoverDirection("next")}
-                  onMouseLeave={() => setHoverDirection(null)}
-                  onClick={() => advancePhoto("next")}
-                  aria-label="Show next photo"
-                >
-                  <span className="mr-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 text-white text-xl font-semibold opacity-0 transition-opacity hover:opacity-100">
-                    ›
-                  </span>
-                </button>
-
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/45 text-white text-[11px] px-3 py-1.5 rounded-full shadow">
-                  Hover left or right to browse · Tap to open caption
-                </div>
-              </div>
-
-              <figcaption className="px-4 py-3 text-[12px] md:text-sm text-[#304139] text-center">
-                {currentPhoto.caption}
-              </figcaption>
-
-              <div className="flex items-center justify-center gap-2 pb-4">
-                {photoHighlights.map((_, indicatorIndex) => (
-                  <button
-                    key={indicatorIndex}
-                    type="button"
-                    aria-label={`Go to photo ${indicatorIndex + 1}`}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
-                      indicatorIndex === currentPhotoIndex ? "w-6 bg-[#1F4E37]" : "w-2 bg-slate-200"
-                    }`}
-                    onClick={() => setCurrentPhotoIndex(indicatorIndex)}
-                  />
-                ))}
-              </div>
-            </motion.figure>
-          </div>
-        </motion.section>
-
-        {/* CONTACT */}
-        <motion.section
-          id="contact"
-          className="rounded-3xl border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
-              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
-              </p>
-            </div>
-            <div className="text-xs text-[#4C5A52]">
-              <p className="font-semibold text-[#122019]">Direct contact</p>
-              <p className="mt-1">
-                <a
-                  href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
-                >
-                  c.jorgette@yahoo.com
-                </a>
-              </p>
-              <p className="mt-1">Los Angeles, California</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-[#F6F3EA] p-5">
-              <p className="text-sm font-semibold">Quick note</p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <form className="grid gap-3">
-                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Your name" />
-                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Email" />
-                <input
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  placeholder="Organization / school (optional)"
-                />
-                <textarea
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  rows={4}
-                  placeholder="What kind of support or collaboration are you looking for?"
-                />
-                <button
-                  type="button"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
-                >
-                  Send message
-                </button>
-              </form>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* LIGHTBOX */}
-        {lightboxItem && (
-          <div
-            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
-            onClick={() => setLightboxItem(null)}
+          <motion.figure
+            className="relative bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
           >
-            <div
-              className="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="bg-slate-50 w-full h-[70vh] flex items-center justify-center">
-                <img
-                  src={lightboxItem.src}
-                  alt={lightboxItem.alt}
-                  className="max-w-full max-h-full object-contain"
-                />
-              </div>
+            {/* IMAGE (cropped nicely to fill space) */}
+            <div className="relative bg-slate-100">
+              <img
+                src={currentPhoto.src}
+                alt={currentPhoto.alt}
+                className="w-full h-72 sm:h-80 md:h-96 object-cover"
+                style={{ objectPosition: currentPhoto.focus || "center 35%" }}
+                onClick={() => setLightboxItem(currentPhoto)}
+              />
 
-              <div className="p-4 flex items-start justify-between gap-4">
-                <p className="text-sm text-slate-800">{lightboxItem.caption}</p>
-                <button
-                  type="button"
-                  className="text-[11px] px-3 py-1 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50"
-                  onClick={() => setLightboxItem(null)}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
-          © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and community work.
-        </footer>
-      </main>
-    </div>
-  );
-}
+              {/* PREV */}
+              <button
+                type="button"
+                className="absolute inset-y-0 left-0 w-1/2 flex items-center justify-start"
+                onMouseEnter={() => setHoverDirection("prev")}
+                onMouseLeave={() => setHoverDirection(null)}
+                onClick={() => advancePhoto("prev")}
+                aria-label="Show previous photo"
+              >
+                <span className="ml-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 tex
