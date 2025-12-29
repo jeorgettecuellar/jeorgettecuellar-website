@@ -147,7 +147,7 @@ export default function App() {
 
   useEffect(() => {
     if (!hoverDirection) return undefined;
-    const intervalId = setInterval(() => advancePhoto(hoverDirection), 900);
+    const intervalId = setInterval(() => advancePhoto(hoverDirection), 2500);
     return () => clearInterval(intervalId);
   }, [hoverDirection]);
 
