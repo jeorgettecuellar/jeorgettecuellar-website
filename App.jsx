@@ -613,4 +613,151 @@ export default function App() {
                 onClick={() => advancePhoto("prev")}
                 aria-label="Show previous photo"
               >
-                <span className="ml-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 tex
+                <span className="ml-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 text-white text-xl font-semibold opacity-0 hover:opacity-100 transition-opacity">
+                  ‹
+                </span>
+              </button>
+
+              {/* NEXT */}
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-end"
+                onMouseEnter={() => setHoverDirection("next")}
+                onMouseLeave={() => setHoverDirection(null)}
+                onClick={() => advancePhoto("next")}
+                aria-label="Show next photo"
+              >
+                <span className="mr-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 text-white text-xl font-semibold opacity-0 hover:opacity-100 transition-opacity">
+                  ›
+                </span>
+              </button>
+
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/45 text-white text-[11px] px-3 py-1.5 rounded-full shadow">
+                Hover or click arrows to browse · Click image to expand
+              </div>
+            </div>
+
+            {/* CAPTION */}
+            <figcaption className="px-4 py-3 text-[12px] md:text-sm text-[#304139] text-center">
+              {currentPhoto.caption}
+            </figcaption>
+
+            {/* DOTS */}
+            <div className="flex items-center justify-center gap-2 pb-4">
+              {photoHighlights.map((_, indicatorIndex) => (
+                <button
+                  key={indicatorIndex}
+                  type="button"
+                  aria-label={`Go to photo ${indicatorIndex + 1}`}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    indicatorIndex === currentPhotoIndex
+                      ? "w-6 bg-[#1F4E37]"
+                      : "w-2 bg-slate-200"
+                  }`}
+                  onClick={() => setCurrentPhotoIndex(indicatorIndex)}
+                />
+              ))}
+            </div>
+          </motion.figure>
+        </motion.section>
+
+        {/* CONTACT */}
+        <motion.section
+          id="contact"
+          className="rounded-3xl border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
+              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
+                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
+              </p>
+            </div>
+            <div className="text-xs text-[#4C5A52]">
+              <p className="font-semibold text-[#122019]">Direct contact</p>
+              <p className="mt-1">
+                <a
+                  href="mailto:c.jorgette@yahoo.com"
+                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
+                >
+                  c.jorgette@yahoo.com
+                </a>
+              </p>
+              <p className="mt-1">Los Angeles, California</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-slate-200 bg-[#F6F3EA] p-5">
+              <p className="text-sm font-semibold">Quick note</p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+              <form className="grid gap-3">
+                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Your name" />
+                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Email" />
+                <input
+                  className="border border-slate-300 rounded-md px-3 py-2"
+                  placeholder="Organization / school (optional)"
+                />
+                <textarea
+                  className="border border-slate-300 rounded-md px-3 py-2"
+                  rows={4}
+                  placeholder="What kind of support or collaboration are you looking for?"
+                />
+                <button
+                  type="button"
+                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
+                >
+                  Send message
+                </button>
+              </form>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* LIGHTBOX */}
+        {lightboxItem && (
+          <div
+            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
+            onClick={() => setLightboxItem(null)}
+          >
+            <div
+              className="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={lightboxItem.src}
+                alt={lightboxItem.alt}
+                className="w-full h-80 md:h-[520px] object-cover"
+                style={{ objectPosition: lightboxItem.focus || "center 35%" }}
+              />
+
+              <div className="p-4 flex items-start justify-between gap-4">
+                <p className="text-sm text-slate-800">{lightboxItem.caption}</p>
+                <button
+                  type="button"
+                  className="text-[11px] px-3 py-1 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50"
+                  onClick={() => setLightboxItem(null)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
+          © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and community work.
+        </footer>
+      </main>
+    </div>
+  );
+}
