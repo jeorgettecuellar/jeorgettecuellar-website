@@ -100,7 +100,8 @@ const photoHighlights = [
   {
     src: "/photo13.jpg",
     alt: "Smiling delegation or cohort photo.",
-    caption: "At Nyborg Prison in Denmark with others who believe in transformation at scale.",
+    caption:
+      "At Nyborg Prison in Denmark with others who believe in transformation at scale.",
     focus: "center 40%",
   },
   {
@@ -111,6 +112,7 @@ const photoHighlights = [
     focus: "center 40%",
   },
 ];
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
