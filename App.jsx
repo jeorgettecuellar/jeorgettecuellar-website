@@ -438,7 +438,75 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* PORTFOLIO */}
+        {/* ✅ CONTACT MOVED UP (NOW ABOVE "AREAS OF WORK") */}
+        <motion.section
+          id="contact"
+          className="rounded-3xl border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
+              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
+                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
+              </p>
+            </div>
+            <div className="text-xs text-[#4C5A52]">
+              <p className="font-semibold text-[#122019]">Direct contact</p>
+              <p className="mt-1">
+                <a
+                  href="mailto:c.jorgette@yahoo.com"
+                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
+                >
+                  c.jorgette@yahoo.com
+                </a>
+              </p>
+              <p className="mt-1">Los Angeles, California</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-slate-200 bg-[#F6F3EA] p-5">
+              <p className="text-sm font-semibold">Quick note</p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+              <form className="grid gap-3">
+                <input
+                  className="border border-slate-300 rounded-md px-3 py-2"
+                  placeholder="Your name"
+                />
+                <input
+                  className="border border-slate-300 rounded-md px-3 py-2"
+                  placeholder="Email"
+                />
+                <input
+                  className="border border-slate-300 rounded-md px-3 py-2"
+                  placeholder="Organization / school (optional)"
+                />
+                <textarea
+                  className="border border-slate-300 rounded-md px-3 py-2"
+                  rows={4}
+                  placeholder="What kind of support or collaboration are you looking for?"
+                />
+                <button
+                  type="button"
+                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
+                >
+                  Send message
+                </button>
+              </form>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* PORTFOLIO (Areas of work) */}
         <motion.section
           id="portfolio"
           className="space-y-5"
@@ -573,7 +641,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* ✅ GALLERY (SLIDESHOW ONLY — NO CARDS) */}
+        {/* GALLERY (SLIDESHOW ONLY — NO CARDS) */}
         <motion.section
           id="gallery"
           className="space-y-4"
@@ -594,7 +662,6 @@ export default function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.45 }}
           >
-            {/* IMAGE (cropped nicely to fill space) */}
             <div className="relative bg-slate-100">
               <img
                 src={currentPhoto.src}
@@ -604,7 +671,6 @@ export default function App() {
                 onClick={() => setLightboxItem(currentPhoto)}
               />
 
-              {/* PREV */}
               <button
                 type="button"
                 className="absolute inset-y-0 left-0 w-1/2 flex items-center justify-start"
@@ -618,7 +684,6 @@ export default function App() {
                 </span>
               </button>
 
-              {/* NEXT */}
               <button
                 type="button"
                 className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-end"
@@ -637,12 +702,10 @@ export default function App() {
               </div>
             </div>
 
-            {/* CAPTION */}
             <figcaption className="px-4 py-3 text-[12px] md:text-sm text-[#304139] text-center">
               {currentPhoto.caption}
             </figcaption>
 
-            {/* DOTS */}
             <div className="flex items-center justify-center gap-2 pb-4">
               {photoHighlights.map((_, indicatorIndex) => (
                 <button
@@ -659,68 +722,6 @@ export default function App() {
               ))}
             </div>
           </motion.figure>
-        </motion.section>
-
-        {/* CONTACT */}
-        <motion.section
-          id="contact"
-          className="rounded-3xl border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
-              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
-              </p>
-            </div>
-            <div className="text-xs text-[#4C5A52]">
-              <p className="font-semibold text-[#122019]">Direct contact</p>
-              <p className="mt-1">
-                <a
-                  href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
-                >
-                  c.jorgette@yahoo.com
-                </a>
-              </p>
-              <p className="mt-1">Los Angeles, California</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-[#F6F3EA] p-5">
-              <p className="text-sm font-semibold">Quick note</p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <form className="grid gap-3">
-                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Your name" />
-                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Email" />
-                <input
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  placeholder="Organization / school (optional)"
-                />
-                <textarea
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  rows={4}
-                  placeholder="What kind of support or collaboration are you looking for?"
-                />
-                <button
-                  type="button"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
-                >
-                  Send message
-                </button>
-              </form>
-            </div>
-          </div>
         </motion.section>
 
         {/* LIGHTBOX */}
@@ -761,3 +762,4 @@ export default function App() {
     </div>
   );
 }
+
