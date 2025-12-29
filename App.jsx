@@ -170,6 +170,11 @@ export default function App() {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // ✅ TWO DIFFERENT YOUTUBE LINKS
+  // Keep your first one, replace the second with your other video ID.
+  const YT_TESTIMONIAL = "https://www.youtube.com/embed/TFAbGh3ZhkY";
+  const YT_COMMENCEMENT = "https://www.youtube.com/embed/dQw4w9WgXcQ"; // <-- replace this with your real second video
+
   return (
     <div className="min-h-screen bg-[#F6F3EA] text-[#122019]">
       {/* Top nav */}
@@ -386,7 +391,7 @@ export default function App() {
               <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/TFAbGh3ZhkY"
+                  src={YT_TESTIMONIAL}
                   title="Featured testimonial"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -409,7 +414,7 @@ export default function App() {
               <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/TFAbGh3ZhkY"
+                  src={YT_COMMENCEMENT}
                   title="Commencement speech"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -568,6 +573,7 @@ export default function App() {
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+            {/* Grid thumbnails (NO CROP) */}
             {photoHighlights.map((item, index) => (
               <motion.figure
                 key={index}
@@ -578,11 +584,12 @@ export default function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.03 * index }}
               >
-                <div className="overflow-hidden">
+                {/* Frame ensures full image visible */}
+                <div className="bg-slate-50 w-full h-48 flex items-center justify-center">
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className="w-full h-40 sm:h-44 md:h-48 lg:h-56 min-h-[160px] object-cover transform transition-transform duration-300 group-hover:scale-105"
+                    className="max-w-full max-h-full object-contain"
                   />
                 </div>
 
@@ -592,7 +599,7 @@ export default function App() {
               </motion.figure>
             ))}
 
-            {/* Featured / browsing tile */}
+            {/* Featured carousel tile (NO CROP) */}
             <motion.figure
               className="relative col-span-full bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden"
               initial={{ opacity: 0, y: 24 }}
@@ -600,13 +607,17 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.45 }}
             >
-              <div className="relative">
-                <img
-                  src={currentPhoto.src}
-                  alt={currentPhoto.alt}
-                  className="w-full h-72 sm:h-80 md:h-96 object-cover"
+              <div className="relative bg-slate-50">
+                <div
+                  className="w-full h-72 sm:h-80 md:h-96 flex items-center justify-center"
                   onClick={() => setLightboxItem(currentPhoto)}
-                />
+                >
+                  <img
+                    src={currentPhoto.src}
+                    alt={currentPhoto.alt}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
 
                 <button
                   type="button"
@@ -700,14 +711,8 @@ export default function App() {
 
             <div className="rounded-2xl border border-slate-200 bg-white p-5">
               <form className="grid gap-3">
-                <input
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  placeholder="Your name"
-                />
-                <input
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  placeholder="Email"
-                />
+                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Your name" />
+                <input className="border border-slate-300 rounded-md px-3 py-2" placeholder="Email" />
                 <input
                   className="border border-slate-300 rounded-md px-3 py-2"
                   placeholder="Organization / school (optional)"
@@ -728,21 +733,23 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* LIGHTBOX */}
+        {/* LIGHTBOX (NO CROP) */}
         {lightboxItem && (
           <div
             className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
             onClick={() => setLightboxItem(null)}
           >
             <div
-              className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl"
+              className="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
-                src={lightboxItem.src}
-                alt={lightboxItem.alt}
-                className="w-full h-80 md:h-[420px] object-cover"
-              />
+              <div className="bg-slate-50 w-full h-[70vh] flex items-center justify-center">
+                <img
+                  src={lightboxItem.src}
+                  alt={lightboxItem.alt}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
 
               <div className="p-4 flex items-start justify-between gap-4">
                 <p className="text-sm text-slate-800">{lightboxItem.caption}</p>
