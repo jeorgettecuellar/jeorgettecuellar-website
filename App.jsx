@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const SECTION_IDS = [
-  "about",
-  "offerings",
-  "speaking",
-  "portfolio",
-  "teaching",
-  "advocacy",
-  "international",
-  "education",
-  "gallery",
-  "contact",
+/**
+ * ✅ Nav labels updated:
+ * - "offerings" -> "Programs & partnerships"
+ * - "speaking"  -> "Meet Jeorgette"
+ * - "portfolio" -> "Areas of work"
+ * ✅ Removed: teaching, international
+ */
+const NAV_ITEMS = [
+  { id: "about", label: "About" },
+  { id: "offerings", label: "Programs & partnerships" },
+  { id: "speaking", label: "Meet Jeorgette" },
+  { id: "portfolio", label: "Areas of work" },
+  { id: "advocacy", label: "Advocacy" },
+  { id: "education", label: "Education" },
+  { id: "gallery", label: "Gallery" },
+  { id: "contact", label: "Contact" },
 ];
+
+const SECTION_IDS = NAV_ITEMS.map((x) => x.id);
 
 const photoHighlights = [
   {
@@ -195,7 +202,6 @@ export default function App() {
       {/* TOP NAV */}
       <div className="sticky top-0 z-40 backdrop-blur bg-[#F6F3EA]/85 border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-          {/* Brand = bigger transparent logo */}
           <button
             type="button"
             onClick={() => scrollToId("about")}
@@ -210,18 +216,18 @@ export default function App() {
           </button>
 
           <div className="hidden md:flex items-center gap-2 flex-wrap justify-end">
-            {SECTION_IDS.map((id) => (
+            {NAV_ITEMS.map((item) => (
               <button
-                key={id}
+                key={item.id}
                 type="button"
-                onClick={() => scrollToId(id)}
+                onClick={() => scrollToId(item.id)}
                 className={`text-[11px] uppercase tracking-[0.18em] px-3 py-1.5 border transition ${
-                  activeSection === id
+                  activeSection === item.id
                     ? "bg-[#1F4E37] text-white border-[#1F4E37]"
                     : "bg-white/60 border-slate-200 text-[#304139] hover:bg-white"
                 }`}
               >
-                {id}
+                {item.label}
               </button>
             ))}
           </div>
@@ -395,9 +401,9 @@ export default function App() {
           <div className="space-y-3">
             <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">Meet Jeorgette</h2>
             <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
-              Before the programs, keynotes, and workshops—there is a story. This section is a personal introduction
-              to Jeorgette Cuellar: where she comes from, what shaped her, and why she is committed to helping people
-              build agency, stability, and a future they can claim as their own.
+              Before the programs, keynotes, and workshops—there is a story. This section is a personal
+              introduction to Jeorgette Cuellar: where she comes from, what shaped her, and why she is
+              committed to helping people build agency, stability, and a future they can claim as their own.
             </p>
           </div>
 
@@ -429,13 +435,7 @@ export default function App() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-4 md:gap-6">
-            <motion.div
-              className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45 }}
-            >
+            <motion.div className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden">
               <div className="p-5">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                   Start here
@@ -459,13 +459,7 @@ export default function App() {
               </div>
             </motion.div>
 
-            <motion.div
-              className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: 0.08 }}
-            >
+            <motion.div className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden">
               <div className="p-5">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                   In her own words
@@ -519,7 +513,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* PORTFOLIO */}
+        {/* PORTFOLIO -> Areas of work (remove teaching/international cards) */}
         <motion.section
           id="portfolio"
           className="space-y-5"
@@ -530,26 +524,22 @@ export default function App() {
         >
           <h2 className="text-2xl md:text-3xl font-bold">Areas of work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My practice spans teaching, advocacy, and international collaboration around justice, education, and re-entry.
+            My practice spans advocacy, education, and community partnership work around justice, re-entry, and long-term stability.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             {[
-              {
-                id: "teaching",
-                title: "Teaching & curriculum",
-                body: "Course and workshop design in community colleges, youth programs, and carceral settings.",
-              },
               {
                 id: "advocacy",
                 title: "Advocacy & policy",
                 body:
-                  "Public speaking, research translation, and partnerships that support decarceration and access to education.",
+                  "Public speaking, research translation, and partnerships that support decarceration and access to education and housing.",
               },
               {
-                id: "international",
-                title: "International collaboration",
-                body: "Learning across systems and bringing back practical lessons for local programs and policy work.",
+                id: "education",
+                title: "Education & leadership development",
+                body:
+                  "Helping people build structure, confidence, and skills through guided learning and supportive systems.",
               },
             ].map((card, i) => (
               <motion.button
@@ -574,21 +564,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* TEACHING */}
-        <motion.section
-          id="teaching"
-          className="space-y-3"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <h2 className="text-xl md:text-2xl font-bold">Teaching & curriculum</h2>
-          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            I facilitate classrooms and workshops that center dignity, agency, and academic possibility for youth and adults—including inside carceral facilities.
-          </p>
-        </motion.section>
-
         {/* ADVOCACY */}
         <motion.section
           id="advocacy"
@@ -600,22 +575,8 @@ export default function App() {
         >
           <h2 className="text-xl md:text-2xl font-bold">Advocacy & policy work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My advocacy includes work with nonprofits, county and state partners, and national organizations committed to transforming youth justice, decarceration, and access to education and housing.
-          </p>
-        </motion.section>
-
-        {/* INTERNATIONAL */}
-        <motion.section
-          id="international"
-          className="space-y-3"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <h2 className="text-xl md:text-2xl font-bold">International work</h2>
-          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            Through global delegations, I&apos;ve visited correctional and educational systems abroad to learn how countries prioritize rehabilitation, relationship, and re-entry—and bring those lessons back to local work.
+            My advocacy includes work with nonprofits, county and state partners, and national organizations committed to transforming youth justice,
+            decarceration, and access to education and housing.
           </p>
         </motion.section>
 
@@ -712,10 +673,6 @@ export default function App() {
                   <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
                     Leadership guidance, education, and structure that empower individuals to shape lives they’re proud of.
                   </p>
-                  <div className="mt-6 hidden md:flex items-center gap-8">
-                    <div className="h-px bg-white/35 flex-1" />
-                    <div className="h-px bg-white/35 flex-1" />
-                  </div>
                 </div>
               </div>
 
@@ -758,7 +715,9 @@ export default function App() {
           </motion.div>
 
           <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">{currentPhoto.caption}</p>
+            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">
+              {currentPhoto.caption}
+            </p>
           </div>
         </motion.section>
 
@@ -792,7 +751,7 @@ export default function App() {
           </div>
         )}
 
-        {/* CONTACT (MOVED BACK TO BOTTOM) */}
+        {/* CONTACT (bottom) */}
         <motion.section
           id="contact"
           className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
@@ -836,7 +795,7 @@ export default function App() {
                 <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
                 <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school (optional)" />
                 <textarea
-                  className="border border-slate-300 rounded-none px-3 py-2"
+                  className="border border-slate-300 px-3 py-2"
                   rows={4}
                   placeholder="What kind of support or collaboration are you looking for?"
                 />
