@@ -5,13 +5,13 @@ const SECTION_IDS = [
   "about",
   "offerings",
   "speaking",
-  "contact",
   "portfolio",
   "teaching",
   "advocacy",
   "international",
   "education",
   "gallery",
+  "contact",
 ];
 
 const photoHighlights = [
@@ -202,7 +202,6 @@ export default function App() {
             className="flex items-center"
             aria-label="Go to top"
           >
-            {/* Put your transparent logo at: public/logo.png */}
             <img
               src="/logo.png"
               alt="Jeorgette Cuellar logo"
@@ -230,7 +229,7 @@ export default function App() {
       </div>
 
       <main className="max-w-6xl mx-auto px-4 py-8 md:py-12 space-y-14">
-        {/* ABOUT (BIG HEADER + IMAGE SECTION) */}
+        {/* ABOUT */}
         <motion.section
           id="about"
           className="space-y-6"
@@ -238,7 +237,6 @@ export default function App() {
           animate="visible"
           variants={sectionFade}
         >
-          {/* BIG HEADER */}
           <div className="pt-2 md:pt-6">
             <motion.h1
               className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight"
@@ -261,7 +259,6 @@ export default function App() {
             </motion.p>
           </div>
 
-          {/* EXPANDED HERO IMAGE SECTION WITH OVERLAY CONTENT */}
           <motion.div
             className="-mx-4 md:-mx-6 lg:-mx-8 border-y border-slate-200 shadow-sm overflow-hidden"
             variants={fadeUp}
@@ -322,7 +319,6 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Optional quote */}
               <div className="hidden md:block absolute bottom-6 right-6 bg-white/85 backdrop-blur border border-white/70 shadow-lg px-4 py-3 max-w-sm">
                 <p className="text-[11px] font-semibold text-[#122019]">
                   “Jeorgette&apos;s story moved the room and gave our youth real, tangible hope.”
@@ -346,9 +342,8 @@ export default function App() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold">Programs & partnerships</h2>
               <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                I collaborate with campuses, nonprofits, and community programs to design
-                spaces where system-impacted youth and families can practice new structures
-                for stability and growth.
+                I collaborate with campuses, nonprofits, and community programs to design spaces
+                where system-impacted youth and families can practice new structures for stability and growth.
               </p>
             </div>
           </div>
@@ -388,7 +383,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* SPEAKING (Warm intro / “Meet Jeorgette”) */}
+        {/* SPEAKING */}
         <motion.section
           id="speaking"
           className="space-y-7"
@@ -398,14 +393,11 @@ export default function App() {
           viewport={{ once: true, amount: 0.25 }}
         >
           <div className="space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
-              Meet Jeorgette
-            </h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">Meet Jeorgette</h2>
             <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
-              Before the programs, keynotes, and workshops—there is a story. This section is a
-              personal introduction to Jeorgette Cuellar: where she comes from, what shaped her,
-              and why she is committed to helping people build agency, stability, and a future they
-              can claim as their own.
+              Before the programs, keynotes, and workshops—there is a story. This section is a personal introduction
+              to Jeorgette Cuellar: where she comes from, what shaped her, and why she is committed to helping people
+              build agency, stability, and a future they can claim as their own.
             </p>
           </div>
 
@@ -415,28 +407,23 @@ export default function App() {
                 Grounded in lived experience
               </p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                Jeorgette speaks from firsthand knowledge of displacement and systems involvement—
-                and the long work of rebuilding. Her message is honest, human, and rooted in dignity.
+                Jeorgette speaks from firsthand knowledge of displacement and systems involvement—and the long work of rebuilding.
               </p>
             </div>
-
             <div className="bg-white border border-slate-200 shadow-sm p-5">
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                 A bridge between worlds
               </p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                She connects community reality to campus and organizational spaces—helping audiences
-                understand what support actually looks like, and how to build it into everyday structure.
+                She connects community reality to campus and organizational spaces—helping audiences understand what support actually looks like.
               </p>
             </div>
-
             <div className="bg-white border border-slate-200 shadow-sm p-5">
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                 The outcome is agency
               </p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                The goal is never “saving” anyone. It’s empowering people to lead their own lives—
-                with guidance, education, and the kind of support that makes independence possible.
+                The goal is never “saving” anyone. It’s empowering people to lead their own lives—with guidance and structure.
               </p>
             </div>
           </div>
@@ -457,11 +444,9 @@ export default function App() {
                   Testimony film · Her story & why she does this work
                 </h3>
                 <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  A short introduction to Jeorgette’s story—what she has lived, what she has learned,
-                  and what she believes people deserve when they’re trying to build a new life.
+                  A short introduction to Jeorgette’s story—what she has lived, what she has learned, and what she believes people deserve.
                 </p>
               </div>
-
               <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
@@ -489,11 +474,9 @@ export default function App() {
                   Commencement speech · Responsibility, repair, and possibility
                 </h3>
                 <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  A message about choosing a future with intention—especially when life didn’t
-                  make it easy. This is Jeorgette’s voice, values, and leadership style.
+                  A message about choosing a future with intention—especially when life didn’t make it easy.
                 </p>
               </div>
-
               <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
@@ -507,23 +490,19 @@ export default function App() {
             </motion.div>
           </div>
 
-          {/* Yellow coordinated CTA block */}
           <div className="bg-[#F4D27A] text-[#4A3C21] border border-[#E7C661] p-6 md:p-7 shadow-sm">
             <h3 className="text-base md:text-lg font-semibold">
               If you’re considering bringing Jeorgette in…
             </h3>
             <p className="mt-2 text-xs md:text-[13px] text-[#4A3C21]/90 leading-relaxed max-w-3xl">
-              The work is built on respect, clarity, and outcomes that return agency to the people
-              who are most impacted. If your community is ready for a speaker who is both real and
-              rigorous—reach out.
+              The work is built on respect, clarity, and outcomes that return agency to the people who are most impacted.
+              If your community is ready for a speaker who is both real and rigorous—reach out.
             </p>
             <div className="mt-4 flex items-center gap-3 flex-wrap">
               <button
                 type="button"
                 onClick={() =>
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
               >
@@ -540,70 +519,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* CONTACT (above Areas of work) */}
-        <motion.section
-          id="contact"
-          className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
-              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                Share a bit about your event, classroom, or program. I&apos;ll follow up with
-                next steps and possibilities.
-              </p>
-            </div>
-            <div className="text-xs text-[#4C5A52]">
-              <p className="font-semibold text-[#122019]">Direct contact</p>
-              <p className="mt-1">
-                <a
-                  href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
-                >
-                  c.jorgette@yahoo.com
-                </a>
-              </p>
-              <p className="mt-1">Los Angeles, California</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-slate-200 bg-[#F6F3EA] p-5">
-              <p className="text-sm font-semibold">Quick note</p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                If you include a date, audience size, and what you want people to leave with,
-                I can respond faster with options.
-              </p>
-            </div>
-
-            <div className="border border-slate-200 bg-white p-5">
-              <form className="grid gap-3">
-                <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
-                <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
-                <input
-                  className="border border-slate-300 px-3 py-2"
-                  placeholder="Organization / school (optional)"
-                />
-                <textarea
-                  className="border border-slate-300 px-3 py-2"
-                  rows={4}
-                  placeholder="What kind of support or collaboration are you looking for?"
-                />
-                <button
-                  type="button"
-                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
-                >
-                  Send message
-                </button>
-              </form>
-            </div>
-          </div>
-        </motion.section>
-
         {/* PORTFOLIO */}
         <motion.section
           id="portfolio"
@@ -615,8 +530,7 @@ export default function App() {
         >
           <h2 className="text-2xl md:text-3xl font-bold">Areas of work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My practice spans teaching, advocacy, and international collaboration around justice,
-            education, and re-entry.
+            My practice spans teaching, advocacy, and international collaboration around justice, education, and re-entry.
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
@@ -629,7 +543,8 @@ export default function App() {
               {
                 id: "advocacy",
                 title: "Advocacy & policy",
-                body: "Public speaking, research translation, and partnerships that support decarceration and access to education.",
+                body:
+                  "Public speaking, research translation, and partnerships that support decarceration and access to education.",
               },
               {
                 id: "international",
@@ -670,9 +585,7 @@ export default function App() {
         >
           <h2 className="text-xl md:text-2xl font-bold">Teaching & curriculum</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            I facilitate classrooms and workshops that center dignity, agency, and academic possibility
-            for youth and adults—including inside carceral facilities. My approach blends lived experience,
-            trauma-informed practice, and research-backed structure.
+            I facilitate classrooms and workshops that center dignity, agency, and academic possibility for youth and adults—including inside carceral facilities.
           </p>
         </motion.section>
 
@@ -687,8 +600,7 @@ export default function App() {
         >
           <h2 className="text-xl md:text-2xl font-bold">Advocacy & policy work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My advocacy includes work with nonprofits, county and state partners, and national organizations
-            committed to transforming youth justice, decarceration, and access to education and housing.
+            My advocacy includes work with nonprofits, county and state partners, and national organizations committed to transforming youth justice, decarceration, and access to education and housing.
           </p>
         </motion.section>
 
@@ -703,12 +615,11 @@ export default function App() {
         >
           <h2 className="text-xl md:text-2xl font-bold">International work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            Through global delegations, I&apos;ve visited correctional and educational systems abroad to learn how
-            countries prioritize rehabilitation, relationship, and re-entry—and bring those lessons back to local work.
+            Through global delegations, I&apos;ve visited correctional and educational systems abroad to learn how countries prioritize rehabilitation, relationship, and re-entry—and bring those lessons back to local work.
           </p>
         </motion.section>
 
-        {/* EDUCATION (big logos left, text right) */}
+        {/* EDUCATION */}
         <motion.section
           id="education"
           className="space-y-6"
@@ -720,14 +631,12 @@ export default function App() {
           <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">Education</h2>
 
           <div className="space-y-5">
-            {/* UCLA */}
             <div className="flex flex-col sm:flex-row items-start gap-6 border border-slate-200 bg-white p-6 shadow-sm">
               <img
                 src="/ucla.png"
                 alt="University of California, Los Angeles seal"
                 className="h-24 w-24 md:h-28 md:w-28 object-contain flex-shrink-0"
               />
-
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                   University of California, Los Angeles
@@ -736,21 +645,18 @@ export default function App() {
                   B.A. Sociology
                 </h3>
                 <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
-
                 <p className="mt-3 text-sm text-[#4C5A52] leading-relaxed max-w-xl">
                   Leadership Academy 2025 Cohort · Underground Scholars Policy Fellowship
                 </p>
               </div>
             </div>
 
-            {/* Barstow Community College */}
             <div className="flex flex-col sm:flex-row items-start gap-6 border border-slate-200 bg-white p-6 shadow-sm">
               <img
                 src="/bcc.png"
                 alt="Barstow Community College logo"
                 className="h-24 w-24 md:h-28 md:w-28 object-contain flex-shrink-0"
               />
-
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#122019] font-semibold">
                   Barstow Community College
@@ -761,7 +667,6 @@ export default function App() {
                 <p className="text-[11px] text-slate-500 mt-1">
                   2020 – 2022 · Summa Cum Laude
                 </p>
-
                 <p className="mt-3 text-sm text-[#4C5A52] leading-relaxed max-w-xl">
                   All California Academic Awardee · All USA Academic Nominee · 2023 Commencement Speaker
                 </p>
@@ -770,7 +675,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* GALLERY (CAMPUSSPEAK-STYLE SLIDESHOW ONLY) */}
+        {/* GALLERY */}
         <motion.section
           id="gallery"
           className="-mx-4 md:-mx-6 lg:-mx-8"
@@ -799,17 +704,14 @@ export default function App() {
 
               <div className="absolute inset-0 bg-black/45" />
 
-              {/* Overlay text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
                 <div className="max-w-5xl w-full">
                   <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight">
                     People Build Their Own Futures—We Help Clear the Path.
                   </h2>
                   <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
-                    Leadership guidance, education, and structure that empower individuals to shape
-                    lives they’re proud of.
+                    Leadership guidance, education, and structure that empower individuals to shape lives they’re proud of.
                   </p>
-
                   <div className="mt-6 hidden md:flex items-center gap-8">
                     <div className="h-px bg-white/35 flex-1" />
                     <div className="h-px bg-white/35 flex-1" />
@@ -817,7 +719,6 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Arrows */}
               <button
                 type="button"
                 className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-10"
@@ -840,7 +741,6 @@ export default function App() {
                 </span>
               </button>
 
-              {/* Dots */}
               <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
                 {photoHighlights.map((_, i) => (
                   <button
@@ -849,9 +749,7 @@ export default function App() {
                     aria-label={`Go to photo ${i + 1}`}
                     onClick={() => setCurrentPhotoIndex(i)}
                     className={`h-2.5 transition-all duration-300 ${
-                      i === currentPhotoIndex
-                        ? "w-8 bg-white"
-                        : "w-2 bg-white/60 hover:bg-white/80"
+                      i === currentPhotoIndex ? "w-8 bg-white" : "w-2 bg-white/60 hover:bg-white/80"
                     }`}
                   />
                 ))}
@@ -859,11 +757,8 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* caption under slider */}
           <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">
-              {currentPhoto.caption}
-            </p>
+            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">{currentPhoto.caption}</p>
           </div>
         </motion.section>
 
@@ -883,7 +778,6 @@ export default function App() {
                 className="w-full h-80 md:h-[520px] object-cover"
                 style={{ objectPosition: lightboxItem.focus || "center 35%" }}
               />
-
               <div className="p-4 flex items-start justify-between gap-4">
                 <p className="text-sm text-slate-800">{lightboxItem.caption}</p>
                 <button
@@ -898,7 +792,66 @@ export default function App() {
           </div>
         )}
 
-        {/* FOOTER (leave “Jeorgette Cuellar” here) */}
+        {/* CONTACT (MOVED BACK TO BOTTOM) */}
+        <motion.section
+          id="contact"
+          className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
+              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
+                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
+              </p>
+            </div>
+            <div className="text-xs text-[#4C5A52]">
+              <p className="font-semibold text-[#122019]">Direct contact</p>
+              <p className="mt-1">
+                <a
+                  href="mailto:c.jorgette@yahoo.com"
+                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
+                >
+                  c.jorgette@yahoo.com
+                </a>
+              </p>
+              <p className="mt-1">Los Angeles, California</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="border border-slate-200 bg-[#F6F3EA] p-5">
+              <p className="text-sm font-semibold">Quick note</p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
+              </p>
+            </div>
+
+            <div className="border border-slate-200 bg-white p-5">
+              <form className="grid gap-3">
+                <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
+                <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
+                <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school (optional)" />
+                <textarea
+                  className="border border-slate-300 rounded-none px-3 py-2"
+                  rows={4}
+                  placeholder="What kind of support or collaboration are you looking for?"
+                />
+                <button
+                  type="button"
+                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
+                >
+                  Send message
+                </button>
+              </form>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* FOOTER */}
         <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
           © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and community work.
         </footer>
