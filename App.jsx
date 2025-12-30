@@ -145,10 +145,10 @@ export default function App() {
     });
   };
 
-  // ✅ Auto-rotate slideshow (slower, CampusSpeak-ish)
+  // Auto-rotate slideshow (slower)
   useEffect(() => {
     if (sliderPaused) return undefined;
-    const intervalId = setInterval(() => advancePhoto("next"), 4500); // slower rotation
+    const intervalId = setInterval(() => advancePhoto("next"), 4500);
     return () => clearInterval(intervalId);
   }, [sliderPaused]);
 
@@ -185,7 +185,7 @@ export default function App() {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // ✅ Correct embeds
+  // Correct embeds
   const YT_TESTIMONIAL = "https://www.youtube.com/embed/nDHfURsqDWs";
   const YT_COMMENCEMENT = "https://www.youtube.com/embed/TFAbGh3ZhkY";
 
@@ -250,8 +250,7 @@ export default function App() {
                 initial="hidden"
                 animate="visible"
               >
-                Building spaces where system-impacted youth can move from surviving to
-                building a life they want.
+                People Don&apos;t Need Saving—They Need Support.
               </motion.h1>
 
               <motion.p
@@ -672,13 +671,14 @@ export default function App() {
 
               <div className="absolute inset-0 bg-black/45" />
 
+              {/* ✅ Option A overlay text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
                 <div className="max-w-5xl w-full">
                   <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight">
-                    Shaping Tomorrow&apos;s Leaders
+                    People Build Their Own Futures—We Help Clear the Path.
                   </h2>
-                  <p className="mt-2 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
-                    Powerful speaking. Impactful programming.
+                  <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
+                    Leadership guidance, education, and structure that empower individuals to shape lives they’re proud of.
                   </p>
 
                   <div className="mt-6 hidden md:flex items-center gap-8">
