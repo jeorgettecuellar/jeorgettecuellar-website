@@ -149,7 +149,7 @@ export default function App() {
   // Auto-rotate slideshow (slower)
   useEffect(() => {
     if (sliderPaused) return undefined;
-    const intervalId = setInterval(() => advancePhoto("next"), 5000);
+    const intervalId = setInterval(() => advancePhoto("next"), 5200);
     return () => clearInterval(intervalId);
   }, [sliderPaused]);
 
@@ -195,7 +195,7 @@ export default function App() {
       {/* TOP NAV */}
       <div className="sticky top-0 z-40 backdrop-blur bg-[#F6F3EA]/85 border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-          {/* ✅ Brand = logo only (leave footer text alone) */}
+          {/* Brand = bigger transparent logo */}
           <button
             type="button"
             onClick={() => scrollToId("about")}
@@ -206,7 +206,7 @@ export default function App() {
             <img
               src="/logo.png"
               alt="Jeorgette Cuellar logo"
-              className="h-10 sm:h-12 w-auto"
+              className="h-16 sm:h-18 md:h-20 w-auto"
             />
           </button>
 
@@ -507,11 +507,12 @@ export default function App() {
             </motion.div>
           </div>
 
-          <div className="bg-[#0F1713] text-white border border-white/10 p-6 md:p-7">
+          {/* Yellow coordinated CTA block */}
+          <div className="bg-[#F4D27A] text-[#4A3C21] border border-[#E7C661] p-6 md:p-7 shadow-sm">
             <h3 className="text-base md:text-lg font-semibold">
               If you’re considering bringing Jeorgette in…
             </h3>
-            <p className="mt-2 text-xs md:text-[13px] text-white/85 leading-relaxed max-w-3xl">
+            <p className="mt-2 text-xs md:text-[13px] text-[#4A3C21]/90 leading-relaxed max-w-3xl">
               The work is built on respect, clarity, and outcomes that return agency to the people
               who are most impacted. If your community is ready for a speaker who is both real and
               rigorous—reach out.
@@ -524,14 +525,14 @@ export default function App() {
                     .getElementById("contact")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="inline-flex items-center bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
+                className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
               >
                 Contact Jeorgette
               </button>
               <a
                 href="/resume.pdf"
                 download
-                className="inline-flex items-center bg-white/10 px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-white/15"
+                className="inline-flex items-center bg-[#4A3C21] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#3B2F18]"
               >
                 Download résumé
               </a>
@@ -707,38 +708,64 @@ export default function App() {
           </p>
         </motion.section>
 
-        {/* EDUCATION */}
+        {/* EDUCATION (big logos left, text right) */}
         <motion.section
           id="education"
-          className="space-y-5"
+          className="space-y-6"
           variants={sectionFade}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold">Education</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">Education</h2>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-            <div className="border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
-                UCLA
-              </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold">B.A. Sociology</h3>
-              <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52]">
-                Leadership Academy 2025 Cohort · Underground Scholars Policy Fellowship.
-              </p>
+          <div className="space-y-5">
+            {/* UCLA */}
+            <div className="flex flex-col sm:flex-row items-start gap-6 border border-slate-200 bg-white p-6 shadow-sm">
+              <img
+                src="/ucla.png"
+                alt="University of California, Los Angeles seal"
+                className="h-24 w-24 md:h-28 md:w-28 object-contain flex-shrink-0"
+              />
+
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                  University of California, Los Angeles
+                </p>
+                <h3 className="mt-1 text-base md:text-lg font-semibold text-[#122019]">
+                  B.A. Sociology
+                </h3>
+                <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
+
+                <p className="mt-3 text-sm text-[#4C5A52] leading-relaxed max-w-xl">
+                  Leadership Academy 2025 Cohort · Underground Scholars Policy Fellowship
+                </p>
+              </div>
             </div>
 
-            <div className="border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#4BAF7A] font-semibold">
-                Barstow Community College
-              </p>
-              <h3 className="mt-1 text-sm md:text-base font-semibold">A.A. English</h3>
-              <p className="text-[11px] text-slate-500 mt-1">2020 – 2022 · Summa Cum Laude</p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52]">
-                All California Academic Awardee · All USA Academic Nominee · 2023 Commencement Speaker.
-              </p>
+            {/* Barstow Community College */}
+            <div className="flex flex-col sm:flex-row items-start gap-6 border border-slate-200 bg-white p-6 shadow-sm">
+              <img
+                src="/bcc.png"
+                alt="Barstow Community College logo"
+                className="h-24 w-24 md:h-28 md:w-28 object-contain flex-shrink-0"
+              />
+
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#122019] font-semibold">
+                  Barstow Community College
+                </p>
+                <h3 className="mt-1 text-base md:text-lg font-semibold text-[#122019]">
+                  A.A. English
+                </h3>
+                <p className="text-[11px] text-slate-500 mt-1">
+                  2020 – 2022 · Summa Cum Laude
+                </p>
+
+                <p className="mt-3 text-sm text-[#4C5A52] leading-relaxed max-w-xl">
+                  All California Academic Awardee · All USA Academic Nominee · 2023 Commencement Speaker
+                </p>
+              </div>
             </div>
           </div>
         </motion.section>
@@ -772,7 +799,7 @@ export default function App() {
 
               <div className="absolute inset-0 bg-black/45" />
 
-              {/* Overlay text (Option A) */}
+              {/* Overlay text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
                 <div className="max-w-5xl w-full">
                   <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight">
