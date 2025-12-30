@@ -3,17 +3,14 @@ import { motion } from "framer-motion";
 
 /**
  * ✅ Changes in this version:
- * 1) Swapped sections: the GALLERY SLIDESHOW now comes BEFORE "Let's work together"
- *    (so "Let's work together" is no longer under the CTA — it now appears where the slideshow used to be)
- *
- * 2) Fixed logo loading:
- *    - Uses /logo-wide.png (must be in /public)
- *    - Adds onError fallback to /logo.png if logo-wide.png is missing/wrong filename
- *    - Uses valid Tailwind sizes (no h-18 / h-22 etc)
+ * - Added BACK the Meet Jeorgette "subsections" (3 intro cards + more detailed background/mission blocks)
+ * - Kept: swapped order (Gallery slideshow before Let's work together)
+ * - Kept: bigger left-aligned wide logo + fixed load (fallback if missing)
+ * - Kept: videos + education logos + slideshow + lightbox
  *
  * REQUIRED in /public:
- * - logo-wide.png (wide logo)
- * - logo.png (fallback logo)
+ * - logo-wide.png
+ * - logo.png (fallback)
  * - hero.png
  * - resume.pdf
  * - ucla.png
@@ -214,7 +211,6 @@ export default function App() {
               alt="JeorgetteCuellar.org"
               className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto"
               onError={(e) => {
-                // Fallback if logo-wide.png is missing or name/case doesn't match in /public
                 e.currentTarget.src = "/logo.png";
               }}
             />
@@ -383,7 +379,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* MEET JEORGETTE (VIDEOS + CTA) */}
+        {/* ✅ MEET JEORGETTE — SUBSECTIONS ADDED BACK */}
         <motion.section
           id="speaking"
           className="space-y-7"
@@ -392,12 +388,84 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold">Meet Jeorgette</h2>
-          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
-            This is a warm introduction to Jeorgette Cuellar: what shaped her, what she believes people deserve,
-            and why the work centers agency, dignity, and outcomes that last.
-          </p>
+          <div className="space-y-3">
+            <h2 className="text-2xl md:text-3xl font-bold">Meet Jeorgette</h2>
+            <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
+              This section is a warm introduction to Jeorgette Cuellar—her background, her mission,
+              and the values that shape how she shows up in rooms with students, staff, and community partners.
+            </p>
+          </div>
 
+          {/* Subsection cards (the “in depth” intro structure) */}
+          <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
+            <div className="bg-white border border-slate-200 shadow-sm p-5">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                Background
+              </p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                Jeorgette’s work is grounded in lived experience with systems—and the long, real process of rebuilding.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 shadow-sm p-5">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                Mission
+              </p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                People don’t need saving. They need support, structure, and leadership guidance that strengthens agency.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 shadow-sm p-5">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                What audiences gain
+              </p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                A message that is both honest and hopeful—plus clear “what now” takeaways for students, staff, and teams.
+              </p>
+            </div>
+          </div>
+
+          {/* Deeper “background + mission” blocks */}
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-6">
+            <div className="bg-white border border-slate-200 shadow-sm p-6">
+              <h3 className="text-sm md:text-base font-semibold text-[#122019]">
+                Where the work comes from
+              </h3>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                Jeorgette speaks from firsthand experience navigating displacement and systems involvement.
+                That perspective shapes how she builds trust in a room—without spectacle, without pity, and without simplifying
+                what people have lived through.
+              </p>
+              <p className="mt-3 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                The focus is dignity and truth: naming what harms people, and naming what actually helps them move forward.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 shadow-sm p-6">
+              <h3 className="text-sm md:text-base font-semibold text-[#122019]">
+                The mission in one sentence
+              </h3>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                Support people in building the life they want—through leadership guidance, education, and structure that expands
+                choice, stability, and long-term outcomes.
+              </p>
+
+              <div className="mt-4 border-t border-slate-200 pt-4">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                  Values that guide the work
+                </p>
+                <ul className="mt-2 space-y-2 text-xs md:text-[13px] text-[#4C5A52]">
+                  <li>• Agency over rescue</li>
+                  <li>• Structure over shame</li>
+                  <li>• Accountability to the people most impacted</li>
+                  <li>• Outcomes that last beyond the room</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Videos (still here) */}
           <div className="grid lg:grid-cols-2 gap-4 md:gap-6">
             <div className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden">
               <div className="p-5">
@@ -407,6 +475,9 @@ export default function App() {
                 <h3 className="mt-2 font-semibold text-sm md:text-base">
                   Her story & why she does this work
                 </h3>
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                  A short introduction to Jeorgette’s story—what she has lived, what she has learned, and what she believes people deserve.
+                </p>
               </div>
               <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
@@ -428,6 +499,9 @@ export default function App() {
                 <h3 className="mt-2 font-semibold text-sm md:text-base">
                   Responsibility, repair, and possibility
                 </h3>
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                  A message about choosing a future with intention—especially when life didn’t make it easy.
+                </p>
               </div>
               <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
@@ -442,6 +516,7 @@ export default function App() {
             </div>
           </div>
 
+          {/* CTA */}
           <div className="bg-[#F4D27A] text-[#4A3C21] border border-[#E7C661] p-6 md:p-7 shadow-sm">
             <h3 className="text-base md:text-lg font-semibold">
               If you’re considering bringing Jeorgette in…
@@ -469,7 +544,47 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* ✅ SWAPPED ORDER: GALLERY SLIDESHOW COMES HERE */}
+        {/* AREAS OF WORK */}
+        <motion.section
+          id="portfolio"
+          className="space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <h2 className="text-2xl md:text-3xl font-bold">Areas of work</h2>
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+            {[
+              {
+                title: "Advocacy & systems partnerships",
+                body:
+                  "Public speaking, coalition building, and collaboration that supports education access, decarceration, and stability.",
+              },
+              {
+                title: "Education & leadership development",
+                body:
+                  "Helping people build structure, confidence, and self-direction through guided learning and supportive systems.",
+              },
+            ].map((card, i) => (
+              <motion.div
+                key={card.title}
+                className="h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.05 * i }}
+              >
+                <h3 className="text-sm md:text-base font-semibold">{card.title}</h3>
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                  {card.body}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* GALLERY SLIDESHOW */}
         <motion.section
           id="gallery"
           className="-mx-4 md:-mx-6 lg:-mx-8"
@@ -547,7 +662,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* ✅ SWAPPED ORDER: "LET'S WORK TOGETHER" NOW HERE */}
+        {/* CONTACT */}
         <motion.section
           id="contact"
           className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
@@ -589,7 +704,10 @@ export default function App() {
               <form className="grid gap-3">
                 <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
                 <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
-                <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school (optional)" />
+                <input
+                  className="border border-slate-300 px-3 py-2"
+                  placeholder="Organization / school (optional)"
+                />
                 <textarea
                   className="border border-slate-300 px-3 py-2"
                   rows={4}
@@ -606,47 +724,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* AREAS OF WORK */}
-        <motion.section
-          id="portfolio"
-          className="space-y-5"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <h2 className="text-2xl md:text-3xl font-bold">Areas of work</h2>
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-            {[
-              {
-                title: "Advocacy & systems partnerships",
-                body:
-                  "Public speaking, coalition building, and collaboration that supports education access, decarceration, and stability.",
-              },
-              {
-                title: "Education & leadership development",
-                body:
-                  "Helping people build structure, confidence, and self-direction through guided learning and supportive systems.",
-              },
-            ].map((card, i) => (
-              <motion.div
-                key={card.title}
-                className="h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: 0.05 * i }}
-              >
-                <h3 className="text-sm md:text-base font-semibold">{card.title}</h3>
-                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  {card.body}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* EDUCATION (logos) */}
+        {/* EDUCATION */}
         <motion.section
           id="education"
           className="space-y-6"
