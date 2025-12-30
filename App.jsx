@@ -5,13 +5,13 @@ const SECTION_IDS = [
   "about",
   "offerings",
   "speaking",
+  "contact",
   "portfolio",
   "teaching",
   "advocacy",
   "international",
   "education",
   "gallery",
-  "contact",
 ];
 
 const photoHighlights = [
@@ -100,8 +100,7 @@ const photoHighlights = [
   {
     src: "/photo13.jpg",
     alt: "Smiling delegation or cohort photo.",
-    caption:
-      "At Nyborg Prison in Denmark with others who believe in transformation at scale.",
+    caption: "At Nyborg Prison in Denmark with others who believe in transformation at scale.",
     focus: "center 40%",
   },
   {
@@ -112,7 +111,6 @@ const photoHighlights = [
     focus: "center 40%",
   },
 ];
-
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -136,7 +134,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("about");
   const [lightboxItem, setLightboxItem] = useState(null);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const [hoverDirection, setHoverDirection] = useState(null);
+  const [sliderPaused, setSliderPaused] = useState(false);
 
   const currentPhoto = photoHighlights[currentPhotoIndex];
 
@@ -147,11 +145,12 @@ export default function App() {
     });
   };
 
+  // ✅ Auto-rotate slideshow (slower, CampusSpeak-ish)
   useEffect(() => {
-    if (!hoverDirection) return undefined;
-    const intervalId = setInterval(() => advancePhoto(hoverDirection), 2500);
+    if (sliderPaused) return undefined;
+    const intervalId = setInterval(() => advancePhoto("next"), 4500); // slower rotation
     return () => clearInterval(intervalId);
-  }, [hoverDirection]);
+  }, [sliderPaused]);
 
   // Scroll spy
   useEffect(() => {
@@ -209,7 +208,7 @@ export default function App() {
                 key={id}
                 type="button"
                 onClick={() => scrollToId(id)}
-                className={`text-[11px] uppercase tracking-[0.18em] px-3 py-1.5 rounded-full border transition ${
+                className={`text-[11px] uppercase tracking-[0.18em] px-3 py-1.5 border transition ${
                   activeSection === id
                     ? "bg-[#1F4E37] text-white border-[#1F4E37]"
                     : "bg-white/60 border-slate-200 text-[#304139] hover:bg-white"
@@ -226,7 +225,7 @@ export default function App() {
         {/* ABOUT / HERO */}
         <motion.section
           id="about"
-          className="rounded-3xl border border-white/70 bg-white/70 shadow-sm overflow-hidden"
+          className="border border-white/70 bg-white/70 shadow-sm overflow-hidden"
           initial="hidden"
           animate="visible"
           variants={sectionFade}
@@ -276,7 +275,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => scrollToId("contact")}
-                  className="inline-flex items-center rounded-full bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
+                  className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
                 >
                   Contact
                 </button>
@@ -284,7 +283,7 @@ export default function App() {
                 <a
                   href="/resume.pdf"
                   download
-                  className="inline-flex items-center rounded-full bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
+                  className="inline-flex items-center bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
                 >
                   Download résumé (PDF)
                 </a>
@@ -298,7 +297,7 @@ export default function App() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.14 }}
             >
-              <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/60 bg-[#0F1713]">
+              <div className="overflow-hidden shadow-2xl border border-white/60 bg-[#0F1713]">
                 <img
                   src="/hero.png"
                   alt="Jeorgette speaking on a panel with community members."
@@ -306,14 +305,14 @@ export default function App() {
                 />
               </div>
 
-              <div className="absolute -bottom-6 -left-4 bg-white shadow-xl rounded-2xl px-4 py-3 border border-slate-100 max-w-xs">
+              <div className="absolute -bottom-6 -left-4 bg-white shadow-xl px-4 py-3 border border-slate-100 max-w-xs">
                 <p className="text-[11px] font-semibold text-[#122019]">
                   “Jeorgette&apos;s story moved the room and gave our youth real, tangible hope.”
                 </p>
                 <p className="mt-1 text-[10px] text-slate-500">– Program partner feedback</p>
               </div>
 
-              <div className="absolute -top-4 right-2 bg-[#1F4E37] text-white text-[10px] px-3 py-2 rounded-full shadow-lg">
+              <div className="absolute -top-4 right-2 bg-[#1F4E37] text-white text-[10px] px-3 py-2 shadow-lg">
                 Trusted by campuses & community programs
               </div>
             </motion.div>
@@ -360,7 +359,7 @@ export default function App() {
             ].map((card, i) => (
               <motion.div
                 key={card.title}
-                className="group h-full rounded-2xl border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+                className="group h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -393,7 +392,7 @@ export default function App() {
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
             <motion.div
-              className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm"
+              className="bg-white border border-[#CFE7D4] p-4 shadow-sm"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -403,7 +402,7 @@ export default function App() {
               <p className="mt-1 text-xs md:text-[13px] text-[#4C5A52]">
                 A short film sharing my story, my work, and the communities I am accountable to.
               </p>
-              <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden shadow">
+              <div className="mt-3 aspect-video w-full overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
                   src={YT_TESTIMONIAL}
@@ -416,7 +415,7 @@ export default function App() {
             </motion.div>
 
             <motion.div
-              className="bg-white border border-[#CFE7D4] rounded-2xl p-4 shadow-sm"
+              className="bg-white border border-[#CFE7D4] p-4 shadow-sm"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -426,7 +425,7 @@ export default function App() {
               <p className="mt-1 text-xs md:text-[13px] text-[#4C5A52]">
                 Speaking to graduates about responsibility, repair, and claiming joy—even when the odds were not built for you.
               </p>
-              <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden shadow">
+              <div className="mt-3 aspect-video w-full overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
                   src={YT_COMMENCEMENT}
@@ -440,10 +439,10 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* ✅ CONTACT MOVED UP (NOW ABOVE "AREAS OF WORK") */}
+        {/* CONTACT (moved above Areas of Work) */}
         <motion.section
           id="contact"
-          className="rounded-3xl border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
+          className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
           variants={sectionFade}
           initial="hidden"
           whileInView="visible"
@@ -453,7 +452,8 @@ export default function App() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
               <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
+                Share a bit about your event, classroom, or program. I&apos;ll follow up with
+                next steps and possibilities.
               </p>
             </div>
             <div className="text-xs text-[#4C5A52]">
@@ -471,35 +471,30 @@ export default function App() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-[#F6F3EA] p-5">
+            <div className="border border-slate-200 bg-[#F6F3EA] p-5">
               <p className="text-sm font-semibold">Quick note</p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
+                If you include a date, audience size, and what you want people to leave with,
+                I can respond faster with options.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+            <div className="border border-slate-200 bg-white p-5">
               <form className="grid gap-3">
+                <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
+                <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
                 <input
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  placeholder="Your name"
-                />
-                <input
-                  className="border border-slate-300 rounded-md px-3 py-2"
-                  placeholder="Email"
-                />
-                <input
-                  className="border border-slate-300 rounded-md px-3 py-2"
+                  className="border border-slate-300 px-3 py-2"
                   placeholder="Organization / school (optional)"
                 />
                 <textarea
-                  className="border border-slate-300 rounded-md px-3 py-2"
+                  className="border border-slate-300 px-3 py-2"
                   rows={4}
                   placeholder="What kind of support or collaboration are you looking for?"
                 />
                 <button
                   type="button"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
+                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
                 >
                   Send message
                 </button>
@@ -508,7 +503,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* PORTFOLIO (Areas of work) */}
+        {/* PORTFOLIO */}
         <motion.section
           id="portfolio"
           className="space-y-5"
@@ -519,7 +514,8 @@ export default function App() {
         >
           <h2 className="text-2xl md:text-3xl font-bold">Areas of work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My practice spans teaching, advocacy, and international collaboration around justice, education, and re-entry.
+            My practice spans teaching, advocacy, and international collaboration around justice,
+            education, and re-entry.
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
@@ -544,7 +540,7 @@ export default function App() {
                 key={card.id}
                 type="button"
                 onClick={() => scrollToId(card.id)}
-                className="text-left group h-full rounded-2xl border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+                className="text-left group h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -573,7 +569,9 @@ export default function App() {
         >
           <h2 className="text-xl md:text-2xl font-bold">Teaching & curriculum</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            I facilitate classrooms and workshops that center dignity, agency, and academic possibility for youth and adults—including inside carceral facilities. My approach blends lived experience, trauma-informed practice, and research-backed structure.
+            I facilitate classrooms and workshops that center dignity, agency, and academic possibility
+            for youth and adults—including inside carceral facilities. My approach blends lived experience,
+            trauma-informed practice, and research-backed structure.
           </p>
         </motion.section>
 
@@ -588,7 +586,8 @@ export default function App() {
         >
           <h2 className="text-xl md:text-2xl font-bold">Advocacy & policy work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My advocacy includes work with nonprofits, county and state partners, and national organizations committed to transforming youth justice, decarceration, and access to education and housing.
+            My advocacy includes work with nonprofits, county and state partners, and national organizations
+            committed to transforming youth justice, decarceration, and access to education and housing.
           </p>
         </motion.section>
 
@@ -603,7 +602,8 @@ export default function App() {
         >
           <h2 className="text-xl md:text-2xl font-bold">International work</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            Through global delegations, I&apos;ve visited correctional and educational systems abroad to learn how countries prioritize rehabilitation, relationship, and re-entry—and bring those lessons back to local work.
+            Through global delegations, I&apos;ve visited correctional and educational systems abroad to learn how
+            countries prioritize rehabilitation, relationship, and re-entry—and bring those lessons back to local work.
           </p>
         </motion.section>
 
@@ -619,7 +619,7 @@ export default function App() {
           <h2 className="text-2xl md:text-3xl font-bold">Education</h2>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="border border-slate-200 bg-white p-5 shadow-sm">
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                 UCLA
               </p>
@@ -630,7 +630,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="border border-slate-200 bg-white p-5 shadow-sm">
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#4BAF7A] font-semibold">
                 Barstow Community College
               </p>
@@ -643,87 +643,100 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* GALLERY (SLIDESHOW ONLY — NO CARDS) */}
+        {/* GALLERY (CAMPUSSPEAK-STYLE HERO SLIDER) */}
         <motion.section
           id="gallery"
-          className="space-y-4"
+          className="-mx-4 md:-mx-6 lg:-mx-8"
           variants={sectionFade}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold">Photo highlights</h2>
-          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            A glimpse into some of the rooms, communities, and partners I have had the honor to work alongside.
-          </p>
-
-          <motion.figure
-            className="relative bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden"
+          <motion.div
+            className="relative w-full border-y border-slate-200 shadow-sm overflow-hidden"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45 }}
+            onMouseEnter={() => setSliderPaused(true)}
+            onMouseLeave={() => setSliderPaused(false)}
           >
-            <div className="relative bg-slate-100">
+            <div className="relative w-full h-[320px] sm:h-[420px] md:h-[520px] bg-slate-200">
               <img
                 src={currentPhoto.src}
                 alt={currentPhoto.alt}
-                className="w-full h-72 sm:h-80 md:h-96 object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
                 style={{ objectPosition: currentPhoto.focus || "center 35%" }}
                 onClick={() => setLightboxItem(currentPhoto)}
               />
 
+              <div className="absolute inset-0 bg-black/45" />
+
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+                <div className="max-w-5xl w-full">
+                  <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight">
+                    Shaping Tomorrow&apos;s Leaders
+                  </h2>
+                  <p className="mt-2 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
+                    Powerful speaking. Impactful programming.
+                  </p>
+
+                  <div className="mt-6 hidden md:flex items-center gap-8">
+                    <div className="h-px bg-white/35 flex-1" />
+                    <div className="h-px bg-white/35 flex-1" />
+                  </div>
+                </div>
+              </div>
+
+              {/* LEFT ARROW */}
               <button
                 type="button"
-                className="absolute inset-y-0 left-0 w-1/2 flex items-center justify-start"
-                onMouseEnter={() => setHoverDirection("prev")}
-                onMouseLeave={() => setHoverDirection(null)}
+                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-10"
                 onClick={() => advancePhoto("prev")}
-                aria-label="Show previous photo"
+                aria-label="Previous photo"
               >
-                <span className="ml-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 text-white text-xl font-semibold opacity-0 hover:opacity-100 transition-opacity">
+                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl leading-none hover:bg-black/55 transition">
                   ‹
                 </span>
               </button>
 
+              {/* RIGHT ARROW */}
               <button
                 type="button"
-                className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-end"
-                onMouseEnter={() => setHoverDirection("next")}
-                onMouseLeave={() => setHoverDirection(null)}
+                className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-10"
                 onClick={() => advancePhoto("next")}
-                aria-label="Show next photo"
+                aria-label="Next photo"
               >
-                <span className="mr-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/35 text-white text-xl font-semibold opacity-0 hover:opacity-100 transition-opacity">
+                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl leading-none hover:bg-black/55 transition">
                   ›
                 </span>
               </button>
 
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/45 text-white text-[11px] px-3 py-1.5 rounded-full shadow">
-                Hover or click arrows to browse · Click image to expand
+              {/* DOTS */}
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+                {photoHighlights.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Go to photo ${i + 1}`}
+                    onClick={() => setCurrentPhotoIndex(i)}
+                    className={`h-2.5 transition-all duration-300 ${
+                      i === currentPhotoIndex
+                        ? "w-8 bg-white"
+                        : "w-2 bg-white/60 hover:bg-white/80"
+                    }`}
+                  />
+                ))}
               </div>
             </div>
+          </motion.div>
 
-            <figcaption className="px-4 py-3 text-[12px] md:text-sm text-[#304139] text-center">
+          {/* Optional caption strip under slider (remove if you don’t want it) */}
+          <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">
               {currentPhoto.caption}
-            </figcaption>
-
-            <div className="flex items-center justify-center gap-2 pb-4">
-              {photoHighlights.map((_, indicatorIndex) => (
-                <button
-                  key={indicatorIndex}
-                  type="button"
-                  aria-label={`Go to photo ${indicatorIndex + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    indicatorIndex === currentPhotoIndex
-                      ? "w-6 bg-[#1F4E37]"
-                      : "w-2 bg-slate-200"
-                  }`}
-                  onClick={() => setCurrentPhotoIndex(indicatorIndex)}
-                />
-              ))}
-            </div>
-          </motion.figure>
+            </p>
+          </div>
         </motion.section>
 
         {/* LIGHTBOX */}
@@ -733,7 +746,7 @@ export default function App() {
             onClick={() => setLightboxItem(null)}
           >
             <div
-              className="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl"
+              className="bg-white max-w-4xl w-full overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <img
@@ -747,7 +760,7 @@ export default function App() {
                 <p className="text-sm text-slate-800">{lightboxItem.caption}</p>
                 <button
                   type="button"
-                  className="text-[11px] px-3 py-1 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50"
+                  className="text-[11px] px-3 py-1 border border-slate-200 text-slate-600 hover:bg-slate-50"
                   onClick={() => setLightboxItem(null)}
                 >
                   Close
@@ -764,4 +777,3 @@ export default function App() {
     </div>
   );
 }
-
