@@ -113,7 +113,7 @@ const photoHighlights = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 18 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
@@ -122,7 +122,7 @@ const fadeUp = {
 };
 
 const sectionFade = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 28 },
   visible: {
     opacity: 1,
     y: 0,
@@ -133,6 +133,7 @@ const sectionFade = {
 export default function App() {
   const [activeSection, setActiveSection] = useState("about");
   const [lightboxItem, setLightboxItem] = useState(null);
+
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [sliderPaused, setSliderPaused] = useState(false);
 
@@ -148,7 +149,7 @@ export default function App() {
   // Auto-rotate slideshow (slower)
   useEffect(() => {
     if (sliderPaused) return undefined;
-    const intervalId = setInterval(() => advancePhoto("next"), 4500);
+    const intervalId = setInterval(() => advancePhoto("next"), 5000);
     return () => clearInterval(intervalId);
   }, [sliderPaused]);
 
@@ -185,21 +186,28 @@ export default function App() {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Correct embeds
+  // YouTube embeds (correct)
   const YT_TESTIMONIAL = "https://www.youtube.com/embed/nDHfURsqDWs";
   const YT_COMMENCEMENT = "https://www.youtube.com/embed/TFAbGh3ZhkY";
 
   return (
     <div className="min-h-screen bg-[#F6F3EA] text-[#122019]">
-      {/* Top nav */}
+      {/* TOP NAV */}
       <div className="sticky top-0 z-40 backdrop-blur bg-[#F6F3EA]/85 border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+          {/* ✅ Brand = logo only (leave footer text alone) */}
           <button
             type="button"
             onClick={() => scrollToId("about")}
-            className="font-semibold tracking-wide"
+            className="flex items-center"
+            aria-label="Go to top"
           >
-            Jeorgette Cuellar
+            {/* Put your transparent logo at: public/logo.png */}
+            <img
+              src="/logo.png"
+              alt="Jeorgette Cuellar logo"
+              className="h-10 sm:h-12 w-auto"
+            />
           </button>
 
           <div className="hidden md:flex items-center gap-2 flex-wrap justify-end">
@@ -222,100 +230,107 @@ export default function App() {
       </div>
 
       <main className="max-w-6xl mx-auto px-4 py-8 md:py-12 space-y-14">
-        {/* ABOUT / HERO */}
+        {/* ABOUT (BIG HEADER + IMAGE SECTION) */}
         <motion.section
           id="about"
-          className="border border-white/70 bg-white/70 shadow-sm overflow-hidden"
+          className="space-y-6"
           initial="hidden"
           animate="visible"
           variants={sectionFade}
         >
-          <div className="grid lg:grid-cols-2 gap-8 p-6 md:p-10">
-            {/* Left */}
-            <div>
-              <motion.p
-                className="text-[11px] uppercase tracking-[0.2em] text-[#1F4E37] font-semibold"
-                variants={fadeUp}
-                custom={0}
-                initial="hidden"
-                animate="visible"
-              >
-                Speaking · Teaching · Advocacy
-              </motion.p>
-
-              <motion.h1
-                className="mt-3 text-3xl md:text-4xl font-bold leading-tight"
-                variants={fadeUp}
-                custom={0.08}
-                initial="hidden"
-                animate="visible"
-              >
-                People Don&apos;t Need Saving—They Need Support.
-              </motion.h1>
-
-              <motion.p
-                className="mt-4 text-sm md:text-[15px] text-[#4C5A52] leading-relaxed max-w-xl"
-                variants={fadeUp}
-                custom={0.18}
-                initial="hidden"
-                animate="visible"
-              >
-                I collaborate with campuses, nonprofits, and community programs to design
-                trauma-informed structures for stability, re-entry, and academic possibility.
-              </motion.p>
-
-              <motion.div
-                className="mt-5 flex items-center gap-3 flex-wrap"
-                variants={fadeUp}
-                custom={0.28}
-                initial="hidden"
-                animate="visible"
-              >
-                <button
-                  type="button"
-                  onClick={() => scrollToId("contact")}
-                  className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
-                >
-                  Contact
-                </button>
-
-                <a
-                  href="/resume.pdf"
-                  download
-                  className="inline-flex items-center bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
-                >
-                  Download résumé (PDF)
-                </a>
-              </motion.div>
-            </div>
-
-            {/* Right */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.14 }}
+          {/* BIG HEADER */}
+          <div className="pt-2 md:pt-6">
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight"
+              variants={fadeUp}
+              custom={0.0}
+              initial="hidden"
+              animate="visible"
             >
-              <div className="overflow-hidden shadow-2xl border border-white/60 bg-[#0F1713]">
-                <img
-                  src="/hero.png"
-                  alt="Jeorgette speaking on a panel with community members."
-                  className="w-full h-64 md:h-80 lg:h-96 object-cover opacity-90"
-                />
+              People Don&apos;t Need Saving—They Need Support.
+            </motion.h1>
+
+            <motion.p
+              className="mt-3 text-sm sm:text-base md:text-lg text-[#1F4E37] uppercase tracking-[0.22em] font-semibold"
+              variants={fadeUp}
+              custom={0.08}
+              initial="hidden"
+              animate="visible"
+            >
+              Speaking · Teaching · Advocacy
+            </motion.p>
+          </div>
+
+          {/* EXPANDED HERO IMAGE SECTION WITH OVERLAY CONTENT */}
+          <motion.div
+            className="-mx-4 md:-mx-6 lg:-mx-8 border-y border-slate-200 shadow-sm overflow-hidden"
+            variants={fadeUp}
+            custom={0.16}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="relative w-full h-[460px] sm:h-[560px] md:h-[660px] bg-slate-200">
+              <img
+                src="/hero.png"
+                alt="Jeorgette speaking on a panel with community members."
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+
+              <div className="absolute inset-0 bg-black/30" />
+
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+                  <div className="max-w-xl bg-white/80 backdrop-blur border border-white/70 shadow-lg p-5 sm:p-6 md:p-7">
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-[#1F4E37] font-semibold">
+                      Outcomes that last
+                    </p>
+
+                    <p className="mt-3 text-sm sm:text-base text-[#304139] leading-relaxed">
+                      I partner with campuses, nonprofits, and community programs to implement
+                      trauma-informed structure, leadership guidance, and education—so people can
+                      lead their own lives in a positive direction with clarity, confidence, and support.
+                    </p>
+
+                    <div className="mt-4 flex items-center gap-3 flex-wrap">
+                      <button
+                        type="button"
+                        onClick={() => scrollToId("contact")}
+                        className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
+                      >
+                        Contact
+                      </button>
+
+                      <a
+                        href="/resume.pdf"
+                        download
+                        className="inline-flex items-center bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
+                      >
+                        Download résumé (PDF)
+                      </a>
+                    </div>
+
+                    <p className="mt-4 text-[11px] text-slate-600">
+                      Los Angeles, California ·{" "}
+                      <a
+                        className="underline underline-offset-2 decoration-[#8FD0A8] hover:decoration-[#1F4E37]"
+                        href="mailto:c.jorgette@yahoo.com"
+                      >
+                        c.jorgette@yahoo.com
+                      </a>
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div className="absolute -bottom-6 -left-4 bg-white shadow-xl px-4 py-3 border border-slate-100 max-w-xs">
+              {/* Optional quote */}
+              <div className="hidden md:block absolute bottom-6 right-6 bg-white/85 backdrop-blur border border-white/70 shadow-lg px-4 py-3 max-w-sm">
                 <p className="text-[11px] font-semibold text-[#122019]">
                   “Jeorgette&apos;s story moved the room and gave our youth real, tangible hope.”
                 </p>
                 <p className="mt-1 text-[10px] text-slate-500">– Program partner feedback</p>
               </div>
-
-              <div className="absolute -top-4 right-2 bg-[#1F4E37] text-white text-[10px] px-3 py-2 shadow-lg">
-                Trusted by campuses & community programs
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </motion.section>
 
         {/* OFFERINGS */}
@@ -373,39 +388,85 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* SPEAKING */}
+        {/* SPEAKING (Warm intro / “Meet Jeorgette”) */}
         <motion.section
           id="speaking"
-          className="space-y-5"
+          className="space-y-7"
           variants={sectionFade}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold">Speaking & media</h2>
-          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            From intimate rooms to large audiences, I speak about displacement,
-            incarceration, and possibility—and the structures that help people move from
-            surviving to building a life they want.
-          </p>
+          <div className="space-y-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">
+              Meet Jeorgette
+            </h2>
+            <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
+              Before the programs, keynotes, and workshops—there is a story. This section is a
+              personal introduction to Jeorgette Cuellar: where she comes from, what shaped her,
+              and why she is committed to helping people build agency, stability, and a future they
+              can claim as their own.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
+          <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
+            <div className="bg-white border border-slate-200 shadow-sm p-5">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                Grounded in lived experience
+              </p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                Jeorgette speaks from firsthand knowledge of displacement and systems involvement—
+                and the long work of rebuilding. Her message is honest, human, and rooted in dignity.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 shadow-sm p-5">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                A bridge between worlds
+              </p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                She connects community reality to campus and organizational spaces—helping audiences
+                understand what support actually looks like, and how to build it into everyday structure.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 shadow-sm p-5">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                The outcome is agency
+              </p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                The goal is never “saving” anyone. It’s empowering people to lead their own lives—
+                with guidance, education, and the kind of support that makes independence possible.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-6">
             <motion.div
-              className="bg-white border border-[#CFE7D4] p-4 shadow-sm"
+              className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45 }}
             >
-              <h3 className="font-semibold text-sm md:text-base">Featured testimonial film</h3>
-              <p className="mt-1 text-xs md:text-[13px] text-[#4C5A52]">
-                A short film sharing my story, my work, and the communities I am accountable to.
-              </p>
-              <div className="mt-3 aspect-video w-full overflow-hidden shadow">
+              <div className="p-5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                  Start here
+                </p>
+                <h3 className="mt-2 font-semibold text-sm md:text-base text-[#122019]">
+                  Testimony film · Her story & why she does this work
+                </h3>
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                  A short introduction to Jeorgette’s story—what she has lived, what she has learned,
+                  and what she believes people deserve when they’re trying to build a new life.
+                </p>
+              </div>
+
+              <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
                   src={YT_TESTIMONIAL}
-                  title="Featured testimonial"
+                  title="Testimony film"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -414,17 +475,26 @@ export default function App() {
             </motion.div>
 
             <motion.div
-              className="bg-white border border-[#CFE7D4] p-4 shadow-sm"
+              className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: 0.08 }}
             >
-              <h3 className="font-semibold text-sm md:text-base">Commencement speech</h3>
-              <p className="mt-1 text-xs md:text-[13px] text-[#4C5A52]">
-                Speaking to graduates about responsibility, repair, and claiming joy—even when the odds were not built for you.
-              </p>
-              <div className="mt-3 aspect-video w-full overflow-hidden shadow">
+              <div className="p-5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
+                  In her own words
+                </p>
+                <h3 className="mt-2 font-semibold text-sm md:text-base text-[#122019]">
+                  Commencement speech · Responsibility, repair, and possibility
+                </h3>
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                  A message about choosing a future with intention—especially when life didn’t
+                  make it easy. This is Jeorgette’s voice, values, and leadership style.
+                </p>
+              </div>
+
+              <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
                   className="w-full h-full"
                   src={YT_COMMENCEMENT}
@@ -436,9 +506,40 @@ export default function App() {
               </div>
             </motion.div>
           </div>
+
+          <div className="bg-[#0F1713] text-white border border-white/10 p-6 md:p-7">
+            <h3 className="text-base md:text-lg font-semibold">
+              If you’re considering bringing Jeorgette in…
+            </h3>
+            <p className="mt-2 text-xs md:text-[13px] text-white/85 leading-relaxed max-w-3xl">
+              The work is built on respect, clarity, and outcomes that return agency to the people
+              who are most impacted. If your community is ready for a speaker who is both real and
+              rigorous—reach out.
+            </p>
+            <div className="mt-4 flex items-center gap-3 flex-wrap">
+              <button
+                type="button"
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="inline-flex items-center bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
+              >
+                Contact Jeorgette
+              </button>
+              <a
+                href="/resume.pdf"
+                download
+                className="inline-flex items-center bg-white/10 px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-white/15"
+              >
+                Download résumé
+              </a>
+            </div>
+          </div>
         </motion.section>
 
-        {/* CONTACT (moved above Areas of Work) */}
+        {/* CONTACT (above Areas of work) */}
         <motion.section
           id="contact"
           className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
@@ -642,7 +743,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* GALLERY (CAMPUSSPEAK-STYLE HERO SLIDER) */}
+        {/* GALLERY (CAMPUSSPEAK-STYLE SLIDESHOW ONLY) */}
         <motion.section
           id="gallery"
           className="-mx-4 md:-mx-6 lg:-mx-8"
@@ -671,14 +772,15 @@ export default function App() {
 
               <div className="absolute inset-0 bg-black/45" />
 
-              {/* ✅ Option A overlay text */}
+              {/* Overlay text (Option A) */}
               <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
                 <div className="max-w-5xl w-full">
                   <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight">
                     People Build Their Own Futures—We Help Clear the Path.
                   </h2>
                   <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
-                    Leadership guidance, education, and structure that empower individuals to shape lives they’re proud of.
+                    Leadership guidance, education, and structure that empower individuals to shape
+                    lives they’re proud of.
                   </p>
 
                   <div className="mt-6 hidden md:flex items-center gap-8">
@@ -688,7 +790,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* LEFT ARROW */}
+              {/* Arrows */}
               <button
                 type="button"
                 className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-10"
@@ -700,7 +802,6 @@ export default function App() {
                 </span>
               </button>
 
-              {/* RIGHT ARROW */}
               <button
                 type="button"
                 className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-10"
@@ -712,7 +813,7 @@ export default function App() {
                 </span>
               </button>
 
-              {/* DOTS */}
+              {/* Dots */}
               <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
                 {photoHighlights.map((_, i) => (
                   <button
@@ -731,7 +832,7 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Optional caption strip under slider (remove if you don’t want it) */}
+          {/* caption under slider */}
           <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
             <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">
               {currentPhoto.caption}
@@ -770,6 +871,7 @@ export default function App() {
           </div>
         )}
 
+        {/* FOOTER (leave “Jeorgette Cuellar” here) */}
         <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
           © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and community work.
         </footer>
