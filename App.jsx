@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 /**
- * ✅ Updates in this version:
- * - Wide logo stays TOP-LEFT, but BIGGER (dominant/brand-forward)
- * - Header padding increased so the bigger logo fits cleanly
- * - Top tabs: About / Programs & partnerships / Meet Jeorgette / Areas of work / Gallery
- *   (Advocacy + Education removed from top tabs)
- * - Videos re-added
- * - Education logos section re-added (UCLA + BCC)
- * - Gallery slideshow re-added (photo1–photo14) + lightbox
- * - "Let's work together" placed directly under "If you're considering Jeorgette…"
+ * ✅ Changes in this version:
+ * 1) Swapped sections: the GALLERY SLIDESHOW now comes BEFORE "Let's work together"
+ *    (so "Let's work together" is no longer under the CTA — it now appears where the slideshow used to be)
  *
- * REQUIRED files in /public:
- * - logo-wide.png
+ * 2) Fixed logo loading:
+ *    - Uses /logo-wide.png (must be in /public)
+ *    - Adds onError fallback to /logo.png if logo-wide.png is missing/wrong filename
+ *    - Uses valid Tailwind sizes (no h-18 / h-22 etc)
+ *
+ * REQUIRED in /public:
+ * - logo-wide.png (wide logo)
+ * - logo.png (fallback logo)
  * - hero.png
  * - resume.pdf
  * - ucla.png
@@ -29,15 +29,7 @@ const NAV_ITEMS = [
   { id: "gallery", label: "Gallery" },
 ];
 
-const SECTION_IDS = [
-  "about",
-  "offerings",
-  "speaking",
-  "portfolio",
-  "education",
-  "gallery",
-  "contact",
-];
+const SECTION_IDS = ["about", "offerings", "speaking", "portfolio", "education", "gallery", "contact"];
 
 const photoHighlights = [
   {
@@ -209,9 +201,8 @@ export default function App() {
     <div className="min-h-screen bg-[#F6F3EA] text-[#122019]">
       {/* TOP NAV */}
       <div className="sticky top-0 z-40 backdrop-blur bg-[#F6F3EA]/90 border-b border-slate-200">
-        {/* Increased vertical padding to fit larger wide logo cleanly */}
         <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between gap-4">
-          {/* TOP LEFT: WIDE LOGO (BIGGER) */}
+          {/* TOP LEFT: WIDE LOGO (BIGGER) + FALLBACK */}
           <button
             type="button"
             onClick={() => scrollToId("about")}
@@ -221,7 +212,11 @@ export default function App() {
             <img
               src="/logo-wide.png"
               alt="JeorgetteCuellar.org"
-              className="h-16 sm:h-18 md:h-20 lg:h-22 xl:h-24 w-auto"
+              className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto"
+              onError={(e) => {
+                // Fallback if logo-wide.png is missing or name/case doesn't match in /public
+                e.currentTarget.src = "/logo.png";
+              }}
             />
           </button>
 
@@ -388,7 +383,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* MEET JEORGETTE (VIDEOS + CTA + CONTACT) */}
+        {/* MEET JEORGETTE (VIDEOS + CTA) */}
         <motion.section
           id="speaking"
           className="space-y-7"
@@ -472,68 +467,143 @@ export default function App() {
               </a>
             </div>
           </div>
+        </motion.section>
 
-          {/* CONTACT under CTA */}
-          <motion.section
-            id="contact"
-            className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
-            variants={sectionFade}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
+        {/* ✅ SWAPPED ORDER: GALLERY SLIDESHOW COMES HERE */}
+        <motion.section
+          id="gallery"
+          className="-mx-4 md:-mx-6 lg:-mx-8"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <motion.div
+            className="relative w-full border-y border-slate-200 shadow-sm overflow-hidden"
+            onMouseEnter={() => setSliderPaused(true)}
+            onMouseLeave={() => setSliderPaused(false)}
           >
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
-                <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                  Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
-                </p>
-              </div>
-              <div className="text-xs text-[#4C5A52]">
-                <p className="font-semibold text-[#122019]">Direct contact</p>
-                <p className="mt-1">
-                  <a
-                    href="mailto:c.jorgette@yahoo.com"
-                    className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
-                  >
-                    c.jorgette@yahoo.com
-                  </a>
-                </p>
-                <p className="mt-1">Los Angeles, California</p>
-              </div>
-            </div>
+            <div className="relative w-full h-[320px] sm:h-[420px] md:h-[520px] bg-slate-200">
+              <img
+                src={currentPhoto.src}
+                alt={currentPhoto.alt}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ objectPosition: currentPhoto.focus || "center 35%" }}
+                onClick={() => setLightboxItem(currentPhoto)}
+              />
+              <div className="absolute inset-0 bg-black/45" />
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="border border-slate-200 bg-[#F6F3EA] p-5">
-                <p className="text-sm font-semibold">Quick note</p>
-                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
-                </p>
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+                <div className="max-w-5xl w-full">
+                  <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight">
+                    People Build Their Own Futures—We Help Clear the Path.
+                  </h2>
+                  <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
+                    Leadership guidance, education, and structure that empower individuals to shape lives they’re proud of.
+                  </p>
+                </div>
               </div>
 
-              <div className="border border-slate-200 bg-white p-5">
-                <form className="grid gap-3">
-                  <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
-                  <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
-                  <input
-                    className="border border-slate-300 px-3 py-2"
-                    placeholder="Organization / school (optional)"
-                  />
-                  <textarea
-                    className="border border-slate-300 px-3 py-2"
-                    rows={4}
-                    placeholder="What kind of support or collaboration are you looking for?"
-                  />
+              <button
+                type="button"
+                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-10"
+                onClick={() => advancePhoto("prev")}
+                aria-label="Previous photo"
+              >
+                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl hover:bg-black/55 transition">
+                  ‹
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-10"
+                onClick={() => advancePhoto("next")}
+                aria-label="Next photo"
+              >
+                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl hover:bg-black/55 transition">
+                  ›
+                </span>
+              </button>
+
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+                {photoHighlights.map((_, i) => (
                   <button
+                    key={i}
                     type="button"
-                    className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
-                  >
-                    Send message
-                  </button>
-                </form>
+                    aria-label={`Go to photo ${i + 1}`}
+                    onClick={() => setCurrentPhotoIndex(i)}
+                    className={`h-2.5 transition-all duration-300 ${
+                      i === currentPhotoIndex ? "w-8 bg-white" : "w-2 bg-white/60 hover:bg-white/80"
+                    }`}
+                  />
+                ))}
               </div>
             </div>
-          </motion.section>
+          </motion.div>
+
+          <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">{currentPhoto.caption}</p>
+          </div>
+        </motion.section>
+
+        {/* ✅ SWAPPED ORDER: "LET'S WORK TOGETHER" NOW HERE */}
+        <motion.section
+          id="contact"
+          className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
+          variants={sectionFade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
+              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
+                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
+              </p>
+            </div>
+            <div className="text-xs text-[#4C5A52]">
+              <p className="font-semibold text-[#122019]">Direct contact</p>
+              <p className="mt-1">
+                <a
+                  href="mailto:c.jorgette@yahoo.com"
+                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
+                >
+                  c.jorgette@yahoo.com
+                </a>
+              </p>
+              <p className="mt-1">Los Angeles, California</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="border border-slate-200 bg-[#F6F3EA] p-5">
+              <p className="text-sm font-semibold">Quick note</p>
+              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
+              </p>
+            </div>
+
+            <div className="border border-slate-200 bg-white p-5">
+              <form className="grid gap-3">
+                <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
+                <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
+                <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school (optional)" />
+                <textarea
+                  className="border border-slate-300 px-3 py-2"
+                  rows={4}
+                  placeholder="What kind of support or collaboration are you looking for?"
+                />
+                <button
+                  type="button"
+                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
+                >
+                  Send message
+                </button>
+              </form>
+            </div>
+          </div>
         </motion.section>
 
         {/* AREAS OF WORK */}
@@ -623,84 +693,6 @@ export default function App() {
                 </p>
               </div>
             </div>
-          </div>
-        </motion.section>
-
-        {/* GALLERY SLIDESHOW */}
-        <motion.section
-          id="gallery"
-          className="-mx-4 md:-mx-6 lg:-mx-8"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <motion.div
-            className="relative w-full border-y border-slate-200 shadow-sm overflow-hidden"
-            onMouseEnter={() => setSliderPaused(true)}
-            onMouseLeave={() => setSliderPaused(false)}
-          >
-            <div className="relative w-full h-[320px] sm:h-[420px] md:h-[520px] bg-slate-200">
-              <img
-                src={currentPhoto.src}
-                alt={currentPhoto.alt}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ objectPosition: currentPhoto.focus || "center 35%" }}
-                onClick={() => setLightboxItem(currentPhoto)}
-              />
-              <div className="absolute inset-0 bg-black/45" />
-
-              <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-                <div className="max-w-5xl w-full">
-                  <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight">
-                    People Build Their Own Futures—We Help Clear the Path.
-                  </h2>
-                  <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
-                    Leadership guidance, education, and structure that empower individuals to shape lives they’re proud of.
-                  </p>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-10"
-                onClick={() => advancePhoto("prev")}
-                aria-label="Previous photo"
-              >
-                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl hover:bg-black/55 transition">
-                  ‹
-                </span>
-              </button>
-
-              <button
-                type="button"
-                className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-10"
-                onClick={() => advancePhoto("next")}
-                aria-label="Next photo"
-              >
-                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl hover:bg-black/55 transition">
-                  ›
-                </span>
-              </button>
-
-              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
-                {photoHighlights.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    aria-label={`Go to photo ${i + 1}`}
-                    onClick={() => setCurrentPhotoIndex(i)}
-                    className={`h-2.5 transition-all duration-300 ${
-                      i === currentPhotoIndex ? "w-8 bg-white" : "w-2 bg-white/60 hover:bg-white/80"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">{currentPhoto.caption}</p>
           </div>
         </motion.section>
 
