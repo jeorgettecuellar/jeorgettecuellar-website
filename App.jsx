@@ -2,24 +2,42 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 /**
- * ✅ Nav labels updated:
- * - "offerings" -> "Programs & partnerships"
- * - "speaking"  -> "Meet Jeorgette"
- * - "portfolio" -> "Areas of work"
- * ✅ Removed: teaching, international
+ * ✅ Updates in this version:
+ * - Wide logo stays TOP-LEFT, but BIGGER (dominant/brand-forward)
+ * - Header padding increased so the bigger logo fits cleanly
+ * - Top tabs: About / Programs & partnerships / Meet Jeorgette / Areas of work / Gallery
+ *   (Advocacy + Education removed from top tabs)
+ * - Videos re-added
+ * - Education logos section re-added (UCLA + BCC)
+ * - Gallery slideshow re-added (photo1–photo14) + lightbox
+ * - "Let's work together" placed directly under "If you're considering Jeorgette…"
+ *
+ * REQUIRED files in /public:
+ * - logo-wide.png
+ * - hero.png
+ * - resume.pdf
+ * - ucla.png
+ * - bcc.png
+ * - photo1.jpg ... photo14.jpg
  */
+
 const NAV_ITEMS = [
   { id: "about", label: "About" },
   { id: "offerings", label: "Programs & partnerships" },
   { id: "speaking", label: "Meet Jeorgette" },
   { id: "portfolio", label: "Areas of work" },
-  { id: "advocacy", label: "Advocacy" },
-  { id: "education", label: "Education" },
   { id: "gallery", label: "Gallery" },
-  { id: "contact", label: "Contact" },
 ];
 
-const SECTION_IDS = NAV_ITEMS.map((x) => x.id);
+const SECTION_IDS = [
+  "about",
+  "offerings",
+  "speaking",
+  "portfolio",
+  "education",
+  "gallery",
+  "contact",
+];
 
 const photoHighlights = [
   {
@@ -44,7 +62,7 @@ const photoHighlights = [
   },
   {
     src: "/photo4.jpg",
-    alt: "Participants seated or gathered during a live event.",
+    alt: "Participants gathered during a live event.",
     caption:
       "Facilitating conversations about resilience, systems, and possibility as a keynote speaker in Riverside County at the annual Southern Nights fundraising event.",
     focus: "center 30%",
@@ -64,7 +82,7 @@ const photoHighlights = [
   },
   {
     src: "/photo7.jpg",
-    alt: "Formal or semi-formal dinner with supporters at a table.",
+    alt: "Dinner with supporters at a table.",
     caption:
       "Alongside Olive Crest’s CEO after another keynote in Palm Springs to fundraise for foster youth in every stage of state custody placement.",
     focus: "center 35%",
@@ -78,21 +96,21 @@ const photoHighlights = [
   },
   {
     src: "/photo9.jpg",
-    alt: "International or delegation-style photo abroad.",
+    alt: "Delegation-style photo.",
     caption:
       "Learning from global models of justice, education, and rehabilitation at the California state capital in partnership with UCLA and UC Berkeley.",
     focus: "center 35%",
   },
   {
     src: "/photo10.jpg",
-    alt: "Group visiting a correctional or institutional facility.",
+    alt: "Group visiting an institutional facility.",
     caption:
       "Advocating for bills that prioritize rehabilitative tools during incarceration and rapid access to education after release.",
     focus: "center 35%",
   },
   {
     src: "/photo11.jpg",
-    alt: "Group of educators or advocates standing together.",
+    alt: "Group standing together at an event.",
     caption:
       "Collaborating with leaders at Café Exit in Denmark after a day of workshops focused on forgiveness, healing, and positive change.",
     focus: "center 40%",
@@ -106,7 +124,7 @@ const photoHighlights = [
   },
   {
     src: "/photo13.jpg",
-    alt: "Smiling delegation or cohort photo.",
+    alt: "Smiling cohort photo.",
     caption: "At Nyborg Prison in Denmark with others who believe in transformation at scale.",
     focus: "center 40%",
   },
@@ -130,11 +148,7 @@ const fadeUp = {
 
 const sectionFade = {
   hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 export default function App() {
@@ -153,20 +167,16 @@ export default function App() {
     });
   };
 
-  // Auto-rotate slideshow (slower)
+  // slideshow speed (slower)
   useEffect(() => {
     if (sliderPaused) return undefined;
-    const intervalId = setInterval(() => advancePhoto("next"), 5200);
+    const intervalId = setInterval(() => advancePhoto("next"), 6500);
     return () => clearInterval(intervalId);
   }, [sliderPaused]);
 
   // Scroll spy
   useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: "0px 0px -60% 0px",
-      threshold: 0,
-    };
+    const options = { root: null, rootMargin: "0px 0px -60% 0px", threshold: 0 };
 
     const callback = (entries) => {
       entries.forEach((entry) => {
@@ -188,20 +198,20 @@ export default function App() {
   }, []);
 
   const scrollToId = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // YouTube embeds (correct)
+  // YouTube embeds
   const YT_TESTIMONIAL = "https://www.youtube.com/embed/nDHfURsqDWs";
   const YT_COMMENCEMENT = "https://www.youtube.com/embed/TFAbGh3ZhkY";
 
   return (
     <div className="min-h-screen bg-[#F6F3EA] text-[#122019]">
       {/* TOP NAV */}
-      <div className="sticky top-0 z-40 backdrop-blur bg-[#F6F3EA]/85 border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div className="sticky top-0 z-40 backdrop-blur bg-[#F6F3EA]/90 border-b border-slate-200">
+        {/* Increased vertical padding to fit larger wide logo cleanly */}
+        <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between gap-4">
+          {/* TOP LEFT: WIDE LOGO (BIGGER) */}
           <button
             type="button"
             onClick={() => scrollToId("about")}
@@ -209,12 +219,13 @@ export default function App() {
             aria-label="Go to top"
           >
             <img
-              src="/logo.png"
-              alt="Jeorgette Cuellar logo"
-              className="h-16 sm:h-18 md:h-20 w-auto"
+              src="/logo-wide.png"
+              alt="JeorgetteCuellar.org"
+              className="h-16 sm:h-18 md:h-20 lg:h-22 xl:h-24 w-auto"
             />
           </button>
 
+          {/* NAV BUTTONS */}
           <div className="hidden md:flex items-center gap-2 flex-wrap justify-end">
             {NAV_ITEMS.map((item) => (
               <button
@@ -234,7 +245,7 @@ export default function App() {
         </div>
       </div>
 
-      <main className="max-w-6xl mx-auto px-4 py-8 md:py-12 space-y-14">
+      <main className="max-w-6xl mx-auto px-4 py-10 md:py-12 space-y-14">
         {/* ABOUT */}
         <motion.section
           id="about"
@@ -275,10 +286,9 @@ export default function App() {
             <div className="relative w-full h-[460px] sm:h-[560px] md:h-[660px] bg-slate-200">
               <img
                 src="/hero.png"
-                alt="Jeorgette speaking on a panel with community members."
+                alt="Jeorgette speaking"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-
               <div className="absolute inset-0 bg-black/30" />
 
               <div className="absolute inset-0 flex items-center">
@@ -290,8 +300,8 @@ export default function App() {
 
                     <p className="mt-3 text-sm sm:text-base text-[#304139] leading-relaxed">
                       I partner with campuses, nonprofits, and community programs to implement
-                      trauma-informed structure, leadership guidance, and education—so people can
-                      lead their own lives in a positive direction with clarity, confidence, and support.
+                      leadership guidance, education, and trauma-informed structure—so people can
+                      lead their own lives with clarity, confidence, and support.
                     </p>
 
                     <div className="mt-4 flex items-center gap-3 flex-wrap">
@@ -324,18 +334,11 @@ export default function App() {
                   </div>
                 </div>
               </div>
-
-              <div className="hidden md:block absolute bottom-6 right-6 bg-white/85 backdrop-blur border border-white/70 shadow-lg px-4 py-3 max-w-sm">
-                <p className="text-[11px] font-semibold text-[#122019]">
-                  “Jeorgette&apos;s story moved the room and gave our youth real, tangible hope.”
-                </p>
-                <p className="mt-1 text-[10px] text-slate-500">– Program partner feedback</p>
-              </div>
             </div>
           </motion.div>
         </motion.section>
 
-        {/* OFFERINGS */}
+        {/* PROGRAMS */}
         <motion.section
           id="offerings"
           className="space-y-6"
@@ -344,15 +347,11 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Programs & partnerships</h2>
-              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                I collaborate with campuses, nonprofits, and community programs to design spaces
-                where system-impacted youth and families can practice new structures for stability and growth.
-              </p>
-            </div>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold">Programs & partnerships</h2>
+          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
+            I collaborate with campuses, nonprofits, and community programs to design spaces where
+            system-impacted youth and families can practice new structures for stability and growth.
+          </p>
 
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {[
@@ -374,7 +373,7 @@ export default function App() {
             ].map((card, i) => (
               <motion.div
                 key={card.title}
-                className="group h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+                className="h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -389,7 +388,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* SPEAKING */}
+        {/* MEET JEORGETTE (VIDEOS + CTA + CONTACT) */}
         <motion.section
           id="speaking"
           className="space-y-7"
@@ -398,54 +397,21 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <div className="space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">Meet Jeorgette</h2>
-            <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
-              Before the programs, keynotes, and workshops—there is a story. This section is a personal
-              introduction to Jeorgette Cuellar: where she comes from, what shaped her, and why she is
-              committed to helping people build agency, stability, and a future they can claim as their own.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
-            <div className="bg-white border border-slate-200 shadow-sm p-5">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
-                Grounded in lived experience
-              </p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                Jeorgette speaks from firsthand knowledge of displacement and systems involvement—and the long work of rebuilding.
-              </p>
-            </div>
-            <div className="bg-white border border-slate-200 shadow-sm p-5">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
-                A bridge between worlds
-              </p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                She connects community reality to campus and organizational spaces—helping audiences understand what support actually looks like.
-              </p>
-            </div>
-            <div className="bg-white border border-slate-200 shadow-sm p-5">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
-                The outcome is agency
-              </p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                The goal is never “saving” anyone. It’s empowering people to lead their own lives—with guidance and structure.
-              </p>
-            </div>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold">Meet Jeorgette</h2>
+          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
+            This is a warm introduction to Jeorgette Cuellar: what shaped her, what she believes people deserve,
+            and why the work centers agency, dignity, and outcomes that last.
+          </p>
 
           <div className="grid lg:grid-cols-2 gap-4 md:gap-6">
-            <motion.div className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden">
+            <div className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden">
               <div className="p-5">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
-                  Start here
+                  Testimony film
                 </p>
-                <h3 className="mt-2 font-semibold text-sm md:text-base text-[#122019]">
-                  Testimony film · Her story & why she does this work
+                <h3 className="mt-2 font-semibold text-sm md:text-base">
+                  Her story & why she does this work
                 </h3>
-                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  A short introduction to Jeorgette’s story—what she has lived, what she has learned, and what she believes people deserve.
-                </p>
               </div>
               <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
@@ -457,19 +423,16 @@ export default function App() {
                   allowFullScreen
                 />
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden">
+            <div className="bg-white border border-[#CFE7D4] shadow-sm overflow-hidden">
               <div className="p-5">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
-                  In her own words
+                  Commencement speech
                 </p>
-                <h3 className="mt-2 font-semibold text-sm md:text-base text-[#122019]">
-                  Commencement speech · Responsibility, repair, and possibility
+                <h3 className="mt-2 font-semibold text-sm md:text-base">
+                  Responsibility, repair, and possibility
                 </h3>
-                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  A message about choosing a future with intention—especially when life didn’t make it easy.
-                </p>
               </div>
               <div className="aspect-video w-full overflow-hidden shadow">
                 <iframe
@@ -481,7 +444,7 @@ export default function App() {
                   allowFullScreen
                 />
               </div>
-            </motion.div>
+            </div>
           </div>
 
           <div className="bg-[#F4D27A] text-[#4A3C21] border border-[#E7C661] p-6 md:p-7 shadow-sm">
@@ -495,9 +458,7 @@ export default function App() {
             <div className="mt-4 flex items-center gap-3 flex-wrap">
               <button
                 type="button"
-                onClick={() =>
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => scrollToId("contact")}
                 className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
               >
                 Contact Jeorgette
@@ -511,9 +472,71 @@ export default function App() {
               </a>
             </div>
           </div>
+
+          {/* CONTACT under CTA */}
+          <motion.section
+            id="contact"
+            className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
+            variants={sectionFade}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+          >
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
+                <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
+                  Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
+                </p>
+              </div>
+              <div className="text-xs text-[#4C5A52]">
+                <p className="font-semibold text-[#122019]">Direct contact</p>
+                <p className="mt-1">
+                  <a
+                    href="mailto:c.jorgette@yahoo.com"
+                    className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
+                  >
+                    c.jorgette@yahoo.com
+                  </a>
+                </p>
+                <p className="mt-1">Los Angeles, California</p>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="border border-slate-200 bg-[#F6F3EA] p-5">
+                <p className="text-sm font-semibold">Quick note</p>
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                  If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
+                </p>
+              </div>
+
+              <div className="border border-slate-200 bg-white p-5">
+                <form className="grid gap-3">
+                  <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
+                  <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
+                  <input
+                    className="border border-slate-300 px-3 py-2"
+                    placeholder="Organization / school (optional)"
+                  />
+                  <textarea
+                    className="border border-slate-300 px-3 py-2"
+                    rows={4}
+                    placeholder="What kind of support or collaboration are you looking for?"
+                  />
+                  <button
+                    type="button"
+                    className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
+                  >
+                    Send message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </motion.section>
         </motion.section>
 
-        {/* PORTFOLIO -> Areas of work (remove teaching/international cards) */}
+        {/* AREAS OF WORK */}
         <motion.section
           id="portfolio"
           className="space-y-5"
@@ -523,30 +546,22 @@ export default function App() {
           viewport={{ once: true, amount: 0.25 }}
         >
           <h2 className="text-2xl md:text-3xl font-bold">Areas of work</h2>
-          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My practice spans advocacy, education, and community partnership work around justice, re-entry, and long-term stability.
-          </p>
-
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             {[
               {
-                id: "advocacy",
-                title: "Advocacy & policy",
+                title: "Advocacy & systems partnerships",
                 body:
-                  "Public speaking, research translation, and partnerships that support decarceration and access to education and housing.",
+                  "Public speaking, coalition building, and collaboration that supports education access, decarceration, and stability.",
               },
               {
-                id: "education",
                 title: "Education & leadership development",
                 body:
-                  "Helping people build structure, confidence, and skills through guided learning and supportive systems.",
+                  "Helping people build structure, confidence, and self-direction through guided learning and supportive systems.",
               },
             ].map((card, i) => (
-              <motion.button
-                key={card.id}
-                type="button"
-                onClick={() => scrollToId(card.id)}
-                className="text-left group h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+              <motion.div
+                key={card.title}
+                className="h-full border border-slate-100 bg-white p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -556,31 +571,12 @@ export default function App() {
                 <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
                   {card.body}
                 </p>
-                <span className="mt-3 inline-flex text-[11px] font-semibold text-[#1F4E37]">
-                  Learn more →
-                </span>
-              </motion.button>
+              </motion.div>
             ))}
           </div>
         </motion.section>
 
-        {/* ADVOCACY */}
-        <motion.section
-          id="advocacy"
-          className="space-y-3"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <h2 className="text-xl md:text-2xl font-bold">Advocacy & policy work</h2>
-          <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            My advocacy includes work with nonprofits, county and state partners, and national organizations committed to transforming youth justice,
-            decarceration, and access to education and housing.
-          </p>
-        </motion.section>
-
-        {/* EDUCATION */}
+        {/* EDUCATION (logos) */}
         <motion.section
           id="education"
           className="space-y-6"
@@ -589,22 +585,20 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-[#122019]">Education</h2>
+          <h2 className="text-2xl md:text-3xl font-bold">Education</h2>
 
           <div className="space-y-5">
             <div className="flex flex-col sm:flex-row items-start gap-6 border border-slate-200 bg-white p-6 shadow-sm">
               <img
                 src="/ucla.png"
-                alt="University of California, Los Angeles seal"
+                alt="UCLA seal"
                 className="h-24 w-24 md:h-28 md:w-28 object-contain flex-shrink-0"
               />
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">
                   University of California, Los Angeles
                 </p>
-                <h3 className="mt-1 text-base md:text-lg font-semibold text-[#122019]">
-                  B.A. Sociology
-                </h3>
+                <h3 className="mt-1 text-base md:text-lg font-semibold">B.A. Sociology</h3>
                 <p className="text-[11px] text-slate-500 mt-1">2023 – 2025 · Senior</p>
                 <p className="mt-3 text-sm text-[#4C5A52] leading-relaxed max-w-xl">
                   Leadership Academy 2025 Cohort · Underground Scholars Policy Fellowship
@@ -622,12 +616,8 @@ export default function App() {
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#122019] font-semibold">
                   Barstow Community College
                 </p>
-                <h3 className="mt-1 text-base md:text-lg font-semibold text-[#122019]">
-                  A.A. English
-                </h3>
-                <p className="text-[11px] text-slate-500 mt-1">
-                  2020 – 2022 · Summa Cum Laude
-                </p>
+                <h3 className="mt-1 text-base md:text-lg font-semibold">A.A. English</h3>
+                <p className="text-[11px] text-slate-500 mt-1">2020 – 2022 · Summa Cum Laude</p>
                 <p className="mt-3 text-sm text-[#4C5A52] leading-relaxed max-w-xl">
                   All California Academic Awardee · All USA Academic Nominee · 2023 Commencement Speaker
                 </p>
@@ -636,7 +626,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* GALLERY */}
+        {/* GALLERY SLIDESHOW */}
         <motion.section
           id="gallery"
           className="-mx-4 md:-mx-6 lg:-mx-8"
@@ -647,10 +637,6 @@ export default function App() {
         >
           <motion.div
             className="relative w-full border-y border-slate-200 shadow-sm overflow-hidden"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
             onMouseEnter={() => setSliderPaused(true)}
             onMouseLeave={() => setSliderPaused(false)}
           >
@@ -662,7 +648,6 @@ export default function App() {
                 style={{ objectPosition: currentPhoto.focus || "center 35%" }}
                 onClick={() => setLightboxItem(currentPhoto)}
               />
-
               <div className="absolute inset-0 bg-black/45" />
 
               <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
@@ -682,7 +667,7 @@ export default function App() {
                 onClick={() => advancePhoto("prev")}
                 aria-label="Previous photo"
               >
-                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl leading-none hover:bg-black/55 transition">
+                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl hover:bg-black/55 transition">
                   ‹
                 </span>
               </button>
@@ -693,7 +678,7 @@ export default function App() {
                 onClick={() => advancePhoto("next")}
                 aria-label="Next photo"
               >
-                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl leading-none hover:bg-black/55 transition">
+                <span className="inline-flex h-12 w-12 items-center justify-center bg-black/35 text-white text-3xl hover:bg-black/55 transition">
                   ›
                 </span>
               </button>
@@ -715,9 +700,7 @@ export default function App() {
           </motion.div>
 
           <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">
-              {currentPhoto.caption}
-            </p>
+            <p className="mt-3 text-center text-xs md:text-sm text-[#4C5A52]">{currentPhoto.caption}</p>
           </div>
         </motion.section>
 
@@ -751,66 +734,6 @@ export default function App() {
           </div>
         )}
 
-        {/* CONTACT (bottom) */}
-        <motion.section
-          id="contact"
-          className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
-          variants={sectionFade}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
-              <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
-              </p>
-            </div>
-            <div className="text-xs text-[#4C5A52]">
-              <p className="font-semibold text-[#122019]">Direct contact</p>
-              <p className="mt-1">
-                <a
-                  href="mailto:c.jorgette@yahoo.com"
-                  className="underline decoration-[#8FD0A8] underline-offset-2 hover:decoration-[#1F4E37]"
-                >
-                  c.jorgette@yahoo.com
-                </a>
-              </p>
-              <p className="mt-1">Los Angeles, California</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-slate-200 bg-[#F6F3EA] p-5">
-              <p className="text-sm font-semibold">Quick note</p>
-              <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
-              </p>
-            </div>
-
-            <div className="border border-slate-200 bg-white p-5">
-              <form className="grid gap-3">
-                <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
-                <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
-                <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school (optional)" />
-                <textarea
-                  className="border border-slate-300 px-3 py-2"
-                  rows={4}
-                  placeholder="What kind of support or collaboration are you looking for?"
-                />
-                <button
-                  type="button"
-                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
-                >
-                  Send message
-                </button>
-              </form>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* FOOTER */}
         <footer className="mt-10 border-t border-slate-200 pt-4 pb-6 text-center text-[11px] text-slate-500">
           © {new Date().getFullYear()} Jeorgette Cuellar · Speaking, teaching, and community work.
         </footer>
