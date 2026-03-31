@@ -1,4 +1,4 @@
-   import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const NAV_ITEMS = [
@@ -362,11 +362,11 @@ export default function App() {
                       </button>
 
                       <a
-                        href="/resume.pdf"
+                        href="/Jeorgette_Cuellar_Speaker_Bio_Media_Sheet.pdf"
                         download
                         className="inline-flex items-center bg-[#F4D27A] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#4A3C21] shadow hover:bg-[#E7C661]"
                       >
-                        Download résumé (PDF)
+                        Download Speaker Bio
                       </a>
                     </div>
 
@@ -631,11 +631,11 @@ export default function App() {
                 Book Jeorgette
               </button>
               <a
-                href="/resume.pdf"
+                href="/Jeorgette_Cuellar_Speaker_Bio_Media_Sheet.pdf"
                 download
                 className="inline-flex items-center bg-[#4A3C21] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#3B2F18]"
               >
-                Download résumé
+                Download Speaker Bio
               </a>
             </div>
           </div>
