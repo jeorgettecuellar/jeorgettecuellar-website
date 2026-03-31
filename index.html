@@ -1,5 +1,4 @@
 <!doctype html>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,5 +17,15 @@
 
   <body class="bg-gray-50 font-[Montserrat]">
     <div id="root"></div>
+
+    <!-- Hidden Netlify form for form detection -->
+    <form name="booking-inquiry" netlify hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="organization" />
+      <textarea name="message"></textarea>
+    </form>
+
     <script type="module" src="/main.jsx"></script>
   </body>
+</html>
