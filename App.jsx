@@ -234,7 +234,7 @@ export default function App() {
               initial="hidden"
               animate="visible"
             >
-              People Don&apos;t Need Saving—They Need Support.
+              People Don&apos;t Need Saving—They Need Support That Works.
             </motion.h1>
 
             <motion.p
@@ -244,7 +244,7 @@ export default function App() {
               initial="hidden"
               animate="visible"
             >
-              Speaking · Teaching · Advocacy
+              Speaker · Educator · Advocate
             </motion.p>
           </div>
 
@@ -267,9 +267,9 @@ export default function App() {
                     </p>
 
                     <p className="mt-3 text-sm sm:text-base text-[#304139] leading-relaxed">
-                      I partner with campuses, nonprofits, and community programs to implement leadership guidance,
-                      education, and trauma-informed structure—so people can lead their own lives with clarity,
-                      confidence, and support.
+                      I partner with campuses, nonprofits, universities, and community programs to deliver powerful
+                      speaking engagements, practical trainings, and grounded conversations that help youth-serving spaces
+                      lead with more clarity, dignity, and real support.
                     </p>
 
                     <div className="mt-4 flex items-center gap-3 flex-wrap">
@@ -278,7 +278,7 @@ export default function App() {
                         onClick={() => scrollToId("contact")}
                         className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
                       >
-                        Contact
+                        Book Jeorgette
                       </button>
 
                       <a
@@ -317,23 +317,23 @@ export default function App() {
         >
           <h2 className="text-2xl md:text-3xl font-bold">Programs & partnerships</h2>
           <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-2xl leading-relaxed">
-            I collaborate with campuses, nonprofits, and community programs to design spaces where system-impacted youth
-            and families can practice new structures for stability and growth.
+            I collaborate with campuses, nonprofits, and community programs through speaking, training, and strategic
+            partnership designed to strengthen support for system-impacted youth and young adults.
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {[
               {
                 title: "Keynotes & Storytelling",
-                body: "Talks that blend lived experience, research, and practical hope for students, staff, and community partners.",
+                body: "Talks that connect lived experience, systems insight, and practical takeaways for students, staff, and community partners.",
               },
               {
                 title: "Workshops & Curriculum",
-                body: "Multi-session or one-time workshops focused on resilience, re-entry, systems navigation, and academic re-engagement.",
+                body: "One-time or multi-session workshops focused on resilience, systems navigation, re-entry, educational access, and youth-centered support.",
               },
               {
                 title: "Program Collaboration",
-                body: "Support for teams building trauma-informed structures: facilitation, training, and partnership strategy.",
+                body: "Facilitation, training, and partnership strategy for teams building stronger, more grounded support structures.",
               },
             ].map((card, i) => (
               <motion.div
@@ -381,7 +381,7 @@ export default function App() {
                     People Build Their Own Futures—We Help Clear the Path.
                   </h2>
                   <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg tracking-wide">
-                    Leadership guidance, education, and structure that empower individuals to shape lives they’re proud of.
+                    Speaking, education, and structure that help people and institutions move from awareness to action.
                   </p>
                 </div>
               </div>
@@ -441,8 +441,8 @@ export default function App() {
           <div className="space-y-3">
             <h2 className="text-2xl md:text-3xl font-bold">Meet Jeorgette</h2>
             <p className="text-sm md:text-[15px] text-[#4C5A52] max-w-3xl leading-relaxed">
-              This section is a warm introduction to Jeorgette Cuellar—her background, her mission,
-              and the values that shape how she shows up in rooms with students, staff, and community partners.
+              Jeorgette Cuellar is a speaker, educator, and advocate whose work brings together lived experience,
+              academic grounding, and practical systems insight for audiences that want more than inspiration alone.
             </p>
           </div>
 
@@ -450,21 +450,21 @@ export default function App() {
             <div className="bg-white border border-slate-200 shadow-sm p-5">
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">Background</p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                Jeorgette’s work is grounded in lived experience with systems—and the long, real process of rebuilding.
+                Jeorgette’s work is grounded in lived experience, public advocacy, and the long, real process of rebuilding through support, education, and opportunity.
               </p>
             </div>
 
             <div className="bg-white border border-slate-200 shadow-sm p-5">
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">Mission</p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                People don’t need saving. They need support, structure, and leadership guidance that strengthens agency.
+                People do best when support is clear, credible, and built to strengthen agency rather than replace it.
               </p>
             </div>
 
             <div className="bg-white border border-slate-200 shadow-sm p-5">
               <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">What audiences gain</p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                A message that is both honest and hopeful—plus clear “what now” takeaways for students, staff, and teams.
+                Honest storytelling, practical insight, and clear next-step takeaways that stay with students, staff, and teams after the room clears.
               </p>
             </div>
           </div>
@@ -483,7 +483,7 @@ export default function App() {
             <div className="bg-white border border-slate-200 shadow-sm p-6">
               <h3 className="text-sm md:text-base font-semibold text-[#122019]">The mission in one sentence</h3>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                Support people in building the life they want—through leadership guidance, education, and structure that expands choice, stability, and long-term outcomes.
+                Help organizations, students, and communities build stronger pathways forward through truthful storytelling, practical education, and support-centered structure.
               </p>
 
               <div className="mt-4 border-t border-slate-200 pt-4">
@@ -504,7 +504,7 @@ export default function App() {
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">Testimony film</p>
                 <h3 className="mt-2 font-semibold text-sm md:text-base">Her story & why she does this work</h3>
                 <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  A short introduction to Jeorgette’s story—what she has lived, what she has learned, and what she believes people deserve.
+                  A short introduction to Jeorgette’s story, voice, and values—and the lived experience that shapes the way she speaks to students, staff, and communities.
                 </p>
               </div>
               <div className="aspect-video w-full overflow-hidden shadow">
@@ -524,7 +524,7 @@ export default function App() {
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[#1F4E37] font-semibold">Commencement speech</p>
                 <h3 className="mt-2 font-semibold text-sm md:text-base">Responsibility, repair, and possibility</h3>
                 <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                  A message about choosing a future with intention—especially when life didn’t make it easy.
+                  A message that shows Jeorgette’s ability to bring honesty, emotional depth, and practical encouragement to public-facing speaking engagements.
                 </p>
               </div>
               <div className="aspect-video w-full overflow-hidden shadow">
@@ -543,8 +543,7 @@ export default function App() {
           <div className="bg-[#F4D27A] text-[#4A3C21] border border-[#E7C661] p-6 md:p-7 shadow-sm">
             <h3 className="text-base md:text-lg font-semibold">If you’re considering bringing Jeorgette in…</h3>
             <p className="mt-2 text-xs md:text-[13px] text-[#4A3C21]/90 leading-relaxed max-w-3xl">
-              The work is built on respect, clarity, and outcomes that return agency to the people who are most impacted.
-              If your community is ready for a speaker who is both real and rigorous—reach out.
+              This work is built for organizations that want a speaker who brings both credibility and substance—someone who can connect lived experience, systems insight, and practical takeaways with clarity, care, and depth.
             </p>
             <div className="mt-4 flex items-center gap-3 flex-wrap">
               <button
@@ -552,7 +551,7 @@ export default function App() {
                 onClick={() => scrollToId("contact")}
                 className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
               >
-                Contact Jeorgette
+                Book Jeorgette
               </button>
               <a
                 href="/resume.pdf"
@@ -580,12 +579,12 @@ export default function App() {
               {
                 title: "Advocacy & systems partnerships",
                 body:
-                  "Public speaking, coalition building, and collaboration that supports education access, decarceration, and stability.",
+                  "Public speaking, collaboration, and community-centered work focused on educational access, systems awareness, decarceration, and long-term stability.",
               },
               {
                 title: "Education & leadership development",
                 body:
-                  "Helping people build structure, confidence, and self-direction through guided learning and supportive systems.",
+                  "Workshops and guided learning experiences that help people build confidence, structure, self-direction, and more effective support practices.",
               },
             ].map((card, i) => (
               <motion.div
@@ -656,9 +655,9 @@ export default function App() {
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Let&apos;s work together</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Book Jeorgette</h2>
               <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
-                Share a bit about your event, classroom, or program. I&apos;ll follow up with next steps and possibilities.
+                Share a bit about your event, classroom, workshop, panel, or program. I&apos;ll follow up with next steps and booking possibilities.
               </p>
             </div>
             <div className="text-xs text-[#4C5A52]">
@@ -677,18 +676,18 @@ export default function App() {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="border border-slate-200 bg-[#F6F3EA] p-5">
-              <p className="text-sm font-semibold">Quick note</p>
+              <p className="text-sm font-semibold">For faster booking support</p>
               <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
-                If you include a date, audience size, and what you want people to leave with, I can respond faster with options.
+                Including a date, audience size, organization, and what you want people to leave with helps me respond faster with the best-fit options.
               </p>
             </div>
 
             <div className="border border-slate-200 bg-white p-5">
               <form className="grid gap-3">
-                <input className="border border-slate-300 px-3 py-2" placeholder="Your name" />
+                <input className="border border-slate-300 px-3 py-2" placeholder="Full name" />
                 <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
-                <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school (optional)" />
-                <textarea className="border border-slate-300 px-3 py-2" rows={4} placeholder="What kind of support or collaboration are you looking for?" />
+                <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school / program" />
+                <textarea className="border border-slate-300 px-3 py-2" rows={4} placeholder="Tell me about the event, audience, timeline, and the kind of speaking or support you’re looking for." />
                 <button
                   type="button"
                   className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
