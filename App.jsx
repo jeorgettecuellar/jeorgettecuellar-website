@@ -1,17 +1,5 @@
-import React, { useEffect, useState } from "react";
+   import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
-/**
- * ✅ Change in this version:
- * - Moved the GALLERY SLIDESHOW to be:
- *   Programs & partnerships  →  Slideshow  →  Meet Jeorgette
- *
- * Everything else preserved:
- * - Big left-aligned wide logo with fallback
- * - Meet Jeorgette subsections + videos + CTA
- * - Areas of work, Education logos, Lightbox
- * - Contact section remains later (after slideshow & meet jeorgette flow)
- */
 
 const NAV_ITEMS = [
   { id: "about", label: "About" },
@@ -135,12 +123,35 @@ const sectionFade = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+const FORM_NAME = "booking-inquiry";
+
+function encodeForm(data) {
+  return Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join("&");
+}
+
+const initialFormState = {
+  name: "",
+  email: "",
+  organization: "",
+  message: "",
+};
+
 export default function App() {
   const [activeSection, setActiveSection] = useState("about");
   const [lightboxItem, setLightboxItem] = useState(null);
 
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [sliderPaused, setSliderPaused] = useState(false);
+
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [formData, setFormData] = useState(initialFormState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitState, setSubmitState] = useState({
+    type: "",
+    message: "",
+  });
 
   const currentPhoto = photoHighlights[currentPhotoIndex];
 
@@ -151,14 +162,12 @@ export default function App() {
     });
   };
 
-  // slideshow speed (slower)
   useEffect(() => {
     if (sliderPaused) return undefined;
     const intervalId = setInterval(() => advancePhoto("next"), 6500);
     return () => clearInterval(intervalId);
   }, [sliderPaused]);
 
-  // Scroll spy
   useEffect(() => {
     const options = { root: null, rootMargin: "0px 0px -60% 0px", threshold: 0 };
 
@@ -181,8 +190,81 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!bookingModalOpen) return undefined;
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setBookingModalOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [bookingModalOpen]);
+
   const scrollToId = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const openBookingModal = () => {
+    setSubmitState({ type: "", message: "" });
+    setBookingModalOpen(true);
+  };
+
+  const closeBookingModal = () => {
+    setBookingModalOpen(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const submitBookingForm = async (e) => {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+    setSubmitState({ type: "", message: "" });
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeForm({
+          "form-name": FORM_NAME,
+          ...formData,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed.");
+      }
+
+      setSubmitState({
+        type: "success",
+        message: "Your inquiry was sent successfully. Jeorgette will follow up soon.",
+      });
+
+      setFormData(initialFormState);
+
+      setTimeout(() => {
+        setBookingModalOpen(false);
+        setSubmitState({ type: "", message: "" });
+      }, 1800);
+    } catch (error) {
+      setSubmitState({
+        type: "error",
+        message: "Something went wrong while sending your inquiry. Please try again or email directly at c.jorgette@yahoo.com.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const YT_TESTIMONIAL = "https://www.youtube.com/embed/nDHfURsqDWs";
@@ -190,7 +272,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F6F3EA] text-[#122019]">
-      {/* TOP NAV */}
       <div className="sticky top-0 z-40 backdrop-blur bg-[#F6F3EA]/90 border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between gap-4">
           <button type="button" onClick={() => scrollToId("about")} className="flex items-center" aria-label="Go to top">
@@ -224,7 +305,6 @@ export default function App() {
       </div>
 
       <main className="max-w-6xl mx-auto px-4 py-10 md:py-12 space-y-14">
-        {/* ABOUT */}
         <motion.section id="about" className="space-y-6" initial="hidden" animate="visible" variants={sectionFade}>
           <div className="pt-2 md:pt-6">
             <motion.h1
@@ -275,7 +355,7 @@ export default function App() {
                     <div className="mt-4 flex items-center gap-3 flex-wrap">
                       <button
                         type="button"
-                        onClick={() => scrollToId("contact")}
+                        onClick={openBookingModal}
                         className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
                       >
                         Book Jeorgette
@@ -306,7 +386,6 @@ export default function App() {
           </motion.div>
         </motion.section>
 
-        {/* PROGRAMS */}
         <motion.section
           id="offerings"
           className="space-y-6"
@@ -351,7 +430,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* ✅ MOVED HERE: SLIDESHOW UNDER PROGRAMS */}
         <motion.section
           id="gallery"
           className="-mx-4 md:-mx-6 lg:-mx-8"
@@ -429,7 +507,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* MEET JEORGETTE (content unchanged) */}
         <motion.section
           id="speaking"
           className="space-y-7"
@@ -548,7 +625,7 @@ export default function App() {
             <div className="mt-4 flex items-center gap-3 flex-wrap">
               <button
                 type="button"
-                onClick={() => scrollToId("contact")}
+                onClick={openBookingModal}
                 className="inline-flex items-center bg-[#1F4E37] px-5 py-2.5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white hover:bg-[#173A29]"
               >
                 Book Jeorgette
@@ -564,7 +641,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* AREAS OF WORK */}
         <motion.section
           id="portfolio"
           className="space-y-5"
@@ -602,7 +678,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* EDUCATION */}
         <motion.section
           id="education"
           className="space-y-6"
@@ -644,7 +719,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* CONTACT */}
         <motion.section
           id="contact"
           className="border border-[#CFE7D4] bg-white shadow-sm p-6 md:p-8 space-y-5"
@@ -683,23 +757,163 @@ export default function App() {
             </div>
 
             <div className="border border-slate-200 bg-white p-5">
-              <form className="grid gap-3">
-                <input className="border border-slate-300 px-3 py-2" placeholder="Full name" />
-                <input className="border border-slate-300 px-3 py-2" placeholder="Email" />
-                <input className="border border-slate-300 px-3 py-2" placeholder="Organization / school / program" />
-                <textarea className="border border-slate-300 px-3 py-2" rows={4} placeholder="Tell me about the event, audience, timeline, and the kind of speaking or support you’re looking for." />
+              <form
+                name={FORM_NAME}
+                method="POST"
+                data-netlify="true"
+                onSubmit={submitBookingForm}
+                className="grid gap-3"
+              >
+                <input type="hidden" name="form-name" value={FORM_NAME} />
+                <input
+                  className="border border-slate-300 px-3 py-2"
+                  placeholder="Full name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  className="border border-slate-300 px-3 py-2"
+                  placeholder="Email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  className="border border-slate-300 px-3 py-2"
+                  placeholder="Organization / school / program"
+                  name="organization"
+                  value={formData.organization}
+                  onChange={handleChange}
+                />
+                <textarea
+                  className="border border-slate-300 px-3 py-2"
+                  rows={4}
+                  placeholder="Tell me about the event, audience, timeline, and the kind of speaking or support you’re looking for."
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
                 <button
-                  type="button"
-                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29]"
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29] disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Send message
+                  {isSubmitting ? "Sending..." : "Send message"}
                 </button>
+
+                {submitState.message ? (
+                  <p
+                    className={`text-xs ${
+                      submitState.type === "success" ? "text-[#1F4E37]" : "text-red-600"
+                    }`}
+                  >
+                    {submitState.message}
+                  </p>
+                ) : null}
               </form>
             </div>
           </div>
         </motion.section>
 
-        {/* LIGHTBOX */}
+        {bookingModalOpen && (
+          <div
+            className="fixed inset-0 z-[100] bg-black/55 flex items-center justify-center px-4 py-6"
+            onClick={closeBookingModal}
+          >
+            <div
+              className="w-full max-w-2xl bg-white border border-[#CFE7D4] shadow-2xl p-6 md:p-8 relative max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={closeBookingModal}
+                className="absolute top-3 right-3 text-[11px] px-3 py-1 border border-slate-300 text-slate-700 hover:bg-slate-50"
+              >
+                Close
+              </button>
+
+              <div className="pr-14">
+                <h2 className="text-2xl md:text-3xl font-bold">Book Jeorgette</h2>
+                <p className="mt-2 text-sm md:text-[15px] text-[#4C5A52] max-w-xl leading-relaxed">
+                  Share a bit about your event, classroom, workshop, panel, or program. I&apos;ll follow up with next steps and booking possibilities.
+                </p>
+              </div>
+
+              <div className="mt-5 border border-slate-200 bg-[#F6F3EA] p-5">
+                <p className="text-sm font-semibold">For faster booking support</p>
+                <p className="mt-2 text-xs md:text-[13px] text-[#4C5A52] leading-relaxed">
+                  Including a date, audience size, organization, and what you want people to leave with helps me respond faster with the best-fit options.
+                </p>
+              </div>
+
+              <form
+                name={FORM_NAME}
+                method="POST"
+                data-netlify="true"
+                onSubmit={submitBookingForm}
+                className="grid gap-3 mt-5"
+              >
+                <input type="hidden" name="form-name" value={FORM_NAME} />
+                <input
+                  className="border border-slate-300 px-3 py-2"
+                  placeholder="Full name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  className="border border-slate-300 px-3 py-2"
+                  placeholder="Email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  className="border border-slate-300 px-3 py-2"
+                  placeholder="Organization / school / program"
+                  name="organization"
+                  value={formData.organization}
+                  onChange={handleChange}
+                />
+                <textarea
+                  className="border border-slate-300 px-3 py-2"
+                  rows={5}
+                  placeholder="Tell me about the event, audience, timeline, and the kind of speaking or support you’re looking for."
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="mt-1 inline-flex items-center justify-center bg-[#1F4E37] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[#173A29] disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Sending..." : "Send message"}
+                </button>
+
+                {submitState.message ? (
+                  <p
+                    className={`text-xs ${
+                      submitState.type === "success" ? "text-[#1F4E37]" : "text-red-600"
+                    }`}
+                  >
+                    {submitState.message}
+                  </p>
+                ) : null}
+              </form>
+            </div>
+          </div>
+        )}
+
         {lightboxItem && (
           <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4" onClick={() => setLightboxItem(null)}>
             <div className="bg-white max-w-4xl w-full overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
